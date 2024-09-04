@@ -1,40 +1,142 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <title>Ansible</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/night.css">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <div>
+                    <h1 style="font-weight: bold;">Ansible</h1>
+                    <h6>For internship setup bootcamp environment</h6>
+                </div>
+            </section>
+            <style>
+              .fragment.blur {
+                filter: blur(5px);
+              }
+              .fragment.blur.visible {
+                filter: none;
+              }
+            </style>
+            <section>
+              <h2>What/Why Ansible?</h2>
+              <p class="fragment custom blur">Simple Automation and Management</p>
+              <p class="fragment custom blur">Easy to understand it YAML!</p>
+              <p class="fragment custom blur">Easy to use</p>
+            </section>
+            <section>
+                <div>
+                    <img width="877" height="600" class="r-stretch" src="https://lh5.googleusercontent.com/I4iPLpA3gx3coLq2eBn2JNWZpu7VwgwtS5ejIvYRonn-KHwhBCZlDUP5WeAMRPLrdWDFuxzxfEgABBosdhlMn34tiejtECJa-13tiFFUX2cW0ICHX_Naf2tZol_G2jTuOTrD7IzL" />
+                </div>
+            </section>
+            <section>
+                <div class="r-stack">
+                    <div
+                        class="fragment fade-out"
+                        data-fragment-index="0"
+                        >
+                        <h2>Scenario:</h2>
+                        <h2>Pre-Install Dotfiles and Packages</h2>
+                    </div>
+                    <div
+                        class="fragment current-visible"
+                        data-fragment-index="0"
+                        >
+                        <h2>Dotfiles</h2>
+                        <img width="877" height="440" class="r-stretch" src="https://repository-images.githubusercontent.com/510354212/8d144b1b-e077-4119-9b0c-d1efb648e9d2" />
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Setup environment</h2>
+                <ul>
+                    <li>Zig</li>
+                    <li>Erlang/Elixir</li>
+                    <li>Go</li>
+                    <li>nvm/nodejs/bun</li>
+                    <li>Podman/Docker</li>
+                </ul>
+            </section>
+            <section >
+                <pre style="height: 560px; overflow-y: auto !important;"><code data-line-numbers="1-21|4-21|5-5|6-21">
+                    newjeans.yml
+                    ---
+                    - name: Display Newjeans
+                      hosts: localhost
+                      tasks:
+                        - name: 1. Minji
+                          debug:
+                            msg: "Minji"
+                        - name: 2. Haerin
+                          debug:
+                            msg: "Haerin"
+                        - name: 3. Hanni
+                          debug:
+                            msg: "Hanni"
+                        - name: 4. Danielle
+                          debug:
+                            msg: "Danielle"
+                        - name: 5. Hyein
+                          debug:
+                            msg: "Hyein"
+                    </code></pre>
+            </section>
+            <section >
+                <pre style="height: 420px; overflow-y: auto !important;"><code data-line-numbers="9-9|10-15">
+                    newjeans.yml
+                    ---
+                    - name: Display Newjeans
+                      hosts: localhost
+                      tasks:
+                        - name: Print members
+                          debug:
+                            msg: "{{ item }}"
+                          loop:
+                            - "Minji"
+                            - "Haerin"
+                            - "Hanni"
+                            - "Danielle"
+                            - "Hyein"
+                    </code></pre>
+            </section>
+            <section>
+                <h2>
+                    Demo
+                </h2>
+                <img width="877" height="550" class="r-stretch" src="https://blog.keyboardinterrupt.com/content/images/2018/02/vagrant_with_ansible.png" />
+            </section>
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</body>
+
 </html>
