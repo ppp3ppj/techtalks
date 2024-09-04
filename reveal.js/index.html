@@ -49,27 +49,21 @@
                         class="fragment fade-out"
                         data-fragment-index="0"
                         >
-                        <h2>Scenario:</h2>
-                        <h2>Pre-Install Dotfiles and Packages</h2>
+                        <h2>Manual install?</h2>
+                        <img width="877" height="550" class="r-stretch" src="https://hvops.com/news/ansible/11/batman-robin-ansible.jpg" />
                     </div>
                     <div
                         class="fragment current-visible"
                         data-fragment-index="0"
                         >
-                        <h2>Dotfiles</h2>
-                        <img width="877" height="440" class="r-stretch" src="https://repository-images.githubusercontent.com/510354212/8d144b1b-e077-4119-9b0c-d1efb648e9d2" />
+                        <h3>Read docs then CTRL+C and CTRL+V in terminal</h3>
+                        <img width="877" height="460" class="r-stretch" src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*Rg8GKCA4gSrROd3O6J47sA.jpeg" />
                     </div>
                 </div>
             </section>
+
             <section>
-                <h2>Setup environment</h2>
-                <ul>
-                    <li>Zig</li>
-                    <li>Erlang/Elixir</li>
-                    <li>Go</li>
-                    <li>nvm/nodejs/bun</li>
-                    <li>Podman/Docker</li>
-                </ul>
+                <h1>Ansible 101</h1>
             </section>
             <section >
                 <pre style="height: 560px; overflow-y: auto !important;"><code data-line-numbers="1-21|4-21|5-5|6-21">
@@ -113,11 +107,53 @@
                             - "Hyein"
                     </code></pre>
             </section>
+            <section >
+                <pre style="height: 510px; overflow-y: auto !important;"><code data-line-numbers="9-12">
+                    newjeans.yml
+                    ---
+                    - name: Install Newjeans
+                      hosts: localhost
+                      become: yes # Run this with sudo
+                      tasks:
+                        - name: Install members pkg
+                          apt: # Debian base
+                            name: "{{ item }}"
+                            state: latest
+                            update_cache: yes
+                          loop:
+                            - "Minji"
+                            - "Haerin"
+                            - "Hanni"
+                            - "Danielle"
+                            - "Hyein"
+                    </code></pre>
+            </section>
+
             <section>
-                <h2>
-                    Demo
-                </h2>
+                <h2>Bootcamp Env</h2>
+                <ul>
+                    <li>Rbenv/Ruby/Rails</li>
+                    <li>nvm/nodejs/yarn</li>
+                    <li>PSQL</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Demo</h2>
                 <img width="877" height="550" class="r-stretch" src="https://blog.keyboardinterrupt.com/content/images/2018/02/vagrant_with_ansible.png" />
+            </section>
+
+            <section>
+                <h2>Summary</h2>
+                <img width="877" height="550" class="r-stretch" src="https://i.imgflip.com/5a2dle.jpg" />
+            </section>
+            <section>
+                <h1>Q/A</h1>
+                <img width="120" height="120"src="https://miro.medium.com/v2/format:webp/1*b3og8n0fDkAnHUx-0lDMHg.png" />
+            </section>
+            <section>
+                <h1>
+                    End
+                </h1>
             </section>
         </div>
     </div>
