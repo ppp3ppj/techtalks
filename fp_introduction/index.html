@@ -1,40 +1,147 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h2>
+                    Functional Programing 101
+                </h2>
+                <h6 style="color:gray">
+                    Functional > OOP
+                </h6>
+            </section>
+
+            <section>
+
+                <style>
+                    .fragment.blur {
+                        filter: blur(5px);
+                    }
+
+                    .fragment.blur.visible {
+                        filter: none;
+                    }
+                </style>
+                <section style="text-align: Left;">
+                    <h3>
+                        Programing Paradigm
+                    </h3>
+
+                    <p class="fragment custom blur" style="color:red">Imperative - Procedural, OOP</p>
+                    <p class="fragment custom blur" style="color:green">Declarative - Functional, Reactive, Logic</p>
+                    <p class="fragment custom blur" style="color:gray">Concurrent - Acto</p>
+                    <p class="fragment custom blur" style="color:gray">Meta - Template, Reflective</p>
+                    <p class="fragment custom blur" style="color:gray">...</p>
+                </section>
+                <section>
+                    <h2>
+                        Why Functional?
+                    </h2>
+                </section>
+                <section>
+                    <h2>
+                        The Limitation of Imperative Languages
+                    </h2>
+                </section>
+                <section>
+                    Ruby
+                    <p style="color:red">
+                        Mutating values can be
+                        dangerous for concurrency
+                    </p>
+                    <pre><code>list = [1, 2, 3, 4]
+list.pop
+# => 4
+list.push(1)
+# => [1, 2, 3, 1]
+puts list.inspect
+# => [1, 2, 3, 1]</code></pre>
+                </section>
+                <section>
+                    <h3>Working with Immutable Data</h3>
+                    <h6 style="color:gray;">
+                            Moving to Fuctional Programming
+                    </h6>
+                </section>
+                <section>
+                    Elixir
+                    <pre><code>list = [1, 2, 3, 4]
+List.delete_at(list, -1)
+# => [4]
+list ++ [1]
+# => [1, 2, 3, 4, 1]
+IO.inspect list
+# => [1, 2, 3, 4]</code></pre>
+                </section>
+                <section>
+                    <h2>
+                           ... But Ruby can use Immutable data really ?
+                    </h2>
+                </section>
+                <section>
+fall into a trap, It’s easy to make mistakes when a language has mutability by default
+                    <pre>
+                        <code>
+User = Struct.new(:name)
+users = [User.new("Haerin"), User.new("Minji")].freeze
+# => [#/struct User name="Haerin"/, #/struct User name="Minji"/]
+
+users.push(User.new("Karina"))
+# => cannot modify frozen Array
+
+users.first.name = "Karina"
+puts users.inspect
+# => [#/struct User name="Karina"/, #/struct User name="Minji"/]
+                        </code>
+                    </pre>
+                </section>
+
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    ## Slide 1
+                    A paragraph with some text and a [link](https://hakim.se).
+                    ---
+                    ## Slide 2
+                    ---
+                    ## Slide 3
+                </textarea>
+            </section>
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</body>
+
 </html>
