@@ -1,45 +1,74 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-                    <img src="https://camo.githubusercontent.com/94febc6ff27c1d45bcbbf00a87f8b4c953f0fd01c520dbfa7b88a71be694b54d/68747470733a2f2f7a69676c616e672e6f72672f696d672f7a69672d6c6f676f2d64796e616d69632e737667"/>
-                    <h3 style="color: gray;">
-                        I love zig btw.
-                    </h3>
-                </section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <img
+                    src="https://camo.githubusercontent.com/94febc6ff27c1d45bcbbf00a87f8b4c953f0fd01c520dbfa7b88a71be694b54d/68747470733a2f2f7a69676c616e672e6f72672f696d672f7a69672d6c6f676f2d64796e616d69632e737667" />
+                <h3 style="color: gray;">
+                    I love zig btw.
+                </h3>
+            </section>
+            <section data-markdown>
+                <textarea data-template>
+                    ## Go
+                    Build simple, secure, scalable system, easy to learn, robust, large ecosystem, communities, and
+                    tools
+                    ---
+                    ## Rust
+                    Reliable and efficient software, blazingly fast
+                </textarea>
+            </section>
+            <section>
+                <h3>Smart pointer in Rust</h3>
+                <p>Box :: allocating vaules on the heap</p>
+                <p>Rc :: reference counting enables multiple ownership</p>
+                <p>Ref and RefMut or RefCell :: enforces the borrowing rules at runtime instead of compile time</p>
+                <p>Mutex or Arc :: Threads safety right?</p>
+            </section>
+            <section>
+                <img src="./assets/images/zig_elixir_go_meme1.jpg" />
+            </section>
+            <section>
+                <h2>
+                    What is Zig?
+                </h2>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</body>
+
 </html>
