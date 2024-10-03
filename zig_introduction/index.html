@@ -25,12 +25,20 @@
                     I love zig btw.
                 </h3>
             </section>
-            <section data-markdown>
+            <section>
+                <h3>Disclaimer</h3>
+                <img width="700" src="./assets/images/zig_elixir_go_meme1.jpg" />
+            </section>
+            <section data-markdown data-background-color="rgb(51,184,255)">
                 <textarea data-template>
                     ## Go
                     Build simple, secure, scalable system, easy to learn, robust, large ecosystem, communities, and
                     tools
-                    ---
+                </textarea>
+            </section>
+
+            <section data-markdown data-background-color="rgb(255,131,51)">
+                <textarea data-template>
                     ## Rust
                     Reliable and efficient software, blazingly fast
                 </textarea>
@@ -43,14 +51,39 @@
                 <p>Mutex or Arc :: Threads safety right?</p>
             </section>
             <section>
-                <img src="./assets/images/zig_elixir_go_meme1.jpg" />
-            </section>
-            <section>
                 <h2>
                     What is Zig?
                 </h2>
             </section>
 
+            <section>
+                <h2>
+                    How about assembly?
+                </h2>
+                <pre><code data-line-numbers>const std = @import("std");
+const expect = std.testing.expect;
+
+comptime {
+    asm (
+        \\.global my_func;
+        \\.type my_func, @function;
+        \\my_func:
+        \\  lea (%rdi,%rsi,1),%eax
+        \\  retq
+    );
+}
+
+extern fn my_func(a: i32, b: i32) i32;
+
+test "global assembly" {
+    try expect(my_func(12, 34) == 46);
+}
+                </code></pre>
+
+                <pre><code>$ zig test test_global_assembly.zig -target x86_64-linux
+1/1 test_global_assembly.test.global assembly...OK
+All 1 tests passed.</code></pre>
+            </section>
         </div>
     </div>
 
