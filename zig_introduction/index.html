@@ -44,13 +44,6 @@
                 </textarea>
             </section>
             <section>
-                <h3>Smart pointer in Rust</h3>
-                <p>Box :: allocating vaules on the heap</p>
-                <p>Rc :: reference counting enables multiple ownership</p>
-                <p>Ref and RefMut or RefCell :: enforces the borrowing rules at runtime instead of compile time</p>
-                <p>Mutex or Arc :: Threads safety right?</p>
-            </section>
-            <section>
                 <h2>
                     What is Zig?
                 </h2>
@@ -82,7 +75,6 @@ Zig is a modern, low-level, and general-purpose programming language. Some progr
             </section>
 
             <section>
-
                 <section>
                     <h3>
                         A taste of zig
@@ -93,6 +85,109 @@ Zig is a modern, low-level, and general-purpose programming language. Some progr
                     <h4>
                         "Focus on debugging your application, not your programming language"
                     </h4>
+                </section>
+                <section>
+                    <h3>Smart pointer in Rust</h3>
+                    <p>Box :: allocating vaules on the heap</p>
+                    <p>Rc :: reference counting enables multiple ownership</p>
+                    <p>Ref and RefMut or RefCell :: enforces the borrowing rules at runtime instead of compile time</p>
+                    <p>Mutex or Arc :: Threads safety right?</p>
+                </section>
+                <section>
+                    <h3>Performance and Safety for Build Mode</h3>
+                    <p class="fragment">Debug</p>
+                    <p class="fragment">ReleaseSafe</p>
+                    <p class="fragment">ReleaseFast</p>
+                    <p class="fragment">ReleaseSmall</p>
+                </section>
+
+                <section>
+                    <h3>Let's go error?</h3>
+                </section>
+                <section>
+                    <h3>Compile time</h3>
+<pre><code data-trim data-noescape>
+test "integer overflow at compile time" {
+    const x: u8 = 255;
+    _ = x + 1;
+}
+  </code></pre>
+
+<pre><code data-trim data-noescape>
+$ zig test 1-integer-overflow.zig
+assets/zig-code/features/1-integer-overflow.zig:3:11: error: overflow of integer type 'u8' with value '256'
+  </code></pre>
+                </section>
+                <section>
+                    <h3>Runtime</h3>
+<pre><code data-trim data-noescape>
+test "integer overflow at runtime" {
+    var x: u8 = 255;
+    x += 1;
+}
+  </code></pre>
+
+<pre><code data-trim data-noescape>
+$ zig test 2-integer-overflow-runtime.zig
+1/1 2-integer-overflow-runtime.test.integer overflow at runtime...thread 3030394 panic: integer overflow
+/home/ci/actions-runner-website/_work/www.ziglang.org/www.ziglang.org/assets/zig-code/features/2-integer-overflow-runtime.zig:3:7: 0x103cc2e in test.integer overflow at runtime (test)
+    x += 1;
+      ^
+    ...
+  </code></pre>
+                </section>
+                <section>
+                        <h3>Comptime unresolved</h3>
+<pre><code data-trim data-noescape>
+fn max(comptime T: type, a: T, b: T) T {
+    return if (a > b) a else b;
+}
+test "try to pass a runtime type" {
+    foo(false);
+}
+fn foo(condition: bool) void {
+    const result = max(if (condition) f32 else u64, 1234, 5678);
+    _ = result;
+}
+  </code></pre>
+
+<pre><code data-trim data-noescape>
+$ zig test test_unresolved_comptime_value.zig
+doc/langref/test_unresolved_comptime_value.zig:8:28: error: unable to resolve comptime value
+    const result = max(if (condition) f32 else u64, 1234, 5678);
+                           ^~~~~~~~~
+doc/langref/test_unresolved_comptime_value.zig:8:28: note: condition in comptime branch must be comptime-known
+  </code></pre>
+                </section>
+
+
+                <section>
+                    <h3>Comptime with bool</h3>
+<pre><code data-trim data-noescape>
+fn max(comptime T: type, a: T, b: T) T {
+    if (T == bool) {
+        return a or b;
+    } else if (a > b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+test "try to compare bools" {
+    try @import("std").testing.expect(max(bool, false, true) == true);
+}
+  </code></pre>
+
+<pre><code data-trim data-noescape>
+$ zig test test_comptime_max_with_bool.zig
+1/1 test_comptime_max_with_bool.test.try to compare bools...OK
+All 1 tests passed.
+  </code></pre>
+                </section>
+
+
+                <section>
+                    <h3>Zig never allocates on the heap unless you explicitly instruct it to.</h3>
                 </section>
             </section>
             <section>
@@ -156,9 +251,6 @@ test "global assembly" {
 All 1 tests passed.</code></pre>
             </section>
 
-            <section>
-                    <h3>Zig never allocate heap if you write allocate it.</h3>
-            </section>
 
             <section>
                     <h3>Zig version</h3>
@@ -171,7 +263,10 @@ All 1 tests passed.</code></pre>
             </section>
 
             <section>
-                    <h3>End</h3>
+                    <h3>QA</h3>
+            </section>
+            <section>
+                    <h3>exit(0)</h3>
             </section>
         </div>
     </div>
