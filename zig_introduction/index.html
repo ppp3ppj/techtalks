@@ -93,6 +93,22 @@ Zig is a modern, low-level, and general-purpose programming language. Some progr
                     <p>Ref and RefMut or RefCell :: enforces the borrowing rules at runtime instead of compile time</p>
                     <p>Mutex or Arc :: Threads safety right?</p>
                 </section>
+
+                <section>
+                    <h3>On Custom-width integer types</h3>
+  <pre><code data-trim data-noescape>
+    const uint_u2: u2 = 2;
+    const int_i99: i99 = 1_000_000_000;
+  </code></pre>
+                </section>
+
+                <section>
+                    <h3>C Primitive Types</h3>
+  <pre><code data-trim data-noescape>
+    const c_short_zig: c_short = 255; // short
+    const c_int_zig: c_int = 1_000_000; // int
+  </code></pre>
+                </section>
                 <section>
                     <h3>Performance and Safety for Build Mode</h3>
                     <p class="fragment">Debug</p>
@@ -102,7 +118,60 @@ Zig is a modern, low-level, and general-purpose programming language. Some progr
                 </section>
 
                 <section>
+                    <h3>Optional type instead of null pointers</h3>
+  <pre><code data-trim data-noescape>
+test "null @intToPtr" {
+    const foo: *i32 = @ptrFromInt(0x0);
+    _ = foo;
+}
+  </code></pre>
+
+  <pre><code data-trim data-noescape>
+$ zig test 6-null-to-ptr.zig
+assets/zig-code/features/6-null-to-ptr.zig:2:35: error: pointer type '*i32' does not allow address zero
+  </code></pre>
+                </section>
+
+                <section>
+                    <h3>Optional type</h3>
+  <pre><code data-trim data-noescape>
+const std = @import("std");
+const assert = std.debug.assert;
+
+test "null @intToPtr" {
+    const ptr: ?*i32 = @ptrFromInt(0x0);
+    assert(ptr == null);
+}
+  </code></pre>
+
+  <pre><code data-trim data-noescape>
+$ zig test 7-optional-syntax.zig
+1/1 7-optional-syntax.test.null @intToPtr...OK
+All 1 tests passed.
+  </code></pre>
+                </section>
+
+                <section>
                     <h3>Let's go error?</h3>
+<pre><code data-trim data-noescape>
+// Error doesn't make sense
+const std = @import("std");
+
+pub fn main() void {
+    _ = std.fs.cwd().openFile("does_not_exist/foo.txt", .{});
+}
+  </code></pre>
+
+<pre><code data-trim data-noescape>
+// Error make sense
+const std = @import("std");
+
+pub fn main() !void {
+    const file = try std.fs.cwd().openFile("does_not_exist/foo.txt", .{});
+    defer file.close();
+    try file.writeAll("all your codebase are belong to us\n");
+}
+  </code></pre>
                 </section>
                 <section>
                     <h3>Compile time</h3>
