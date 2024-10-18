@@ -264,6 +264,42 @@ All 1 tests passed.
                 <section>
                     <h3>Zig never allocates on the heap unless you explicitly instruct it to.</h3>
                 </section>
+                <section>
+                    <h3>Build</h3>
+                    <a href="https://github.com/ppp3ppj/monkey_zig/blob/main/build.zig">Zig build example</a>
+<pre><code data-trim data-noescape>
+pub fn build(b: *std.Build) void {
+    const target = b.standardTargetOptions(.{});
+    const optimize = b.standardOptimizeOption(.{});
+    const token_module = b.addModule("token",.{
+        .root_source_file = b.path("src/token/token.zig"),
+    });
+
+    const lexer_module = b.addModule("lexer", .{
+        .root_source_file = b.path("src/lexer/lexer.zig"),
+    });
+
+    lexer_module.addImport("token", token_module);
+
+    const lib = b.addStaticLibrary(.{
+        .name = "monkey_zig",
+        .root_source_file = b.path("src/root.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+    b.installArtifact(lib);
+    const exe = b.addExecutable(.{
+        .name = "monkey_zig",
+        .root_source_file = b.path("src/repl.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+    exe.root_module.addImport("token", token_module);
+    exe.root_module.addImport("lexer", lexer_module);
+    b.installArtifact(exe);
+    ...
+  </code></pre>
+                </section>
             </section>
             <section>
                 <section>
