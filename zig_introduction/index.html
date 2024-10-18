@@ -115,13 +115,6 @@ Zig is a modern, low-level, and general-purpose programming language. Some progr
     const c_int_zig: c_int = 1_000_000; // int
   </code></pre>
                 </section>
-                <section>
-                    <h3>Performance and Safety for Build Mode</h3>
-                    <p class="fragment">Debug</p>
-                    <p class="fragment">ReleaseSafe</p>
-                    <p class="fragment">ReleaseFast</p>
-                    <p class="fragment">ReleaseSmall</p>
-                </section>
 
                 <section>
                     <h3>Optional type instead of null pointers</h3>
@@ -264,6 +257,14 @@ All 1 tests passed.
                 <section>
                     <h3>Zig never allocates on the heap unless you explicitly instruct it to.</h3>
                 </section>
+
+                <section>
+                    <h3>Performance and Safety for Build Mode</h3>
+                    <p class="fragment">Debug</p>
+                    <p class="fragment">ReleaseSafe</p>
+                    <p class="fragment">ReleaseFast</p>
+                    <p class="fragment">ReleaseSmall</p>
+                </section>
                 <section>
                     <h3>Build</h3>
                     <a href="https://github.com/ppp3ppj/monkey_zig/blob/main/build.zig">Zig build example</a>
@@ -300,6 +301,62 @@ pub fn build(b: *std.Build) void {
     ...
   </code></pre>
                 </section>
+                <section>
+                    <h3>Cross-compiling is a first-class use case</h3>
+                </section>
+<section>
+                <h2>
+                    How about assembly?
+                </h2>
+                <pre><code data-line-numbers>const std = @import("std");
+const expect = std.testing.expect;
+
+comptime {
+    asm (
+        \\.global my_func;
+        \\.type my_func, @function;
+        \\my_func:
+        \\  lea (%rdi,%rsi,1),%eax
+        \\  retq
+    );
+}
+
+extern fn my_func(a: i32, b: i32) i32;
+
+test "global assembly" {
+    try expect(my_func(12, 34) == 46);
+}
+                </code></pre>
+
+                <pre><code>$ zig test test_global_assembly.zig -target x86_64-linux
+1/1 test_global_assembly.test.global assembly...OK
+All 1 tests passed.</code></pre>
+            </section>
+
+
+                <section>
+<pre><code data-trim data-noescape>
+const std = @import("std");
+
+pub fn main() void {
+    std.debug.print("Hello, world!\n", .{});
+}
+  </code></pre>
+
+<pre><code data-trim data-noescape data-line-numbers="1-2,4-5,7-8">
+$ zig build-exe hello.zig -target x86_64-windows
+$ file hello.exe
+hello.exe: PE32+ executable (console) x86-64, for MS Windows
+$ zig build-exe hello.zig -target x86_64-macos
+$ file hello
+hello: Mach-O 64-bit x86_64 executable, flags:<NOUNDEFS|DYLDLINK|TWOLEVEL|PIE>
+$ zig build-exe hello.zig -target aarch64-linux
+$ file hello
+hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, with debug_info, not stripped
+  </code></pre>
+                </section>
+
+
             </section>
             <section>
                 <section>
@@ -333,34 +390,6 @@ pub fn build(b: *std.Build) void {
                 </section>
             </section>
 
-            <section>
-                <h2>
-                    How about assembly?
-                </h2>
-                <pre><code data-line-numbers>const std = @import("std");
-const expect = std.testing.expect;
-
-comptime {
-    asm (
-        \\.global my_func;
-        \\.type my_func, @function;
-        \\my_func:
-        \\  lea (%rdi,%rsi,1),%eax
-        \\  retq
-    );
-}
-
-extern fn my_func(a: i32, b: i32) i32;
-
-test "global assembly" {
-    try expect(my_func(12, 34) == 46);
-}
-                </code></pre>
-
-                <pre><code>$ zig test test_global_assembly.zig -target x86_64-linux
-1/1 test_global_assembly.test.global assembly...OK
-All 1 tests passed.</code></pre>
-            </section>
 
 
             <section>
