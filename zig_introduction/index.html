@@ -75,12 +75,41 @@ Zig is a modern, low-level, and general-purpose programming language. Some progr
                     <img src="https://ziglang.org/news/goodbye-cpp/github-pr-lines.png"/>
             </section>
 
+
             <section>
                 <section>
                     <h3>
                         A taste of zig
                     </h3>
                 </section>
+            <section>
+                    <h3>Why Zig? ...</h3>
+  <pre><code data-trim data-noescape>
+const std = @import("std");
+const stdout = std.io.getStdOut().writer();
+
+pub fn main() !void {
+    const x: i32 = 3412;
+    const y: ?i32 = return_null(x);
+
+    // ptr have type *?i32
+    const ptr = &y;
+    try stdout.print("result y is {d}, ptr is still {d}\n",
+        .{(y orelse 0), (ptr.* orelse 0)});
+
+    if(ptr.*) |not_null_ptr| {
+        try stdout.print("{d}", .{not_null_ptr});
+    } else {
+        unreachable;
+    }
+}
+
+fn return_null(n: i32) ?i32 {
+    if (n == 3412) return null;
+    return n;
+}
+  </code></pre>
+            </section>
                 <section>
                     <img width="500" src="https://img.ifunny.co/images/ae282be3e4ecf5285afe268aa220d73ac4af975bf5e791a3c88794147518349e_1.webp"/>
                     <h4>
@@ -354,6 +383,53 @@ hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically link
             <section>
                     <h3>LLVM Backend</h3>
                     <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/LLVM_logo.png"/>
+            </section>
+            <section>
+                    <h3>Why Zig? ...</h3>
+  <pre><code data-line-numbers="5-6, 20-23 | 6, 8-9 | 6, 9-11 | 9, 13-17">const std = @import("std");
+const stdout = std.io.getStdOut().writer();
+
+pub fn main() !void {
+    const x: i32 = 3412;
+    const y: ?i32 = return_null(x);
+
+    // ptr have type *?i32
+    const ptr = &y;
+    try stdout.print("result y is {d}, ptr is still {d}\n",
+        .{(y orelse 0), (ptr.* orelse 0)});
+
+    if(ptr.*) |not_null_ptr| {
+        try stdout.print("{d}", .{not_null_ptr});
+    } else {
+        unreachable;
+    }
+}
+
+fn return_null(n: i32) ?i32 {
+    if (n == 3412) return null;
+    return n;
+}
+  </code></pre>
+            </section>
+
+            <section>
+                        <h3>Result</h3>
+ <pre><code data-trim data-noescape>
+testzig git:(main) ✗ zig run main.zig
+result y is 0, ptr is still 0
+thread 27687 panic: reached unreachable code
+/.../testzig/main.zig:21:9: 0x1037b5b in main (main)
+        unreachable;
+        ^
+/.../zig/lib/std/start.zig:623:37: 0x103781f in posixCallMainAndExit (main)
+            const result = root.main() catch |err| {
+                                    ^
+/.../zig/lib/std/start.zig:240:5: 0x103740d in _start (main)
+    asm volatile (switch (native_arch) {
+    ^
+???:?:?: 0x0 in ??? (???)
+[1]    27687 IOT instruction (core dumped)  zig run main.zig
+  </code></pre>
             </section>
 
             </section>
