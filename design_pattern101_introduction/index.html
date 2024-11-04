@@ -527,6 +527,118 @@ class AdvancedMultiFunctionDevice extends Printer, Scanner, Fax {
                     "Depend upon abstractions, [not] concretes."
                 </section>
 
+            <section>
+                <h2>What is the Dependency Inversion Principle?</h2>
+                <p>The Dependency Inversion Principle states:</p>
+                <blockquote>
+                    High-level modules should not depend on low-level modules. Both should depend on abstractions.
+                </blockquote>
+                <p>Abstractions should not depend on details; details should depend on abstractions.</p>
+            </section>
+
+            <section>
+                <h2>Example Code Overview</h2>
+                <p>Here's a poorly designed payment service:</p>
+                <pre><code class="javascript">
+/**
+ * Class representing a payment service using PayPal.
+ */
+class BadPayPalPayment {
+    processPayment(amount) {
+        console.log(`Processing PayPal payment of $${amount}`);
+    }
+}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Order Service Implementation</h2>
+                <p>Here's how the <code>BadOrderService</code> class depends directly on <code>BadPayPalPayment</code>:</p>
+                <pre><code class="javascript">
+/**
+ * Class representing an order service that depends directly on PayPalPayment.
+ */
+class BadOrderService {
+    constructor() {
+        this.paymentService = new BadPayPalPayment();
+    }
+
+    processOrder(amount) {
+        this.paymentService.processPayment(amount);
+    }
+}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Why Does This Violate DIP?</h2>
+                <p>The <code>BadOrderService</code> class directly depends on the <code>BadPayPalPayment</code> class:</p>
+                <ul>
+                    <li>High-level module (<code>BadOrderService</code>) is tightly coupled to a low-level module (<code>BadPayPalPayment</code>).</li>
+                    <li>This design makes it difficult to switch payment methods without modifying the order service.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>How to Fix the DIP Violation</h2>
+                <p>Introduce an abstraction for payment services:</p>
+                <pre><code class="javascript">
+/**
+ * @interface PaymentService
+ */
+class PaymentService {
+    processPayment(amount) {
+        throw new Error('Method not implemented.');
+    }
+}
+
+/**
+ * Class representing a payment service using PayPal.
+ */
+class PayPalPayment extends PaymentService {
+    processPayment(amount) {
+        console.log(`Processing PayPal payment of $${amount}`);
+    }
+}
+
+/**
+ * Class representing an order service that depends on the PaymentService abstraction.
+ */
+class OrderService {
+    /**
+     * Create an order service with a specified payment service.
+     * @param {PaymentService} paymentService - The payment service to use.
+     */
+    constructor(paymentService) {
+        this.paymentService = paymentService;
+    }
+
+    processOrder(amount) {
+        this.paymentService.processPayment(amount);
+    }
+}
+                </code></pre>
+                <p>This allows flexibility in choosing different payment methods.</p>
+            </section>
+
+            <section>
+                <h2>Refactored Classes</h2>
+                <p>Now we can create different payment services:</p>
+                <pre><code class="javascript">
+const payPalPayment = new PayPalPayment();
+const orderService = new OrderService(payPalPayment);
+
+orderService.processOrder(100); // Processing PayPal payment of $100
+                </code></pre>
+                <p>We can easily add new payment methods without changing <code>OrderService</code>.</p>
+            </section>
+
+            <section>
+                <h2>Conclusion</h2>
+                <p>Following the Dependency Inversion Principle leads to more maintainable and flexible code.</p>
+                <p>By depending on abstractions rather than concrete implementations, we promote loose coupling and easier extensibility.</p>
+            </section>
+
             </section>
 
             <section>
