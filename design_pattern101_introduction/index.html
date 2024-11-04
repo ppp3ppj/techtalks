@@ -188,6 +188,104 @@ class MemberPrinter {
                     "Software entities ... should be open for extension, but closed for modification." "
                 </section>
 
+            <section>
+                <h2>What is OCP?</h2>
+                <p>A class should be open for extension but closed for modification.</p>
+                <p>Add new features without altering existing code.</p>
+            </section>
+         <section>
+                <h2>Bad Example: Violating OCP</h2>
+                <pre><code class="javascript">/**
+ * Class representing a discount calculator.
+*/
+class BadDiscountCalculator {
+    calculateDiscount(price, discountType, discountValue) {
+        if (discountType === 'percentage') {
+            return price - (price * discountValue / 100);
+        } else if (discountType === 'flat') {
+            return price - discountValue;
+        } else {
+            throw new Error('Invalid discount type');
+        }
+    }
+}</code></pre>
+            </section>
+
+            <section>
+                <h2>Why is This a Problem?</h2>
+                <ul>
+                    <li><strong>Closed for Modification:</strong> To add a new discount type, the existing code must be changed.</li>
+                    <li><strong>Risk of Errors:</strong> Modifying existing code can introduce bugs.</li>
+                    <li><strong>Scalability:</strong> Becomes difficult to scale as more discount types are added.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>How to Fix This</h2>
+                <p>Use an interface or base class to make the design extensible:</p>
+                <ul>
+                    <li>Create specific discount strategy classes.</li>
+                    <li>Use polymorphism to calculate discounts.</li>
+                </ul>
+            </section>
+
+
+<section>
+                <h2>Refactored Example</h2>
+                <pre><code class="javascript">
+// Interface for discount strategies
+class DiscountStrategy {
+    calculate(price, discountValue) {
+        throw new Error('Method not implemented');
+    }
+}
+
+// Percentage discount class
+class PercentageDiscount extends DiscountStrategy {
+    calculate(price, discountValue) {
+        return price - (price * discountValue / 100);
+    }
+}
+
+// Flat discount class
+class FlatDiscount extends DiscountStrategy {
+    calculate(price, discountValue) {
+        return price - discountValue;
+    }
+}
+
+// Calculator using strategies
+class DiscountCalculator {
+    constructor(strategy) {
+        this.strategy = strategy;
+    }
+
+    setStrategy(strategy) {
+        this.strategy = strategy;
+    }
+
+    calculate(price, discountValue) {
+        return this.strategy.calculate(price, discountValue);
+    }
+}
+
+// Example usage
+const percentageDiscount = new PercentageDiscount();
+const calculator = new DiscountCalculator(percentageDiscount);
+console.log(calculator.calculate(100, 10)); // Outputs 90
+                </code></pre>
+            </section>
+
+            <!-- Slide 7: Conclusion -->
+            <section>
+                <h2>Conclusion</h2>
+                <p>Applying OCP makes your code:</p>
+                <ul>
+                    <li>Easy to extend with new functionality.</li>
+                    <li>More maintainable and scalable.</li>
+                    <li>Less prone to errors when adding features.</li>
+                </ul>
+            </section>
+
                 <section data-background-color="rgb(235, 131, 23)">
                     <h3>
                         Liskov substitution principle
