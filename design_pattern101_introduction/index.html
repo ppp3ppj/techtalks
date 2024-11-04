@@ -396,6 +396,130 @@ class BadPartTimeEmployee extends BadEmployee {
                     </h3>
                     "Clients should not be forced to depend upon interfaces that they do not use."
                 </section>
+            <section>
+                <h2>What is the Interface Segregation Principle?</h2>
+                <p>The Interface Segregation Principle states:</p>
+                <blockquote>
+                    No client should be forced to depend on methods it does not use.
+                </blockquote>
+                <p>Interfaces should be specific to the needs of the client.</p>
+            </section>
+
+            <section>
+                <h2>Example Code Overview</h2>
+                <p>Here's a poorly designed interface <code>BadMultiFunctionDevice</code>:</p>
+                <pre><code class="javascript">
+/**
+ * @interface BadMultiFunctionDevice
+ * This interface violates ISP by forcing all devices to implement methods they may not need.
+ */
+class BadMultiFunctionDevice {
+    print(document) { throw new Error('Method not implemented.'); }
+    scan(document) { throw new Error('Method not implemented.'); }
+    fax(document) { throw new Error('Method not implemented.'); }
+}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Classes Implementing the Interface</h2>
+                <pre><code class="javascript">
+/**
+ * Class representing a basic printer.
+ * Violates ISP because it must implement scan and fax methods even though it doesn't need them.
+ */
+class BadPrinter extends BadMultiFunctionDevice {
+    print(document) {
+        console.log(`Printing: ${document}`);
+    }
+    scan() {
+        throw new Error('Printer cannot scan.');
+    }
+    fax() {
+        throw new Error('Printer cannot fax.');
+    }
+}
+                </code></pre>
+                <p>This class violates ISP by implementing unused methods.</p>
+            </section>
+
+            <section>
+                <h2>Why Does This Violate ISP?</h2>
+                <p>The interface <code>BadMultiFunctionDevice</code> forces classes to implement methods that they do not need.</p>
+                <ul>
+                    <li><code>BadPrinter</code> is forced to implement <code>scan()</code> and <code>fax()</code> even though it doesn't use them.</li>
+                </ul>
+                <p>This makes the interface larger and less manageable for clients that only need a subset of the functionality.</p>
+            </section>
+
+            <section>
+                <h2>How to Fix the ISP Violation</h2>
+                <p>Refactor the interface into smaller, more specific interfaces:</p>
+                <pre><code class="javascript">
+/**
+ * @interface Printer
+ */
+class Printer {
+    print(document) { throw new Error('Method not implemented.'); }
+}
+
+/**
+ * @interface Scanner
+ */
+class Scanner {
+    scan(document) { throw new Error('Method not implemented.'); }
+}
+
+/**
+ * @interface Fax
+ */
+class Fax {
+    fax(document) { throw new Error('Method not implemented.'); }
+}
+                </code></pre>
+                <p>Classes can then implement only the interfaces they need.</p>
+            </section>
+
+            <section>
+                <h2>Refactored Classes</h2>
+                <pre><code class="javascript">
+/**
+ * Class representing a basic printer.
+ * Implements only the Printer interface.
+ */
+class SimplePrinter extends Printer {
+    print(document) {
+        console.log(`Printing: ${document}`);
+    }
+}
+
+/**
+ * Class representing an advanced multi-function device.
+ * Implements all relevant interfaces.
+ */
+class AdvancedMultiFunctionDevice extends Printer, Scanner, Fax {
+    print(document) {
+        console.log(`Printing: ${document}`);
+    }
+    scan(document) {
+        console.log(`Scanning: ${document}`);
+    }
+    fax(document) {
+        console.log(`Faxing: ${document}`);
+    }
+}
+                </code></pre>
+                <p>Now, classes implement only the methods they need, adhering to ISP.</p>
+            </section>
+
+            <!-- Slide 8: Conclusion -->
+            <section>
+                <h2>Conclusion</h2>
+                <p>Following the Interface Segregation Principle leads to more maintainable and scalable code.</p>
+                <p>Interfaces should be tailored to specific needs, ensuring classes only implement relevant methods.</p>
+            </section>
+
+
                 <section data-background-color="rgb(244, 246, 255)">
                     <h3>
                         Dependency inversion principle
