@@ -170,7 +170,6 @@ class MemberPrinter {
                 </code></pre>
             </section>
 
-            <!-- Slide 7: Conclusion -->
             <section>
                 <h2>Conclusion</h2>
                 <p>Applying SRP makes your code:</p>
@@ -275,7 +274,6 @@ console.log(calculator.calculate(100, 10)); // Outputs 90
                 </code></pre>
             </section>
 
-            <!-- Slide 7: Conclusion -->
             <section>
                 <h2>Conclusion</h2>
                 <p>Applying OCP makes your code:</p>
@@ -293,6 +291,105 @@ console.log(calculator.calculate(100, 10)); // Outputs 90
                     "Functions that use pointers or references to base classes must be able to use objects of derived
                     classes without knowing it."
                 </section>
+
+            <section>
+                <h2>What is LSP?</h2>
+                <p>The Liskov Substitution Principle states:</p>
+                <blockquote>
+                    Subtypes must be substitutable for their base types without altering the desired behavior of the program.
+                </blockquote>
+                <p>In simpler terms, a derived class should extend the base class without changing its core functionality.</p>
+            </section>
+
+
+<section>
+                <h2>Example Code Overview</h2>
+                <p>Let's look at an example with an abstract class <code>BadEmployee</code> and two subclasses:</p>
+                <ul>
+                    <li><code>BadFullTimeEmployee</code></li>
+                    <li><code>BadPartTimeEmployee</code></li>
+                </ul>
+                <pre><code class="javascript">
+/**
+ * Class representing an Employee.
+ * @abstract
+ */
+class BadEmployee {
+    getMonthlySalary() {
+        throw new Error('This method must be implemented by subclasses.');
+    }
+}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Full-Time Employee Class</h2>
+                <pre><code class="javascript">
+/**
+ * Class representing a full-time employee.
+ * @extends BadEmployee
+ */
+class BadFullTimeEmployee extends BadEmployee {
+    constructor(salary) {
+        super();
+        this.salary = salary;
+    }
+
+    getMonthlySalary() {
+        return this.salary;
+    }
+}
+                </code></pre>
+                <p>Behavior: Returns the monthly salary directly, adhering to expectations.</p>
+            </section>
+
+            <section>
+                <h2>Part-Time Employee Class</h2>
+                <pre><code class="javascript">
+/**
+ * Class representing a part-time employee.
+ * @extends BadEmployee
+ */
+class BadPartTimeEmployee extends BadEmployee {
+    constructor(hourlyRate, hoursWorked) {
+        super();
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+
+    getMonthlySalary() {
+        return this.hourlyRate * this.hoursWorked;
+    }
+}
+                </code></pre>
+                <p>Behavior: Calculates the monthly salary based on an hourly rate and hours worked.</p>
+                <p><strong>Problem:</strong> This implementation changes the assumptions of the base class.</p>
+            </section>
+
+            <section>
+                <h2>Why Does This Violate LSP?</h2>
+                <p>The base class <code>BadEmployee</code> expects a method <code>getMonthlySalary()</code> that returns a fixed monthly value.</p>
+                <p>Substituting <code>BadPartTimeEmployee</code> in place of <code>BadEmployee</code> alters the behavior, making it incompatible with the base type's assumptions.</p>
+                <p>This breaks the LSP as the part-time logic introduces a change in behavior that affects code relying on the base type.</p>
+            </section>
+
+            <section>
+                <h2>How to Fix the LSP Violation</h2>
+                <p>Ensure that subclasses don't override behavior in a way that breaks the contract of the base class:</p>
+                <ul>
+                    <li>Create a base class only if it can be properly extended.</li>
+                    <li>Ensure that methods like <code>getMonthlySalary()</code> adhere to a consistent contract.</li>
+                    <li>Consider using separate interfaces or types for employees with different calculation methods.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Conclusion</h2>
+                <p>Following LSP helps maintain a robust and predictable inheritance structure.</p>
+                <p>Subclasses should extend the base class without changing its fundamental behavior.</p>
+                <p>Designing with LSP in mind ensures better code maintainability and scalability.</p>
+            </section>
+
                 <section data-background-color="rgb(243, 198, 35)">
                     <h3>
                         Interface segregation principle
