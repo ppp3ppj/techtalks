@@ -69,6 +69,118 @@
                     In other words, every class should have only one responsibility."
                 </section>
 
+            <section>
+                <h2>What is SRP?</h2>
+                <p>SRP states that a class should have only one reason to change.</p>
+                <p>Each class should handle a single, specific responsibility.</p>
+            </section>
+
+            <section>
+                <h2>Bad Example: Violating SRP</h2>
+                <pre><code class="javascript">/**
+ * Class representing a BadMemberManager.
+ */
+class BadMemberManager {
+    constructor() {
+        this.members = [];
+    }
+
+    addMember(name, age, role) {
+        const member = { name, age, role };
+        this.members.push(member);
+    }
+
+    getMembers() {
+        return this.members;
+    }
+
+    findMember(name) {
+        return this.members.find(member => member.name === name);
+    }
+
+    async printMembers() {
+        if (this.members.length === 0) {
+            await Bun.write(Bun.stdout, 'No members found.');
+            return;
+        }
+
+        await Bun.write(Bun.stdout, 'Member List:\n');
+        this.members.forEach(async member => {
+            await Bun.write(Bun.stdout, `Name: ${member.name}, Age: ${member.age}, Role: ${member.role}`);
+        });
+    }
+}</code></pre>
+            </section>
+
+            <section>
+                <h2>Why is This a Problem?</h2>
+                <ul>
+                    <li><strong>Multiple Responsibilities:</strong> The class manages data and handles output.</li>
+                    <li><strong>Complex Maintenance:</strong> Changes to printing logic require modifying this class.</li>
+                    <li><strong>Testing Challenges:</strong> I/O operations make the class harder to unit test.</li>
+                </ul>
+            </section>
+
+          <section>
+                <h2>How to Fix This</h2>
+                <p>Separate the concerns into different classes:</p>
+                <ul>
+                    <li><strong>MemberManager:</strong> Handles data management (adding, finding members).</li>
+                    <li><strong>MemberPrinter:</strong> Handles printing or displaying member details.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Refactored Example</h2>
+                <pre><code class="javascript">
+// Class handling member data
+class MemberManager {
+    constructor() {
+        this.members = [];
+    }
+
+    addMember(name, age, role) {
+        const member = { name, age, role };
+        this.members.push(member);
+    }
+
+    getMembers() {
+        return this.members;
+    }
+
+    findMember(name) {
+        return this.members.find(member => member.name === name);
+    }
+}
+
+// Class handling output
+class MemberPrinter {
+    async printMembers(members) {
+        if (members.length === 0) {
+            await Bun.write(Bun.stdout, 'No members found.');
+            return;
+        }
+
+        await Bun.write(Bun.stdout, 'Member List:\n');
+        for (const member of members) {
+            await Bun.write(Bun.stdout, `Name: ${member.name}, Age: ${member.age}, Role: ${member.role}\n`);
+        }
+    }
+}
+                </code></pre>
+            </section>
+
+            <!-- Slide 7: Conclusion -->
+            <section>
+                <h2>Conclusion</h2>
+                <p>Applying SRP makes your code:</p>
+                <ul>
+                    <li>More maintainable</li>
+                    <li>Easier to test</li>
+                    <li>Less coupled</li>
+                </ul>
+            </section>
+
                 <section data-background-color="rgb(70, 70, 255)">
                     <h3>
                         Open-closed principle
