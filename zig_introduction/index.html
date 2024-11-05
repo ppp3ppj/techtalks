@@ -187,6 +187,76 @@ pub fn main() void {
   </code></pre>
                 </section>
                 <section>
+                    <h3>Cool error in zig</h3>
+<pre><code data-trim data-noescape data-line-numbers="3-7 | 3-7, 9-19 | 21-33 | 35-43">
+const std = @import("std");
+
+const CustomFileError = error{
+    FileNotFound,
+    PermissionDenied,
+    UnknownError,
+};
+
+fn openFilePathStr(path: []const u8) CustomFileError!std.fs.File {
+    var file = std.fs.cwd().openFile(path, .{}) catch |err| switch (err) {
+        error.FileNotFound => return CustomFileError.FileNotFound,
+        error.AccessDenied => return CustomFileError.PermissionDenied,
+        else => return CustomFileError.UnknownError,
+    };
+
+    defer file.close();
+
+    return file;
+}
+
+fn printError(err: CustomFileError) void {
+    switch (err) {
+        CustomFileError.FileNotFound => {
+            std.debug.print("Error occurred: File not found.\n", .{});
+        },
+        CustomFileError.PermissionDenied => {
+            std.debug.print("Error occurred: Permission denied.\n", .{});
+        },
+        CustomFileError.UnknownError => {
+            std.debug.print("Error occurred: An unknown error occurred.\n", .{});
+        },
+    }
+}
+
+pub fn main() !void {
+    const r = openFilePathStr("minji_haerin.txt") catch |err| {
+        printError(err);
+        unreachable;
+    };
+
+    std.debug.print("File opened successfully: {s}\n", .{"minji_haerin.txt"});
+    _ = r;
+}
+</code></pre>
+
+                </section>
+
+                <section>
+                        <h3>Result</h3>
+  <pre><code data-trim data-noescape>
+➜  zigtest git:(main) ✗ zig run testerr.zig
+Error occurred: File not found.
+thread 30969 panic: reached unreachable code
+.../zigtest/testerr.zig:12:9: 0x1037789 in main (testerr)
+        unreachable;
+        ^
+.../zig/lib/std/start.zig:623:37: 0x10376ee in posixCallMainAndExit (testerr)
+            const result = root.main() catch |err| {
+                                    ^
+.../zig/lib/std/start.zig:240:5: 0x10372fd in _start (testerr)
+    asm volatile (switch (native_arch) {
+    ^
+???:?:?: 0x0 in ??? (???)
+[1]    30969 IOT instruction (core dumped)  zig run testerr.zig
+  </code></pre>
+                </section>
+
+                <section>
                     <h3>Compile time</h3>
 <pre><code data-trim data-noescape>
 test "integer overflow at compile time" {
