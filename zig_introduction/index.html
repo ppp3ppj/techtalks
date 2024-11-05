@@ -303,55 +303,6 @@ $ zig test 2-integer-overflow-runtime.zig
     const _u128: comptime_int = 340_282_366_920_938_463_463_374_607_431_768_211_456;
   </code></pre>
             </section>
-                <section>
-                        <h3>Comptime with generic unresolved</h3>
-<pre><code data-trim data-noescape>
-fn max(comptime T: type, a: T, b: T) T {
-    return if (a > b) a else b;
-}
-test "try to pass a runtime type" {
-    foo(false);
-}
-fn foo(condition: bool) void {
-    const result = max(if (condition) f32 else u64, 1234, 5678);
-    _ = result;
-}
-  </code></pre>
-
-<pre><code data-trim data-noescape>
-$ zig test test_unresolved_comptime_value.zig
-doc/langref/test_unresolved_comptime_value.zig:8:28: error: unable to resolve comptime value
-    const result = max(if (condition) f32 else u64, 1234, 5678);
-                           ^~~~~~~~~
-doc/langref/test_unresolved_comptime_value.zig:8:28: note: condition in comptime branch must be comptime-known
-  </code></pre>
-                </section>
-
-
-                <section>
-                    <h3>Comptime generic with bool</h3>
-<pre><code data-trim data-noescape>
-fn max(comptime T: type, a: T, b: T) T {
-    if (T == bool) {
-        return a or b;
-    } else if (a > b) {
-        return a;
-    } else {
-        return b;
-    }
-}
-test "try to compare bools" {
-    try @import("std").testing.expect(max(bool, false, true) == true);
-}
-  </code></pre>
-
-<pre><code data-trim data-noescape>
-$ zig test test_comptime_max_with_bool.zig
-1/1 test_comptime_max_with_bool.test.try to compare bools...OK
-All 1 tests passed.
-  </code></pre>
-                </section>
-
 
                 <section>
                     <img width="300" height="300" src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/carmen.svg"/>
