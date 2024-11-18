@@ -22,6 +22,7 @@
                 <div>
                     <h2>Introduction to</h2>
                     <h1>Ansible</h1>
+                    <p><em>"Simplifying Automation, One Playbook at a Time!"</em></p>
                 </div>
             </section>
             <style>
@@ -32,131 +33,164 @@
                 filter: none;
               }
             </style>
+
             <section>
               <h2>What/Why Ansible?</h2>
-              <p class="fragment custom blur">Simple Automation and Management</p>
-              <p class="fragment custom blur">Easy to understand it YAML!</p>
-              <p class="fragment custom blur">Easy to use</p>
+              <ul>
+                <li class="fragment custom blur">🤖 <strong>Simple Automation</strong>: Automate tasks across servers easily.</li>
+                <li class="fragment custom blur">📜 <strong>YAML</strong>: No coding, just simple configurations.</li>
+                <li class="fragment custom blur">🚀 <strong>Effortless Usage</strong>: Set it up in minutes!</li>
+              </ul>
             </section>
+
             <section>
                 <div>
+                    <h2>Ansible in Action!</h2>
                     <img width="877" height="600" class="r-stretch" src="https://lh5.googleusercontent.com/I4iPLpA3gx3coLq2eBn2JNWZpu7VwgwtS5ejIvYRonn-KHwhBCZlDUP5WeAMRPLrdWDFuxzxfEgABBosdhlMn34tiejtECJa-13tiFFUX2cW0ICHX_Naf2tZol_G2jTuOTrD7IzL" />
-                </div>
-            </section>
-            <section>
-                <div class="r-stack">
-                    <div
-                        class="fragment fade-out"
-                        data-fragment-index="0"
-                        >
-                        <h2>Manual install?</h2>
-                        <img width="877" height="550" class="r-stretch" src="https://hvops.com/news/ansible/11/batman-robin-ansible.jpg" />
-                    </div>
-                    <div
-                        class="fragment current-visible"
-                        data-fragment-index="0"
-                        >
-                        <h3>Read docs then CTRL+C and CTRL+V in terminal</h3>
-                        <img width="877" height="460" class="r-stretch" src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*Rg8GKCA4gSrROd3O6J47sA.jpeg" />
-                    </div>
                 </div>
             </section>
 
             <section>
-                <h1>Ansible 101</h1>
+                <div class="r-stack">
+                    <div class="fragment fade-out" data-fragment-index="0">
+                        <h2>Manual install?</h2>
+                        <img width="877" height="550" class="r-stretch" src="https://hvops.com/news/ansible/11/batman-robin-ansible.jpg" />
+                        <p><em>Manual installs are so... last decade.</em></p>
+                    </div>
+                    <div class="fragment current-visible" data-fragment-index="1">
+                        <h3>Stop copying & pasting!</h3>
+                        <img width="677" height="360" class="r-stretch" src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*Rg8GKCA4gSrROd3O6J47sA.jpeg" />
+                        <p><strong>Start automating with Ansible!</strong></p>
+                    </div>
+                </div>
+            </section>
+
+
+            <section>
+              <h2>Manual Install vs Ansible</h2>
+              <div class="r-stack">
+                <!-- Before Ansible -->
+                <div class="fragment fade-out" data-fragment-index="0">
+                  <h3>Before Ansible... 😩</h3>
+                  <img width="300"  src="https://media1.tenor.com/m/tgrDE9IAnncAAAAd/omw-slow.gif" alt="Stressed person with papers" width="700" />
+                  <p><em>"Manual install? Took me hours to copy-paste commands! Now, I can’t feel my fingers..."</em></p>
+                </div>
+                <!-- After Ansible -->
+                <div class="fragment current-visible" data-fragment-index="1">
+                  <h3>With Ansible... 💪</h3>
+                  <img width="300" src="https://media1.tenor.com/m/iCqG_iT-h48AAAAd/bills-ugh.gif" alt="Superhero relaxing" width="700" />
+                  <p><em>"Now I just run the playbook and let Ansible do all the work... Easy and cool!"</em></p>
+                </div>
+              </div>
+            </section>
+
+            <section>
+                <h2>Ansible 101</h2>
+                <p>Learn the basics of automating tasks with Ansible. In this section, we’ll cover essential concepts and tasks to get you started!</p>
             </section>
             <section >
-                <pre style="height: 560px; overflow-y: auto !important;"><code data-line-numbers="1-21|4-21|5-5|6-21">
-                    newjeans.yml
-                    ---
-                    - name: Display Newjeans
-                      hosts: localhost
-                      tasks:
-                        - name: 1. Minji
-                          debug:
-                            msg: "Minji"
-                        - name: 2. Haerin
-                          debug:
-                            msg: "Haerin"
-                        - name: 3. Hanni
-                          debug:
-                            msg: "Hanni"
-                        - name: 4. Danielle
-                          debug:
-                            msg: "Danielle"
-                        - name: 5. Hyein
-                          debug:
-                            msg: "Hyein"
-                    </code></pre>
+                <pre style="height: 560px; overflow-y: auto !important;"><code data-line-numbers="1-21|4-21|5-5|6-21"> newjeans.yml
+    ---
+    - name: Display Newjeans
+      hosts: localhost
+      tasks:
+        - name: 1. Minji
+          debug:
+            msg: "Minji"
+        - name: 2. Haerin
+          debug:
+            msg: "Haerin"
+        - name: 3. Hanni
+          debug:
+            msg: "Hanni"
+        - name: 4. Danielle
+          debug:
+            msg: "Danielle"
+        - name: 5. Hyein
+          debug:
+            msg: "Hyein"</code></pre>
             </section>
             <section >
-                <pre style="height: 420px; overflow-y: auto !important;"><code data-line-numbers="9-9|10-15">
-                    newjeans.yml
-                    ---
-                    - name: Display Newjeans
-                      hosts: localhost
-                      tasks:
-                        - name: Print members
-                          debug:
-                            msg: "{{ item }}"
-                          loop:
-                            - "Minji"
-                            - "Haerin"
-                            - "Hanni"
-                            - "Danielle"
-                            - "Hyein"
-                    </code></pre>
+                <pre style="height: 420px; overflow-y: auto !important;"><code data-line-numbers="9-9|10-14"> newjeans.yml
+    ---
+    - name: Display Newjeans
+      hosts: localhost
+      tasks:
+        - name: Print members
+          debug:
+            msg: "{{ item }}"
+          loop:
+            - "Minji"
+            - "Haerin"
+            - "Hanni"
+            - "Danielle"
+            - "Hyein"</code></pre>
             </section>
             <section >
-                <pre style="height: 510px; overflow-y: auto !important;"><code data-line-numbers="9-12">
-                    newjeans.yml
-                    ---
-                    - name: Install Newjeans
-                      hosts: localhost
-                      become: yes # Run this with sudo
-                      tasks:
-                        - name: Install members pkg
-                          apt: # Debian base
-                            name: "{{ item }}"
-                            state: latest
-                            update_cache: yes
-                          loop:
-                            - "Minji"
-                            - "Haerin"
-                            - "Hanni"
-                            - "Danielle"
-                            - "Hyein"
+                <pre style="height: 510px; overflow-y: auto !important;"><code data-line-numbers="9-11"> newjeans.yml
+    ---
+    - name: Install Newjeans
+      hosts: localhost
+      become: yes # Run this with sudo
+      tasks:
+        - name: Install members pkg
+          apt: # Debian base
+            name: "{{ item }}"
+            state: latest
+            update_cache: yes
+          loop:
+            - "Minji"
+            - "Haerin"
+            - "Hanni"
+            - "Danielle"
+            - "Hyein"
                     </code></pre>
+            </section>
+
+            <section>
+                <h3>Running an Ansible Playbook</h3>
+                <p>To run your first Ansible playbook, simply use the following command:</p>
+                <pre><code class="language-shell">ansible-playbook newjeans.yml</code></pre>
+            </section>
+
+            <section>
+                <h2>And Other Features</h2>
+                <ul>
+                    <li>📋 <strong>Inventory</strong>: Manage static or dynamic groups of hosts.</li>
+                    <li>📦 <strong>Roles</strong>: Organize tasks into reusable modules.</li>
+                    <li>🔒 <strong>Vault</strong>: Protect sensitive data with encryption.</li>
+                    <li>🌌 <strong>Galaxy</strong>: Download community roles and collections.</li>
+                    <li>📜 <strong>Playbooks</strong>: Automate complex workflows with YAML.</li>
+                    <li>⚡ <strong>Callbacks</strong>: Add custom functionality to your workflow.</li>
+                </ul>
             </section>
 
             <section>
                 <h2>Bootcamp Internship Environment</h2>
                 <ul>
-                    <li>rbenv/ruby</li>
-                    <li>nvm/nodejs</li>
-                    <li>psql</li>
+                    <li>💎 <strong>rbenv/Ruby</strong>: Manage and run Ruby versions for Rails projects.</li>
+                    <li>🌿 <strong>nvm/Node.js</strong>: Seamlessly switch Node.js versions for frontend or backend development.</li>
+                    <li>🐘 <strong>psql</strong>: Use PostgreSQL for managing and querying relational databases.</li>
                 </ul>
             </section>
 
             <section>
                 <img width="500" src="assets/ansible-meme-car.jpg"/>
-                <h2>Only 3 minute in ...</h2>
+                <h5>Setup in just a few seconds with ansible</h5>
                 <a href="https://github.com/ppp3ppj/ansible-bootcamp">@Self</a>
             </section>
 
             <section>
-                <h2>Future update</h2>
+                <h2>Future Updates</h2>
                 <ul>
-                    <li>
-                        <a href="https://github.com/ppp3ppj/ansible-bootcamp">Continuous improvement</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/ppp3ppj/bootcamp-doctor-cli">CLI Doctor</a>
-                    </li>
-                    <li>psql with template config</li>
-                    <li>cross-platform</li>
+                    <li>🔄 <a href="https://github.com/ppp3ppj/ansible-bootcamp"><strong>Continuous Improvement</strong></a>: Regular enhancements to Ansible Bootcamp.</li>
+                    <li>🩺 <a href="https://github.com/ppp3ppj/bootcamp-doctor-cli"><strong>CLI Doctor</strong></a>: A tool for diagnostics and troubleshooting.</li>
+                    <li>📄 <strong>PSQL Template Config</strong>: Pre-built configurations for PostgreSQL.</li>
+                    <li>🌐 <strong>MacOS Support</strong>: Ensure compatibility with macOS</li>
                 </ul>
+                <p>💡 Explore more or contribute at our GitHub repositories!</p>
             </section>
+
 
             <section>
                 <h2>Demo</h2>
