@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>reveal.js</title>
+    <title>Functional programing vs OOP</title>
 
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
@@ -18,111 +18,134 @@
 <body>
     <div class="reveal">
         <div class="slides">
+            <!-- Slide 1: Title -->
+            <section>
+                <h1>OOP Meets Functional Programming</h1>
+                <h3>"When Objects and Functions Become Friends"</h3>
+            </section>
+
+            <!-- Slide 2: Why We’re Here -->
+            <section>
+                <h2>Why Are We Here?</h2>
+                <ul>
+                    <li>Because our code has more bugs than features 🐛</li>
+                    <li>Because mutating state feels like black magic 🎩</li>
+                    <li>Because Functional Programming sounds fancy 💅</li>
+                </ul>
+            </section>
+
+
+            <!-- Slide 3: OOP vs. FP (Funny Table) -->
+            <section>
+                <h2>OOP vs. FP: A Showdown</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>OOP</th>
+                            <th>FP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>State Management</td>
+                            <td>Everything changes! Chaos reigns! 😱</td>
+                            <td>Immutable. Chill vibes. 🧘‍♂️</td>
+                        </tr>
+                        <tr>
+                            <td>Focus</td>
+                            <td>Objects = “I own everything” 🏢</td>
+                            <td>Functions = “I transform everything” 🔄</td>
+                        </tr>
+                        <tr>
+                            <td>Side Effects</td>
+                            <td>"What happens in methods... doesn’t stay there." 💥</td>
+                            <td>"No surprises. Ever." 🎯</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Slide 4: OOP Analogy -->
+            <section>
+                <h2>OOP Is Like a Restaurant</h2>
+                <p>You have:</p>
+                <ul>
+                    <li>A **Chef** (Object) who <em>knows everything</em>.</li>
+                    <li>A kitchen full of ingredients (state) 🍅🥩.</li>
+                    <li>Sometimes, the chef burns the food (side effects) 🔥.</li>
+                </ul>
+                <p>Functional Programming is like... A fast-food joint: precise, consistent, no surprises 🍔.</p>
+            </section>
+
+            <!-- Slide 5: Core Concepts -->
+            <section>
+                <h2>Functional Programming 101</h2>
+                <ul>
+                    <li><strong>Immutability</strong>: "Hands off my data!" 🛑</li>
+                    <li><strong>Pure Functions</strong>: "What you give is what you get." 🎁</li>
+                    <li><strong>Higher-Order Functions</strong>: "Functions that love other functions." 💞</li>
+                </ul>
+                <p>FP is basically: <em>Data in, data out, no drama!</em></p>
+            </section>
+
+            <!-- Slide 6: Code Example -->
+            <section>
+                <h2>Code: OOP vs FP</h2>
+                <div>
+                    <h3>OOP:</h3>
+                    <pre><code class="language-python">
+                            class Chef:
+                            def make_pizza(self, toppings):
+                            return f"Pizza with {toppings}"
+                            chef = Chef()
+                            print(chef.make_pizza("cheese"))</code></pre>
+                </div>
+                <div>
+                    <h3>FP:</h3>
+                    <pre><code class="language-python">
+                            def make_pizza(toppings):
+                            return f"Pizza with {toppings}"
+                            print(make_pizza("cheese"))</code></pre>
+                </div>
+                <p>See? No need for fancy hats. 🎩</p>
+            </section>
+
+            <!-- Slide 7: Why FP in OOP World -->
+            <section>
+                <h2>FP in an OOP World</h2>
+                <ul>
+                    <li>Use FP for **utilities** (e.g., data transformations).</li>
+                    <li>Mix both worlds: It's like peanut butter and chocolate! 🥜🍫</li>
+                    <li>Examples: React (FP) in a Class-based App (OOP).</li>
+                </ul>
+            </section>
+            <!-- Slide 8: Practical Benefits -->
+            <section>
+                <h2>Why Should You Care?</h2>
+                <ul>
+                    <li>Write fewer bugs = fewer calls at midnight 📞💤.</li>
+                    <li>Easier testing: Pure functions don’t lie. 🕵️‍♂️</li>
+                    <li>Concurrency: No shared state = no headaches. 🧠</li>
+                </ul>
+                <p>Bonus: You’ll sound smart in meetings! 😎</p>
+            </section>
+            <!-- Slide 9: Closing & Resources -->
+            <section>
+                <h2>FP + OOP = Best Friends Forever</h2>
+                <p>Functional Programming isn’t here to replace OOP. It’s here to make it better!</p>
+                <p>Want to learn more? Check out:</p>
+                <ul>
+                    <li>Eloquent JavaScript (Ch. 6)</li>
+                    <li>Functional Programming in Elm</li>
+                    <li>Haskell for Great Justice! (Just kidding 😄)</li>
+                </ul>
+                <h3>Thank you! Q&A time! 🧐</h3>
+            </section>
             <section>
                 <h2>
-                    Functional Programing 101
+                    Exit(0)
                 </h2>
-                <h6 style="color:gray">
-                    Functional > OOP
-                </h6>
-            </section>
-
-            <section>
-
-                <style>
-                    .fragment.blur {
-                        filter: blur(5px);
-                    }
-
-                    .fragment.blur.visible {
-                        filter: none;
-                    }
-                </style>
-                <section style="text-align: Left;">
-                    <h3>
-                        Programing Paradigm
-                    </h3>
-
-                    <p class="fragment custom blur" style="color:red">Imperative - Procedural, OOP</p>
-                    <p class="fragment custom blur" style="color:green">Declarative - Functional, Reactive, Logic</p>
-                    <p class="fragment custom blur" style="color:gray">Concurrent - Acto</p>
-                    <p class="fragment custom blur" style="color:gray">Meta - Template, Reflective</p>
-                    <p class="fragment custom blur" style="color:gray">...</p>
-                </section>
-                <section>
-                    <h2>
-                        Why Functional?
-                    </h2>
-                </section>
-                <section>
-                    <h2>
-                        The Limitation of Imperative Languages
-                    </h2>
-                </section>
-                <section>
-                    Ruby
-                    <p style="color:red">
-                        Mutating values can be
-                        dangerous for concurrency
-                    </p>
-                    <pre><code>list = [1, 2, 3, 4]
-list.pop
-# => 4
-list.push(1)
-# => [1, 2, 3, 1]
-puts list.inspect
-# => [1, 2, 3, 1]</code></pre>
-                </section>
-                <section>
-                    <h3>Working with Immutable Data</h3>
-                    <h6 style="color:gray;">
-                            Moving to Fuctional Programming
-                    </h6>
-                </section>
-                <section>
-                    Elixir
-                    <pre><code>list = [1, 2, 3, 4]
-List.delete_at(list, -1)
-# => [4]
-list ++ [1]
-# => [1, 2, 3, 4, 1]
-IO.inspect list
-# => [1, 2, 3, 4]</code></pre>
-                </section>
-                <section>
-                    <h2>
-                           ... But Ruby can use Immutable data really ?
-                    </h2>
-                </section>
-                <section>
-fall into a trap, It’s easy to make mistakes when a language has mutability by default
-                    <pre>
-                        <code>
-User = Struct.new(:name)
-users = [User.new("Haerin"), User.new("Minji")].freeze
-# => [#/struct User name="Haerin"/, #/struct User name="Minji"/]
-
-users.push(User.new("Karina"))
-# => cannot modify frozen Array
-
-users.first.name = "Karina"
-puts users.inspect
-# => [#/struct User name="Karina"/, #/struct User name="Minji"/]
-                        </code>
-                    </pre>
-                </section>
-
-            </section>
-
-            <section data-markdown>
-                <textarea data-template>
-                    ## Slide 1
-                    A paragraph with some text and a [link](https://hakim.se).
-                    ---
-                    ## Slide 2
-                    ---
-                    ## Slide 3
-                </textarea>
             </section>
         </div>
     </div>
