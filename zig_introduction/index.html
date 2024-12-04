@@ -21,94 +21,123 @@
             <section data-background-color="rgb(16, 14, 9)">
                 <img
                     src="https://camo.githubusercontent.com/94febc6ff27c1d45bcbbf00a87f8b4c953f0fd01c520dbfa7b88a71be694b54d/68747470733a2f2f7a69676c616e672e6f72672f696d672f7a69672d6c6f676f2d64796e616d69632e737667" />
-                <h3 style="color: gray;">
-                    I love zig btw.
+                <h3 style="color: gray; font-size: 2.5rem;">
+                    Simple, fast, and powerful. Zig is the language I can't stop loving.
                 </h3>
             </section>
+
             <section>
                 <h3>Disclaimer</h3>
                 <img width="700" src="./assets/images/zig_elixir_go_meme1.jpg" />
             </section>
-            <section data-markdown data-background-color="rgb(51,184,255)">
+
+
+            <section data-markdown data-background-color="rgb(34, 40, 49)" style="color: #f8f9fa;">
                 <textarea data-template>
-                    ## Go
-                    Build simple, secure, scalable system, easy to learn, robust, large ecosystem, communities, and
-                    tools
+                    ## Go: The Go-To for Simplicity & Speed
+                    🚀 **Build fast, simple, and secure systems**
+                    - Easy to learn, even for newcomers
+                    - **Scalable & reliable** for high-performance applications
+                    - Huge ecosystem, vibrant communities, and powerful tools!
+                    - **Perfect for cloud computing** and microservices.
                 </textarea>
             </section>
 
-            <section data-markdown data-background-color="rgb(255,131,51)">
+            <section data-markdown data-background-color="rgb(50, 50, 50)" style="color: white;">
                 <textarea data-template>
-                    ## Rust
-                    Reliable and efficient software, blazingly fast
+                    ## Rust: Performance Meets Safety
+                    ⚡ **Blazingly fast, and memory-safe**
+                    - **Zero-cost abstractions** for optimal performance
+                    - No more worries about **null pointers or buffer overflows**
+                    - **Built-in concurrency** support for modern systems
+                    - Perfect for **system-level programming**, embedded, and game development.
                 </textarea>
             </section>
+
             <section>
-                <h2>
+                <h2 style="color: #FFA500;">
                     What is Zig?
                 </h2>
                 <p>
-Zig is a modern, low-level, and general-purpose programming language. Some programmers think of Zig as a modern and better version of C
+                    Zig is a modern, low-level programming language designed for simplicity and performance.
+                    Many consider it a *better* and *more modern* version of C, with better control over memory,
+                    easier debugging, and no hidden features!
                 </p>
+
+                <a href="https://survey.stackoverflow.co/2023/#technology-admired-and-desired"
+                    style="color: #007bff; font-size: 2rem; text-decoration: none; font-weight: bold;">
+                    🌟 Admired and Desired by Developers
+                </a>
                 <div>
-                    <a href="https://survey.stackoverflow.co/2023/#technology-admired-and-desired">Admired and Desired</a>
-                </div>
-                <div>
-                    <a href="https://survey.stackoverflow.co/2023/#technology-top-paying-technologies">Top paying technologies</a>
+                    <a href="https://survey.stackoverflow.co/2023/#technology-top-paying-technologies"
+                        style="color: #007bff; font-size: 2rem; text-decoration: none; font-weight: bold;">
+                        💰 Top Paying Technologies is Zig
+                    </a>
                 </div>
             </section>
 
             <section>
-                <h3>Zero and Ziggy the Ziguana</h3>
-                    <img height="400" width="400" src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/zero.svg"/>
-                    <img height="400" width="400" src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/ziggy.svg"/>
+                <h3 style="color: #FFA500;">Zero and Ziggy the Ziguana</h3>
+                <img height="400" width="400"
+                    src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/zero.svg" />
+                <img height="400" width="400"
+                    src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/ziggy.svg" />
             </section>
 
             <section>
-                    <h3>Designed by</h3>
-                    <img src="https://avatars.githubusercontent.com/u/106511?v=4"/>
-                    <h5>Andrew Kelley</h5>
+                <h3>Designed by</h3>
+                <img src="https://avatars.githubusercontent.com/u/106511?v=4" />
+                <h5>Andrew Kelley</h5>
             </section>
 
             <section>
                 <section>
-                    <h3>
-                        A taste of zig
+                    <h3 style="text-align: center; font-size: 5rem; color: #FFA500;">
+                        A Taste of Zig
                     </h3>
                 </section>
-            <section>
-                    <h3>Why Zig? ...</h3>
-  <pre><code data-trim data-noescape>
-const std = @import("std");
-const stdout = std.io.getStdOut().writer();
-
-pub fn main() !void {
-    const x: i32 = 3412;
-    const y: ?i32 = return_null(x);
-
-    // ptr have type *?i32
-    const ptr = &y;
-    try stdout.print("result y is {d}, ptr is still {d}\n",
-        .{(y orelse 0), (ptr.* orelse 0)});
-
-    if(ptr.*) |not_null_ptr| {
-        try stdout.print("{d}", .{not_null_ptr});
-    } else {
-        unreachable;
-    }
-}
-
-fn return_null(n: i32) ?i32 {
-    if (n == 3412) return null;
-    return n;
-}
-  </code></pre>
-            </section>
                 <section>
-                    <img width="500" src="https://img.ifunny.co/images/ae282be3e4ecf5285afe268aa220d73ac4af975bf5e791a3c88794147518349e_1.webp"/>
-                    <h4>
+                    <h3>Why Zig? ...</h3>
+                    <pre><code data-trim data-noescape>
+                            const std = @import("std");
+                            const stdout = std.io.getStdOut().writer();
+
+                            pub fn main() !void {
+                            const x: i32 = 3412;
+                            const y: ?i32 = return_null(x);
+
+                            // ptr have type *?i32
+                            const ptr = &y;
+                            try stdout.print("result y is {d}, ptr is still {d}\n",
+                            .{(y orelse 0), (ptr.* orelse 0)});
+
+                            if(ptr.*) |not_null_ptr| {
+                            try stdout.print("{d}", .{not_null_ptr});
+                            } else {
+                            unreachable;
+                            }
+                            }
+
+                            fn return_null(n: i32) ?i32 {
+                            if (n == 3412) return null;
+                            return n;
+                            }
+                        </code></pre>
+                </section>
+                <section>
+                    <img src="https://img.ifunny.co/images/ae282be3e4ecf5285afe268aa220d73ac4af975bf5e791a3c88794147518349e_1.webp"
+                        alt="Debugging Meme" style="width: 500px; margin-bottom: 20px;" />
+                    <h4 style="font-size: 2rem; text-align: center;">
                         "Focus on debugging your application, not your programming language"
                     </h4>
+                </section>
+                <section>
+                    <h2 style="text-align: center;">Why Choose Simplicity?</h2>
+                    <ul style="font-size: 3rem;">
+                        <li>🛠 No hidden control flow</li>
+                        <li>💾 No hidden memory allocations</li>
+                        <li>🚫 No preprocessor, no macros</li>
+                    </ul>
                 </section>
                 <section>
                     <h3>Smart pointer in Rust</h3>
@@ -120,192 +149,197 @@ fn return_null(n: i32) ?i32 {
 
                 <section>
                     <h3>On Custom-width integer types</h3>
-  <pre><code data-trim data-noescape>
-    const uint_u2: u2 = 2;
-    const int_i99: i99 = 1_000_000_000;
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            const uint_u2: u2 = 2;
+                            const int_i99: i99 = 1_000_000_000;
+                        </code></pre>
                 </section>
 
                 <section>
                     <h3>C Primitive Types</h3>
-  <pre><code data-trim data-noescape>
-    const c_short_zig: c_short = 255; // short
-    const c_int_zig: c_int = 1_000_000; // int
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            const c_short_zig: c_short = 255; // short
+                            const c_int_zig: c_int = 1_000_000; // int
+                        </code></pre>
                 </section>
 
                 <section>
                     <h3>Optional type instead of null pointers</h3>
-  <pre><code data-trim data-noescape>
-test "null @intToPtr" {
-    const foo: *i32 = @ptrFromInt(0x0);
-    _ = foo;
-}
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            test "null @intToPtr" {
+                            const foo: *i32 = @ptrFromInt(0x0);
+                            _ = foo;
+                            }
+                        </code></pre>
 
-  <pre><code data-trim data-noescape>
-$ zig test 6-null-to-ptr.zig
-assets/zig-code/features/6-null-to-ptr.zig:2:35: error: pointer type '*i32' does not allow address zero
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            $ zig test 6-null-to-ptr.zig
+                            assets/zig-code/features/6-null-to-ptr.zig:2:35: error: pointer type '*i32' does not allow
+                            address zero
+                        </code></pre>
                 </section>
 
                 <section>
                     <h3>Optional type</h3>
-  <pre><code data-trim data-noescape>
-const std = @import("std");
-const assert = std.debug.assert;
+                    <pre><code data-trim data-noescape>
+                            const std = @import("std");
+                            const assert = std.debug.assert;
 
-test "null @intToPtr" {
-    const ptr: ?*i32 = @ptrFromInt(0x0);
-    assert(ptr == null);
-}
-  </code></pre>
+                            test "null @intToPtr" {
+                            const ptr: ?*i32 = @ptrFromInt(0x0);
+                            assert(ptr == null);
+                            }
+                        </code></pre>
 
-  <pre><code data-trim data-noescape>
-$ zig test 7-optional-syntax.zig
-1/1 7-optional-syntax.test.null @intToPtr...OK
-All 1 tests passed.
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            $ zig test 7-optional-syntax.zig
+                            1/1 7-optional-syntax.test.null @intToPtr...OK
+                            All 1 tests passed.
+                        </code></pre>
                 </section>
 
                 <section>
                     <h3>Let's go error?</h3>
                     <h4>Error in zig in just a value</h4>
-<pre><code data-trim data-noescape>
-// Error doesn't make sense
-const std = @import("std");
+                    <pre><code data-trim data-noescape>
+                            // Error doesn't make sense
+                            const std = @import("std");
 
-pub fn main() void {
-    _ = std.fs.cwd().openFile("minji_haerin.txt", .{});
-}
-  </code></pre>
+                            pub fn main() void {
+                            _ = std.fs.cwd().openFile("minji_haerin.txt", .{});
+                            }
+                        </code></pre>
                 </section>
                 <section>
                     <h3>Cool error in zig</h3>
-<pre><code data-trim data-noescape data-line-numbers="3-7 | 3-7, 9-19 | 21-33 | 35-43">
-const std = @import("std");
+                    <pre><code data-trim data-noescape data-line-numbers="3-7 | 3-7, 9-19 | 21-33 | 35-43">
+                            const std = @import("std");
 
-const CustomFileError = error{
-    FileNotFound,
-    PermissionDenied,
-    UnknownError,
-};
+                            const CustomFileError = error{
+                            FileNotFound,
+                            PermissionDenied,
+                            UnknownError,
+                            };
 
-fn openFilePathStr(path: []const u8) CustomFileError!std.fs.File {
-    var file = std.fs.cwd().openFile(path, .{}) catch |err| switch (err) {
-        error.FileNotFound => return CustomFileError.FileNotFound,
-        error.AccessDenied => return CustomFileError.PermissionDenied,
-        else => return CustomFileError.UnknownError,
-    };
+                            fn openFilePathStr(path: []const u8) CustomFileError!std.fs.File {
+                            var file = std.fs.cwd().openFile(path, .{}) catch |err| switch (err) {
+                            error.FileNotFound => return CustomFileError.FileNotFound,
+                            error.AccessDenied => return CustomFileError.PermissionDenied,
+                            else => return CustomFileError.UnknownError,
+                            };
 
-    defer file.close();
+                            defer file.close();
 
-    return file;
-}
+                            return file;
+                            }
 
-fn printError(err: CustomFileError) void {
-    switch (err) {
-        CustomFileError.FileNotFound => {
-            std.debug.print("Error occurred: File not found.\n", .{});
-        },
-        CustomFileError.PermissionDenied => {
-            std.debug.print("Error occurred: Permission denied.\n", .{});
-        },
-        CustomFileError.UnknownError => {
-            std.debug.print("Error occurred: An unknown error occurred.\n", .{});
-        },
-    }
-}
+                            fn printError(err: CustomFileError) void {
+                            switch (err) {
+                            CustomFileError.FileNotFound => {
+                            std.debug.print("Error occurred: File not found.\n", .{});
+                            },
+                            CustomFileError.PermissionDenied => {
+                            std.debug.print("Error occurred: Permission denied.\n", .{});
+                            },
+                            CustomFileError.UnknownError => {
+                            std.debug.print("Error occurred: An unknown error occurred.\n", .{});
+                            },
+                            }
+                            }
 
-pub fn main() !void {
-    const r = openFilePathStr("minji_haerin.txt") catch |err| {
-        printError(err);
-        unreachable;
-    };
+                            pub fn main() !void {
+                            const r = openFilePathStr("minji_haerin.txt") catch |err| {
+                            printError(err);
+                            unreachable;
+                            };
 
-    std.debug.print("File opened successfully: {s}\n", .{"minji_haerin.txt"});
-    _ = r;
-}
-</code></pre>
+                            std.debug.print("File opened successfully: {s}\n", .{"minji_haerin.txt"});
+                            _ = r;
+                            }
+                        </code></pre>
 
                 </section>
 
                 <section>
-                        <h3>Result</h3>
-  <pre><code data-trim data-noescape>
-➜  zigtest git:(main) ✗ zig run testerr.zig
-Error occurred: File not found.
-thread 30969 panic: reached unreachable code
-.../zigtest/testerr.zig:12:9: 0x1037789 in main (testerr)
-        unreachable;
-        ^
-.../zig/lib/std/start.zig:623:37: 0x10376ee in posixCallMainAndExit (testerr)
-            const result = root.main() catch |err| {
-                                    ^
-.../zig/lib/std/start.zig:240:5: 0x10372fd in _start (testerr)
-    asm volatile (switch (native_arch) {
-    ^
-???:?:?: 0x0 in ??? (???)
-[1]    30969 IOT instruction (core dumped)  zig run testerr.zig
-  </code></pre>
+                    <h3>Result</h3>
+                    <pre><code data-trim data-noescape>
+                            ➜ zigtest git:(main) ✗ zig run testerr.zig
+                            Error occurred: File not found.
+                            thread 30969 panic: reached unreachable code
+                            .../zigtest/testerr.zig:12:9: 0x1037789 in main (testerr)
+                            unreachable;
+                            ^
+                            .../zig/lib/std/start.zig:623:37: 0x10376ee in posixCallMainAndExit (testerr)
+                            const result = root.main() catch |err| {
+                            ^
+                            .../zig/lib/std/start.zig:240:5: 0x10372fd in _start (testerr)
+                            asm volatile (switch (native_arch) {
+                            ^
+                            ???:?:?: 0x0 in ??? (???)
+                            [1] 30969 IOT instruction (core dumped) zig run testerr.zig
+                        </code></pre>
                 </section>
 
                 <section>
                     <h3>Compile time</h3>
-<pre><code data-trim data-noescape>
-test "integer overflow at compile time" {
-    const x: u8 = 255;
-    _ = x + 1;
-}
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            test "integer overflow at compile time" {
+                            const x: u8 = 255;
+                            _ = x + 1;
+                            }
+                        </code></pre>
 
-<pre><code data-trim data-noescape>
-$ zig test 1-integer-overflow.zig
-assets/zig-code/features/1-integer-overflow.zig:3:11: error: overflow of integer type 'u8' with value '256'
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            $ zig test 1-integer-overflow.zig
+                            assets/zig-code/features/1-integer-overflow.zig:3:11: error: overflow of integer type 'u8'
+                            with value '256'
+                        </code></pre>
                 </section>
                 <section>
                     <h3>Runtime</h3>
-<pre><code data-trim data-noescape>
-test "integer overflow at runtime" {
-    var x: u8 = 255;
-    x += 1;
-}
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            test "integer overflow at runtime" {
+                            var x: u8 = 255;
+                            x += 1;
+                            }
+                        </code></pre>
 
-<pre><code data-trim data-noescape>
-$ zig test 2-integer-overflow-runtime.zig
-1/1 2-integer-overflow-runtime.test.integer overflow at runtime...thread 3030394 panic: integer overflow
-/home/ci/actions-runner-website/_work/www.ziglang.org/www.ziglang.org/assets/zig-code/features/2-integer-overflow-runtime.zig:3:7: 0x103cc2e in test.integer overflow at runtime (test)
-    x += 1;
-      ^
-    ...
-  </code></pre>
+                    <pre><code data-trim data-noescape>
+                            $ zig test 2-integer-overflow-runtime.zig
+                            1/1 2-integer-overflow-runtime.test.integer overflow at runtime...thread 3030394 panic:
+                            integer overflow
+                            /home/ci/actions-runner-website/_work/www.ziglang.org/www.ziglang.org/assets/zig-code/features/2-integer-overflow-runtime.zig:3:7:
+                            0x103cc2e in test.integer overflow at runtime (test)
+                            x += 1;
+                            ^
+                            ...
+                        </code></pre>
                 </section>
-            <section>
-                <h3>Constant has the wrong vaule?</h3>
-                          <pre><code data-trim data-noescape>
-    const _u8: u8 = 256; // 255
-    const _u16: u16 = 65_536; // 65_535
-    const _u32: u32 = 4_294_967_296;
-    const _u64: u64 = 18_446_744_073_709_551_616;
-    const _u128: u128 = 340_282_366_920_938_463_463_374_607_431_768_211_456;
-  </code></pre>
-            </section>
-
-            <section>
-                <h3>comptime_int vaule?</h3>
-                          <pre><code data-trim data-noescape>
-    const _u8: comptime_int = 256;
-    const _u16: comptime_int = 65_536;
-    const _u32: comptime_int = 4_294_967_296;
-    const _u64: comptime_int = 18_446_744_073_709_551_616;
-    const _u128: comptime_int = 340_282_366_920_938_463_463_374_607_431_768_211_456;
-  </code></pre>
-            </section>
+                <section>
+                    <h3>Constant has the wrong vaule?</h3>
+                    <pre><code data-trim data-noescape>
+                            const _u8: u8 = 256; // 255
+                            const _u16: u16 = 65_536; // 65_535
+                            const _u32: u32 = 4_294_967_296;
+                            const _u64: u64 = 18_446_744_073_709_551_616;
+                            const _u128: u128 = 340_282_366_920_938_463_463_374_607_431_768_211_456;
+                        </code></pre>
+                </section>
 
                 <section>
-                    <img width="300" height="300" src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/carmen.svg"/>
+                    <h3>comptime_int vaule?</h3>
+                    <pre><code data-trim data-noescape>
+                            const _u8: comptime_int = 256;
+                            const _u16: comptime_int = 65_536;
+                            const _u32: comptime_int = 4_294_967_296;
+                            const _u64: comptime_int = 18_446_744_073_709_551_616;
+                            const _u128: comptime_int = 340_282_366_920_938_463_463_374_607_431_768_211_456;
+                        </code></pre>
+                </section>
+
+                <section>
+                    <img width="300" height="300"
+                        src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/carmen.svg" />
                     <h3>Zig never allocates on the heap unless you explicitly instruct it to.</h3>
                 </section>
 
@@ -319,145 +353,146 @@ $ zig test 2-integer-overflow-runtime.zig
                 <section>
                     <h3>Build</h3>
                     <a href="https://github.com/ppp3ppj/monkey_zig/blob/main/build.zig">Zig build example</a>
-<pre><code data-trim data-noescape>
-pub fn build(b: *std.Build) void {
-    const target = b.standardTargetOptions(.{});
-    const optimize = b.standardOptimizeOption(.{});
-    const token_module = b.addModule("token",.{
-        .root_source_file = b.path("src/token/token.zig"),
-    });
+                    <pre><code data-trim data-noescape>
+                            pub fn build(b: *std.Build) void {
+                            const target = b.standardTargetOptions(.{});
+                            const optimize = b.standardOptimizeOption(.{});
+                            const token_module = b.addModule("token",.{
+                            .root_source_file = b.path("src/token/token.zig"),
+                            });
 
-    const lexer_module = b.addModule("lexer", .{
-        .root_source_file = b.path("src/lexer/lexer.zig"),
-    });
+                            const lexer_module = b.addModule("lexer", .{
+                            .root_source_file = b.path("src/lexer/lexer.zig"),
+                            });
 
-    lexer_module.addImport("token", token_module);
+                            lexer_module.addImport("token", token_module);
 
-    const lib = b.addStaticLibrary(.{
-        .name = "monkey_zig",
-        .root_source_file = b.path("src/root.zig"),
-        .target = target,
-        .optimize = optimize,
-    });
-    b.installArtifact(lib);
-    const exe = b.addExecutable(.{
-        .name = "monkey_zig",
-        .root_source_file = b.path("src/repl.zig"),
-        .target = target,
-        .optimize = optimize,
-    });
-    exe.root_module.addImport("token", token_module);
-    exe.root_module.addImport("lexer", lexer_module);
-    b.installArtifact(exe);
-    ...
-  </code></pre>
+                            const lib = b.addStaticLibrary(.{
+                            .name = "monkey_zig",
+                            .root_source_file = b.path("src/root.zig"),
+                            .target = target,
+                            .optimize = optimize,
+                            });
+                            b.installArtifact(lib);
+                            const exe = b.addExecutable(.{
+                            .name = "monkey_zig",
+                            .root_source_file = b.path("src/repl.zig"),
+                            .target = target,
+                            .optimize = optimize,
+                            });
+                            exe.root_module.addImport("token", token_module);
+                            exe.root_module.addImport("lexer", lexer_module);
+                            b.installArtifact(exe);
+                            ...
+                        </code></pre>
                 </section>
                 <section>
                     <h3>Cross-compiling is a first-class use case</h3>
                 </section>
-<section>
-                <h2>
-                    How about assembly?
-                </h2>
-                <pre><code data-line-numbers>const std = @import("std");
-const expect = std.testing.expect;
+                <section>
+                    <h2>
+                        How about assembly?
+                    </h2>
+                    <pre><code data-line-numbers>const std = @import("std");
+                            const expect = std.testing.expect;
 
-comptime {
-    asm (
-        \\.global my_func;
-        \\.type my_func, @function;
-        \\my_func:
-        \\  lea (%rdi,%rsi,1),%eax
-        \\  retq
-    );
-}
+                            comptime {
+                            asm (
+                            \\.global my_func;
+                            \\.type my_func, @function;
+                            \\my_func:
+                            \\ lea (%rdi,%rsi,1),%eax
+                            \\ retq
+                            );
+                            }
 
-extern fn my_func(a: i32, b: i32) i32;
+                            extern fn my_func(a: i32, b: i32) i32;
 
-test "global assembly" {
-    try expect(my_func(12, 34) == 46);
-}
-                </code></pre>
+                            test "global assembly" {
+                            try expect(my_func(12, 34) == 46);
+                            }
+                        </code></pre>
 
-                <pre><code>$ zig test test_global_assembly.zig -target x86_64-linux
-1/1 test_global_assembly.test.global assembly...OK
-All 1 tests passed.</code></pre>
-            </section>
+                    <pre><code>$ zig test test_global_assembly.zig -target x86_64-linux
+                            1/1 test_global_assembly.test.global assembly...OK
+                            All 1 tests passed.</code></pre>
+                </section>
 
 
                 <section>
-<pre><code data-trim data-noescape>
-const std = @import("std");
+                    <pre><code data-trim data-noescape>
+                            const std = @import("std");
 
-pub fn main() void {
-    std.debug.print("Hello, world!\n", .{});
-}
-  </code></pre>
+                            pub fn main() void {
+                            std.debug.print("Hello, world!\n", .{});
+                            }
+                        </code></pre>
 
-<pre><code data-trim data-noescape data-line-numbers="1-2,4-5,7-8">
-$ zig build-exe hello.zig -target x86_64-windows
-$ file hello.exe
-hello.exe: PE32+ executable (console) x86-64, for MS Windows
-$ zig build-exe hello.zig -target x86_64-macos
-$ file hello
-hello: Mach-O 64-bit x86_64 executable, flags:<NOUNDEFS|DYLDLINK|TWOLEVEL|PIE>
-$ zig build-exe hello.zig -target aarch64-linux
-$ file hello
-hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, with debug_info, not stripped
-  </code></pre>
+                    <pre><code data-trim data-noescape data-line-numbers="1-2,4-5,7-8">
+                            $ zig build-exe hello.zig -target x86_64-windows
+                            $ file hello.exe
+                            hello.exe: PE32+ executable (console) x86-64, for MS Windows
+                            $ zig build-exe hello.zig -target x86_64-macos
+                            $ file hello
+                            hello: Mach-O 64-bit x86_64 executable, flags:<NOUNDEFS|DYLDLINK|TWOLEVEL|PIE>
+                                $ zig build-exe hello.zig -target aarch64-linux
+                                $ file hello
+                                hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, with
+                                debug_info, not stripped
+                        </code></pre>
                 </section>
 
-            <section>
+                <section>
                     <h3>LLVM Backend</h3>
-                    <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/LLVM_logo.png"/>
-            </section>
-            <section>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/LLVM_logo.png" />
+                </section>
+                <section>
                     <h3>Why Zig? ...</h3>
-  <pre><code data-line-numbers="5-6, 20-23 | 6, 8-9 | 6, 9-11 | 9, 13-17">const std = @import("std");
-const stdout = std.io.getStdOut().writer();
+                    <pre><code data-line-numbers="5-6, 20-23 | 6, 8-9 | 6, 9-11 | 9, 13-17">const std = @import("std");
+                            const stdout = std.io.getStdOut().writer();
 
-pub fn main() !void {
-    const x: i32 = 3412;
-    const y: ?i32 = return_null(x);
+                            pub fn main() !void {
+                            const x: i32 = 3412;
+                            const y: ?i32 = return_null(x);
 
-    // ptr have type *?i32
-    const ptr = &y;
-    try stdout.print("result y is {d}, ptr is still {d}\n",
-        .{(y orelse 0), (ptr.* orelse 0)});
+                            // ptr have type *?i32
+                            const ptr = &y;
+                            try stdout.print("result y is {d}, ptr is still {d}\n",
+                            .{(y orelse 0), (ptr.* orelse 0)});
 
-    if(ptr.*) |not_null_ptr| {
-        try stdout.print("{d}", .{not_null_ptr});
-    } else {
-        unreachable;
-    }
-}
+                            if(ptr.*) |not_null_ptr| {
+                            try stdout.print("{d}", .{not_null_ptr});
+                            } else {
+                            unreachable;
+                            }
+                            }
 
-fn return_null(n: i32) ?i32 {
-    if (n == 3412) return null;
-    return n;
-}
-  </code></pre>
-            </section>
+                            fn return_null(n: i32) ?i32 {
+                            if (n == 3412) return null;
+                            return n;
+                            }
+                        </code></pre>
+                </section>
 
-            <section>
-                        <h3>Result</h3>
- <pre><code data-trim data-noescape>
-testzig git:(main) ✗ zig run main.zig
-result y is 0, ptr is still 0
-thread 27687 panic: reached unreachable code
-/.../testzig/main.zig:21:9: 0x1037b5b in main (main)
-        unreachable;
-        ^
-/.../zig/lib/std/start.zig:623:37: 0x103781f in posixCallMainAndExit (main)
-            const result = root.main() catch |err| {
-                                    ^
-/.../zig/lib/std/start.zig:240:5: 0x103740d in _start (main)
-    asm volatile (switch (native_arch) {
-    ^
-???:?:?: 0x0 in ??? (???)
-[1]    27687 IOT instruction (core dumped)  zig run main.zig
-  </code></pre>
-            </section>
+                <section>
+                    <h3>Result</h3>
+                    <pre><code data-trim data-noescape>
+                            testzig git:(main) ✗ zig run main.zig
+                            result y is 0, ptr is still 0
+                            thread 27687 panic: reached unreachable code
+                            /.../testzig/main.zig:21:9: 0x1037b5b in main (main)
+                            unreachable;
+                            ^
+                            /.../zig/lib/std/start.zig:623:37: 0x103781f in posixCallMainAndExit (main)
+                            const result = root.main() catch |err| {
+                            ^
+                            /.../zig/lib/std/start.zig:240:5: 0x103740d in _start (main)
+                            asm volatile (switch (native_arch) {
+                            ^
+                            ???:?:?: 0x0 in ??? (???)
+                            [1] 27687 IOT instruction (core dumped) zig run main.zig
+                        </code></pre>
+                </section>
 
             </section>
             <section>
@@ -467,17 +502,19 @@ thread 27687 panic: reached unreachable code
                     </h3>
                 </section>
                 <section>
-                    <img width="600" src="data:image/svg+xml;base64,PHN2ZyBpZD0iQnVuIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA3MCI+PHRpdGxlPkJ1biBMb2dvPC90aXRsZT48cGF0aCBpZD0iU2hhZG93IiBkPSJNNzEuMDksMjAuNzRjLS4xNi0uMTctLjMzLS4zNC0uNS0uNXMtLjMzLS4zNC0uNS0uNS0uMzMtLjM0LS41LS41LS4zMy0uMzQtLjUtLjUtLjMzLS4zNC0uNS0uNS0uMzMtLjM0LS41LS41LS4zMy0uMzQtLjUtLjVBMjYuNDYsMjYuNDYsMCwwLDEsNzUuNSwzNS43YzAsMTYuNTctMTYuODIsMzAuMDUtMzcuNSwzMC4wNS0xMS41OCwwLTIxLjk0LTQuMjMtMjguODMtMTAuODZsLjUuNS41LjUuNS41LjUuNS41LjUuNS41LjUuNUMxOS41NSw2NS4zLDMwLjE0LDY5Ljc1LDQyLDY5Ljc1YzIwLjY4LDAsMzcuNS0xMy40OCwzNy41LTMwQzc5LjUsMzIuNjksNzYuNDYsMjYsNzEuMDksMjAuNzRaIi8+PGcgaWQ9IkJvZHkiPjxwYXRoIGlkPSJCYWNrZ3JvdW5kIiBkPSJNNzMsMzUuN2MwLDE1LjIxLTE1LjY3LDI3LjU0LTM1LDI3LjU0UzMsNTAuOTEsMywzNS43QzMsMjYuMjcsOSwxNy45NCwxOC4yMiwxM1MzMy4xOCwzLDM4LDNzOC45NCw0LjEzLDE5Ljc4LDEwQzY3LDE3Ljk0LDczLDI2LjI3LDczLDM1LjdaIiBzdHlsZT0iZmlsbDojZmJmMGRmIi8+PHBhdGggaWQ9IkJvdHRvbV9TaGFkb3ciIGRhdGEtbmFtZT0iQm90dG9tIFNoYWRvdyIgZD0iTTczLDM1LjdhMjEuNjcsMjEuNjcsMCwwLDAtLjgtNS43OGMtMi43MywzMy4zLTQzLjM1LDM0LjktNTkuMzIsMjQuOTRBNDAsNDAsMCwwLDAsMzgsNjMuMjRDNTcuMyw2My4yNCw3Myw1MC44OSw3MywzNS43WiIgc3R5bGU9ImZpbGw6I2Y2ZGVjZSIvPjxwYXRoIGlkPSJMaWdodF9TaGluZSIgZGF0YS1uYW1lPSJMaWdodCBTaGluZSIgZD0iTTI0LjUzLDExLjE3QzI5LDguNDksMzQuOTQsMy40Niw0MC43OCwzLjQ1QTkuMjksOS4yOSwwLDAsMCwzOCwzYy0yLjQyLDAtNSwxLjI1LTguMjUsMy4xMy0xLjEzLjY2LTIuMywxLjM5LTMuNTQsMi4xNS0yLjMzLDEuNDQtNSwzLjA3LTgsNC43QzguNjksMTguMTMsMywyNi42MiwzLDM1LjdjMCwuNCwwLC44LDAsMS4xOUM5LjA2LDE1LjQ4LDIwLjA3LDEzLjg1LDI0LjUzLDExLjE3WiIgc3R5bGU9ImZpbGw6I2ZmZmVmYyIvPjxwYXRoIGlkPSJUb3AiIGQ9Ik0zNS4xMiw1LjUzQTE2LjQxLDE2LjQxLDAsMCwxLDI5LjQ5LDE4Yy0uMjguMjUtLjA2LjczLjMuNTksMy4zNy0xLjMxLDcuOTItNS4yMyw2LTEzLjE0QzM1LjcxLDUsMzUuMTIsNS4xMiwzNS4xMiw1LjUzWm0yLjI3LDBBMTYuMjQsMTYuMjQsMCwwLDEsMzksMTljLS4xMi4zNS4zMS42NS41NS4zNkM0MS43NCwxNi41Niw0My42NSwxMSwzNy45Myw1LDM3LjY0LDQuNzQsMzcuMTksNS4xNCwzNy4zOSw1LjQ5Wm0yLjc2LS4xN0ExNi40MiwxNi40MiwwLDAsMSw0NywxNy4xMmEuMzMuMzMsMCwwLDAsLjY1LjExYy45Mi0zLjQ5LjQtOS40NC03LjE3LTEyLjUzQzQwLjA4LDQuNTQsMzkuODIsNS4wOCw0MC4xNSw1LjMyWk0yMS42OSwxNS43NmExNi45NCwxNi45NCwwLDAsMCwxMC40Ny05Yy4xOC0uMzYuNzUtLjIyLjY2LjE4LTEuNzMsOC03LjUyLDkuNjctMTEuMTIsOS40NUMyMS4zMiwxNi40LDIxLjMzLDE1Ljg3LDIxLjY5LDE1Ljc2WiIgc3R5bGU9ImZpbGw6I2NjYmVhNztmaWxsLXJ1bGU6ZXZlbm9kZCIvPjxwYXRoIGlkPSJPdXRsaW5lIiBkPSJNMzgsNjUuNzVDMTcuMzIsNjUuNzUuNSw1Mi4yNy41LDM1LjdjMC0xMCw2LjE4LTE5LjMzLDE2LjUzLTI0LjkyLDMtMS42LDUuNTctMy4yMSw3Ljg2LTQuNjIsMS4yNi0uNzgsMi40NS0xLjUxLDMuNi0yLjE5QzMyLDEuODksMzUsLjUsMzgsLjVzNS42MiwxLjIsOC45LDMuMTRjMSwuNTcsMiwxLjE5LDMuMDcsMS44NywyLjQ5LDEuNTQsNS4zLDMuMjgsOSw1LjI3QzY5LjMyLDE2LjM3LDc1LjUsMjUuNjksNzUuNSwzNS43LDc1LjUsNTIuMjcsNTguNjgsNjUuNzUsMzgsNjUuNzVaTTM4LDNjLTIuNDIsMC01LDEuMjUtOC4yNSwzLjEzLTEuMTMuNjYtMi4zLDEuMzktMy41NCwyLjE1LTIuMzMsMS40NC01LDMuMDctOCw0LjdDOC42OSwxOC4xMywzLDI2LjYyLDMsMzUuNywzLDUwLjg5LDE4LjcsNjMuMjUsMzgsNjMuMjVTNzMsNTAuODksNzMsMzUuN0M3MywyNi42Miw2Ny4zMSwxOC4xMyw1Ny43OCwxMyw1NCwxMSw1MS4wNSw5LjEyLDQ4LjY2LDcuNjRjLTEuMDktLjY3LTIuMDktMS4yOS0zLTEuODRDNDIuNjMsNCw0MC40MiwzLDM4LDNaIi8+PC9nPjxnIGlkPSJNb3V0aCI+PGcgaWQ9IkJhY2tncm91bmQtMiIgZGF0YS1uYW1lPSJCYWNrZ3JvdW5kIj48cGF0aCBkPSJNNDUuMDUsNDNhOC45Myw4LjkzLDAsMCwxLTIuOTIsNC43MSw2LjgxLDYuODEsMCwwLDEtNCwxLjg4QTYuODQsNi44NCwwLDAsMSwzNCw0Ny43MSw4LjkzLDguOTMsMCwwLDEsMzEuMTIsNDNhLjcyLjcyLDAsMCwxLC44LS44MUg0NC4yNkEuNzIuNzIsMCwwLDEsNDUuMDUsNDNaIiBzdHlsZT0iZmlsbDojYjcxNDIyIi8+PC9nPjxnIGlkPSJUb25ndWUiPjxwYXRoIGlkPSJCYWNrZ3JvdW5kLTMiIGRhdGEtbmFtZT0iQmFja2dyb3VuZCIgZD0iTTM0LDQ3Ljc5YTYuOTEsNi45MSwwLDAsMCw0LjEyLDEuOSw2LjkxLDYuOTEsMCwwLDAsNC4xMS0xLjksMTAuNjMsMTAuNjMsMCwwLDAsMS0xLjA3LDYuODMsNi44MywwLDAsMC00LjktMi4zMSw2LjE1LDYuMTUsMCwwLDAtNSwyLjc4QzMzLjU2LDQ3LjQsMzMuNzYsNDcuNiwzNCw0Ny43OVoiIHN0eWxlPSJmaWxsOiNmZjYxNjQiLz48cGF0aCBpZD0iT3V0bGluZS0yIiBkYXRhLW5hbWU9Ik91dGxpbmUiIGQ9Ik0zNC4xNiw0N2E1LjM2LDUuMzYsMCwwLDEsNC4xOS0yLjA4LDYsNiwwLDAsMSw0LDEuNjljLjIzLS4yNS40NS0uNTEuNjYtLjc3YTcsNywwLDAsMC00LjcxLTEuOTMsNi4zNiw2LjM2LDAsMCwwLTQuODksMi4zNkE5LjUzLDkuNTMsMCwwLDAsMzQuMTYsNDdaIi8+PC9nPjxwYXRoIGlkPSJPdXRsaW5lLTMiIGRhdGEtbmFtZT0iT3V0bGluZSIgZD0iTTM4LjA5LDUwLjE5YTcuNDIsNy40MiwwLDAsMS00LjQ1LTIsOS41Miw5LjUyLDAsMCwxLTMuMTEtNS4wNSwxLjIsMS4yLDAsMCwxLC4yNi0xLDEuNDEsMS40MSwwLDAsMSwxLjEzLS41MUg0NC4yNmExLjQ0LDEuNDQsMCwwLDEsMS4xMy41MSwxLjE5LDEuMTksMCwwLDEsLjI1LDFoMGE5LjUyLDkuNTIsMCwwLDEtMy4xMSw1LjA1QTcuNDIsNy40MiwwLDAsMSwzOC4wOSw1MC4xOVptLTYuMTctNy40Yy0uMTYsMC0uMi4wNy0uMjEuMDlhOC4yOSw4LjI5LDAsMCwwLDIuNzMsNC4zN0E2LjIzLDYuMjMsMCwwLDAsMzguMDksNDlhNi4yOCw2LjI4LDAsMCwwLDMuNjUtMS43Myw4LjMsOC4zLDAsMCwwLDIuNzItNC4zNy4yMS4yMSwwLDAsMC0uMi0uMDlaIi8+PC9nPjxnIGlkPSJGYWNlIj48ZWxsaXBzZSBpZD0iUmlnaHRfQmx1c2giIGRhdGEtbmFtZT0iUmlnaHQgQmx1c2giIGN4PSI1My4yMiIgY3k9IjQwLjE4IiByeD0iNS44NSIgcnk9IjMuNDQiIHN0eWxlPSJmaWxsOiNmZWJiZDAiLz48ZWxsaXBzZSBpZD0iTGVmdF9CbHVjaCIgZGF0YS1uYW1lPSJMZWZ0IEJsdWNoIiBjeD0iMjIuOTUiIGN5PSI0MC4xOCIgcng9IjUuODUiIHJ5PSIzLjQ0IiBzdHlsZT0iZmlsbDojZmViYmQwIi8+PHBhdGggaWQ9IkV5ZXMiIGQ9Ik0yNS43LDM4LjhhNS41MSw1LjUxLDAsMSwwLTUuNS01LjUxQTUuNTEsNS41MSwwLDAsMCwyNS43LDM4LjhabTI0Ljc3LDBBNS41MSw1LjUxLDAsMSwwLDQ1LDMzLjI5LDUuNSw1LjUsMCwwLDAsNTAuNDcsMzguOFoiIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZCIvPjxwYXRoIGlkPSJJcmlzIiBkPSJNMjQsMzMuNjRhMi4wNywyLjA3LDAsMSwwLTIuMDYtMi4wN0EyLjA3LDIuMDcsMCwwLDAsMjQsMzMuNjRabTI0Ljc3LDBhMi4wNywyLjA3LDAsMSwwLTIuMDYtMi4wN0EyLjA3LDIuMDcsMCwwLDAsNDguNzUsMzMuNjRaIiBzdHlsZT0iZmlsbDojZmZmO2ZpbGwtcnVsZTpldmVub2RkIi8+PC9nPjwvc3ZnPg=="/>
+                    <img width="600"
+                        src="data:image/svg+xml;base64,PHN2ZyBpZD0iQnVuIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA3MCI+PHRpdGxlPkJ1biBMb2dvPC90aXRsZT48cGF0aCBpZD0iU2hhZG93IiBkPSJNNzEuMDksMjAuNzRjLS4xNi0uMTctLjMzLS4zNC0uNS0uNXMtLjMzLS4zNC0uNS0uNS0uMzMtLjM0LS41LS41LS4zMy0uMzQtLjUtLjUtLjMzLS4zNC0uNS0uNS0uMzMtLjM0LS41LS41LS4zMy0uMzQtLjUtLjVBMjYuNDYsMjYuNDYsMCwwLDEsNzUuNSwzNS43YzAsMTYuNTctMTYuODIsMzAuMDUtMzcuNSwzMC4wNS0xMS41OCwwLTIxLjk0LTQuMjMtMjguODMtMTAuODZsLjUuNS41LjUuNS41LjUuNS41LjUuNS41LjUuNUMxOS41NSw2NS4zLDMwLjE0LDY5Ljc1LDQyLDY5Ljc1YzIwLjY4LDAsMzcuNS0xMy40OCwzNy41LTMwQzc5LjUsMzIuNjksNzYuNDYsMjYsNzEuMDksMjAuNzRaIi8+PGcgaWQ9IkJvZHkiPjxwYXRoIGlkPSJCYWNrZ3JvdW5kIiBkPSJNNzMsMzUuN2MwLDE1LjIxLTE1LjY3LDI3LjU0LTM1LDI3LjU0UzMsNTAuOTEsMywzNS43QzMsMjYuMjcsOSwxNy45NCwxOC4yMiwxM1MzMy4xOCwzLDM4LDNzOC45NCw0LjEzLDE5Ljc4LDEwQzY3LDE3Ljk0LDczLDI2LjI3LDczLDM1LjdaIiBzdHlsZT0iZmlsbDojZmJmMGRmIi8+PHBhdGggaWQ9IkJvdHRvbV9TaGFkb3ciIGRhdGEtbmFtZT0iQm90dG9tIFNoYWRvdyIgZD0iTTczLDM1LjdhMjEuNjcsMjEuNjcsMCwwLDAtLjgtNS43OGMtMi43MywzMy4zLTQzLjM1LDM0LjktNTkuMzIsMjQuOTRBNDAsNDAsMCwwLDAsMzgsNjMuMjRDNTcuMyw2My4yNCw3Myw1MC44OSw3MywzNS43WiIgc3R5bGU9ImZpbGw6I2Y2ZGVjZSIvPjxwYXRoIGlkPSJMaWdodF9TaGluZSIgZGF0YS1uYW1lPSJMaWdodCBTaGluZSIgZD0iTTI0LjUzLDExLjE3QzI5LDguNDksMzQuOTQsMy40Niw0MC43OCwzLjQ1QTkuMjksOS4yOSwwLDAsMCwzOCwzYy0yLjQyLDAtNSwxLjI1LTguMjUsMy4xMy0xLjEzLjY2LTIuMywxLjM5LTMuNTQsMi4xNS0yLjMzLDEuNDQtNSwzLjA3LTgsNC43QzguNjksMTguMTMsMywyNi42MiwzLDM1LjdjMCwuNCwwLC44LDAsMS4xOUM5LjA2LDE1LjQ4LDIwLjA3LDEzLjg1LDI0LjUzLDExLjE3WiIgc3R5bGU9ImZpbGw6I2ZmZmVmYyIvPjxwYXRoIGlkPSJUb3AiIGQ9Ik0zNS4xMiw1LjUzQTE2LjQxLDE2LjQxLDAsMCwxLDI5LjQ5LDE4Yy0uMjguMjUtLjA2LjczLjMuNTksMy4zNy0xLjMxLDcuOTItNS4yMyw2LTEzLjE0QzM1LjcxLDUsMzUuMTIsNS4xMiwzNS4xMiw1LjUzWm0yLjI3LDBBMTYuMjQsMTYuMjQsMCwwLDEsMzksMTljLS4xMi4zNS4zMS42NS41NS4zNkM0MS43NCwxNi41Niw0My42NSwxMSwzNy45Myw1LDM3LjY0LDQuNzQsMzcuMTksNS4xNCwzNy4zOSw1LjQ5Wm0yLjc2LS4xN0ExNi40MiwxNi40MiwwLDAsMSw0NywxNy4xMmEuMzMuMzMsMCwwLDAsLjY1LjExYy45Mi0zLjQ5LjQtOS40NC03LjE3LTEyLjUzQzQwLjA4LDQuNTQsMzkuODIsNS4wOCw0MC4xNSw1LjMyWk0yMS42OSwxNS43NmExNi45NCwxNi45NCwwLDAsMCwxMC40Ny05Yy4xOC0uMzYuNzUtLjIyLjY2LjE4LTEuNzMsOC03LjUyLDkuNjctMTEuMTIsOS40NUMyMS4zMiwxNi40LDIxLjMzLDE1Ljg3LDIxLjY5LDE1Ljc2WiIgc3R5bGU9ImZpbGw6I2NjYmVhNztmaWxsLXJ1bGU6ZXZlbm9kZCIvPjxwYXRoIGlkPSJPdXRsaW5lIiBkPSJNMzgsNjUuNzVDMTcuMzIsNjUuNzUuNSw1Mi4yNy41LDM1LjdjMC0xMCw2LjE4LTE5LjMzLDE2LjUzLTI0LjkyLDMtMS42LDUuNTctMy4yMSw3Ljg2LTQuNjIsMS4yNi0uNzgsMi40NS0xLjUxLDMuNi0yLjE5QzMyLDEuODksMzUsLjUsMzgsLjVzNS42MiwxLjIsOC45LDMuMTRjMSwuNTcsMiwxLjE5LDMuMDcsMS44NywyLjQ5LDEuNTQsNS4zLDMuMjgsOSw1LjI3QzY5LjMyLDE2LjM3LDc1LjUsMjUuNjksNzUuNSwzNS43LDc1LjUsNTIuMjcsNTguNjgsNjUuNzUsMzgsNjUuNzVaTTM4LDNjLTIuNDIsMC01LDEuMjUtOC4yNSwzLjEzLTEuMTMuNjYtMi4zLDEuMzktMy41NCwyLjE1LTIuMzMsMS40NC01LDMuMDctOCw0LjdDOC42OSwxOC4xMywzLDI2LjYyLDMsMzUuNywzLDUwLjg5LDE4LjcsNjMuMjUsMzgsNjMuMjVTNzMsNTAuODksNzMsMzUuN0M3MywyNi42Miw2Ny4zMSwxOC4xMyw1Ny43OCwxMyw1NCwxMSw1MS4wNSw5LjEyLDQ4LjY2LDcuNjRjLTEuMDktLjY3LTIuMDktMS4yOS0zLTEuODRDNDIuNjMsNCw0MC40MiwzLDM4LDNaIi8+PC9nPjxnIGlkPSJNb3V0aCI+PGcgaWQ9IkJhY2tncm91bmQtMiIgZGF0YS1uYW1lPSJCYWNrZ3JvdW5kIj48cGF0aCBkPSJNNDUuMDUsNDNhOC45Myw4LjkzLDAsMCwxLTIuOTIsNC43MSw2LjgxLDYuODEsMCwwLDEtNCwxLjg4QTYuODQsNi44NCwwLDAsMSwzNCw0Ny43MSw4LjkzLDguOTMsMCwwLDEsMzEuMTIsNDNhLjcyLjcyLDAsMCwxLC44LS44MUg0NC4yNkEuNzIuNzIsMCwwLDEsNDUuMDUsNDNaIiBzdHlsZT0iZmlsbDojYjcxNDIyIi8+PC9nPjxnIGlkPSJUb25ndWUiPjxwYXRoIGlkPSJCYWNrZ3JvdW5kLTMiIGRhdGEtbmFtZT0iQmFja2dyb3VuZCIgZD0iTTM0LDQ3Ljc5YTYuOTEsNi45MSwwLDAsMCw0LjEyLDEuOSw2LjkxLDYuOTEsMCwwLDAsNC4xMS0xLjksMTAuNjMsMTAuNjMsMCwwLDAsMS0xLjA3LDYuODMsNi44MywwLDAsMC00LjktMi4zMSw2LjE1LDYuMTUsMCwwLDAtNSwyLjc4QzMzLjU2LDQ3LjQsMzMuNzYsNDcuNiwzNCw0Ny43OVoiIHN0eWxlPSJmaWxsOiNmZjYxNjQiLz48cGF0aCBpZD0iT3V0bGluZS0yIiBkYXRhLW5hbWU9Ik91dGxpbmUiIGQ9Ik0zNC4xNiw0N2E1LjM2LDUuMzYsMCwwLDEsNC4xOS0yLjA4LDYsNiwwLDAsMSw0LDEuNjljLjIzLS4yNS40NS0uNTEuNjYtLjc3YTcsNywwLDAsMC00LjcxLTEuOTMsNi4zNiw2LjM2LDAsMCwwLTQuODksMi4zNkE5LjUzLDkuNTMsMCwwLDAsMzQuMTYsNDdaIi8+PC9nPjxwYXRoIGlkPSJPdXRsaW5lLTMiIGRhdGEtbmFtZT0iT3V0bGluZSIgZD0iTTM4LjA5LDUwLjE5YTcuNDIsNy40MiwwLDAsMS00LjQ1LTIsOS41Miw5LjUyLDAsMCwxLTMuMTEtNS4wNSwxLjIsMS4yLDAsMCwxLC4yNi0xLDEuNDEsMS40MSwwLDAsMSwxLjEzLS41MUg0NC4yNmExLjQ0LDEuNDQsMCwwLDEsMS4xMy41MSwxLjE5LDEuMTksMCwwLDEsLjI1LDFoMGE5LjUyLDkuNTIsMCwwLDEtMy4xMSw1LjA1QTcuNDIsNy40MiwwLDAsMSwzOC4wOSw1MC4xOVptLTYuMTctNy40Yy0uMTYsMC0uMi4wNy0uMjEuMDlhOC4yOSw4LjI5LDAsMCwwLDIuNzMsNC4zN0E2LjIzLDYuMjMsMCwwLDAsMzguMDksNDlhNi4yOCw2LjI4LDAsMCwwLDMuNjUtMS43Myw4LjMsOC4zLDAsMCwwLDIuNzItNC4zNy4yMS4yMSwwLDAsMC0uMi0uMDlaIi8+PC9nPjxnIGlkPSJGYWNlIj48ZWxsaXBzZSBpZD0iUmlnaHRfQmx1c2giIGRhdGEtbmFtZT0iUmlnaHQgQmx1c2giIGN4PSI1My4yMiIgY3k9IjQwLjE4IiByeD0iNS44NSIgcnk9IjMuNDQiIHN0eWxlPSJmaWxsOiNmZWJiZDAiLz48ZWxsaXBzZSBpZD0iTGVmdF9CbHVjaCIgZGF0YS1uYW1lPSJMZWZ0IEJsdWNoIiBjeD0iMjIuOTUiIGN5PSI0MC4xOCIgcng9IjUuODUiIHJ5PSIzLjQ0IiBzdHlsZT0iZmlsbDojZmViYmQwIi8+PHBhdGggaWQ9IkV5ZXMiIGQ9Ik0yNS43LDM4LjhhNS41MSw1LjUxLDAsMSwwLTUuNS01LjUxQTUuNTEsNS41MSwwLDAsMCwyNS43LDM4LjhabTI0Ljc3LDBBNS41MSw1LjUxLDAsMSwwLDQ1LDMzLjI5LDUuNSw1LjUsMCwwLDAsNTAuNDcsMzguOFoiIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZCIvPjxwYXRoIGlkPSJJcmlzIiBkPSJNMjQsMzMuNjRhMi4wNywyLjA3LDAsMSwwLTIuMDYtMi4wN0EyLjA3LDIuMDcsMCwwLDAsMjQsMzMuNjRabTI0Ljc3LDBhMi4wNywyLjA3LDAsMSwwLTIuMDYtMi4wN0EyLjA3LDIuMDcsMCwwLDAsNDguNzUsMzMuNjRaIiBzdHlsZT0iZmlsbDojZmZmO2ZpbGwtcnVsZTpldmVub2RkIi8+PC9nPjwvc3ZnPg==" />
                 </section>
 
                 <section data-background-color="white">
-                    <img width="600" src="https://dbdb.io/media/logos/tigerbeetle.svg"/>
+                    <img width="600" src="https://dbdb.io/media/logos/tigerbeetle.svg" />
                 </section>
                 <section>
-                    <img width="600" src="https://raw.githubusercontent.com/ZigEmbeddedGroup/microzig/main/design/logo-text-auto.svg"/>
+                    <img width="600"
+                        src="https://raw.githubusercontent.com/ZigEmbeddedGroup/microzig/main/design/logo-text-auto.svg" />
                 </section>
                 <section>
-                    <img width="600" src="https://boksos.com/boksos.png"/>
+                    <img width="600" src="https://boksos.com/boksos.png" />
                 </section>
                 <section>
                     <h4>
@@ -495,9 +532,9 @@ thread 27687 panic: reached unreachable code
 
 
             <section>
-                    <h3>Zig version</h3>
-                    <h4>0.13.2</h4>
-                    <h4>0.14.0-dev</h4>
+                <h3>Zig version</h3>
+                <h4>0.13.2</h4>
+                <h4>0.14.0-dev</h4>
             </section>
 
 
@@ -510,19 +547,19 @@ thread 27687 panic: reached unreachable code
             </section>
 
             <section>
-                    <h3>Summary</h3>
-                    <img width="500" src="./assets/images/zig_rust_d_c3_meme2.jpg" />
+                <h3>Summary</h3>
+                <img width="500" src="./assets/images/zig_rust_d_c3_meme2.jpg" />
             </section>
 
             <section>
-                    <h3>QA</h3>
+                <h3>QA</h3>
             </section>
             <section>
-                    <h3>exit(0)</h3>
+                <h3>exit(0)</h3>
             </section>
         </div>
     </div>
-zig_elixir_go_meme1
+    zig_elixir_go_meme1
     <script src="dist/reveal.js"></script>
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
