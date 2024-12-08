@@ -96,40 +96,181 @@
                         A Taste of Zig
                     </h3>
                 </section>
+
                 <section>
-                    <h3>Why Zig? ...</h3>
-                    <pre><code data-trim data-noescape>
-                            const std = @import("std");
-                            const stdout = std.io.getStdOut().writer();
-
-                            pub fn main() !void {
-                            const x: i32 = 3412;
-                            const y: ?i32 = return_null(x);
-
-                            // ptr have type *?i32
-                            const ptr = &y;
-                            try stdout.print("result y is {d}, ptr is still {d}\n",
-                            .{(y orelse 0), (ptr.* orelse 0)});
-
-                            if(ptr.*) |not_null_ptr| {
-                            try stdout.print("{d}", .{not_null_ptr});
-                            } else {
-                            unreachable;
-                            }
-                            }
-
-                            fn return_null(n: i32) ?i32 {
-                            if (n == 3412) return null;
-                            return n;
-                            }
-                        </code></pre>
+                    <h2 style="text-align: center; color: #f93;">Why Zig?</h2>
+                    <h3 style="text-align: center; font-size: 1.5em; margin-top: 10px;">When we already have C++ and
+                        Rust?</h3>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <img src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/zig-mark.svg"
+                            alt="Zig Logo" style="height: 100px; margin: 0 20px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg"
+                            alt="C++ Logo" style="height: 100px; margin: 0 20px;">
+                        <img src="https://www.rust-lang.org/logos/rust-logo-512x512.png" alt="Rust Logo"
+                            style="height: 100px; margin: 0 20px;">
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; font-size: 1.2em; color: #666;">
+                        <em>"Because sometimes, you don't need the <strong>kitchen sink</strong>."</em>
+                    </p>
+                    <p style="text-align: center; font-size: 1em; color: #444;">
+                        Zig: Simplicity of C, precision of Rust, none of the baggage! 🚀
+                    </p>
                 </section>
                 <section>
                     <img src="https://img.ifunny.co/images/ae282be3e4ecf5285afe268aa220d73ac4af975bf5e791a3c88794147518349e_1.webp"
                         alt="Debugging Meme" style="width: 500px; margin-bottom: 20px;" />
                     <h4 style="font-size: 2rem; text-align: center;">
-                        "Focus on debugging your application, not your programming language"
+                        "Focus on debugging your application rather than debugging your programming language knowledge"
                     </h4>
+                </section>
+
+                <section>
+                    <h2>What is Memory?</h2>
+                    <div style="text-align: center;">
+                        <img src="https://media.giphy.com/media/XRdxFD0dJzVxmkOpwa/giphy.gif" alt="Memory Concept"
+                            style="height: 200px;">
+                    </div>
+                    <p style="text-align: center; color: #666;">
+                        - **Temporary storage**
+                        - Holds data like variables and objects
+                        - Essential for running programs
+                    </p>
+                </section>
+
+
+                <section>
+                    <h2>Quick Recap: Stack vs Heap</h2>
+                    <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Stack 🗂️</th>
+                                <th>Heap 📦</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Speed ⚡</strong></td>
+                                <td>Fast 🚀</td>
+                                <td>Slower 🐢</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Size 📏</strong></td>
+                                <td>Small 🧳</td>
+                                <td>Large 🏢</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Memory Management 🔧</strong></td>
+                                <td>Automatic 🔄 (functions return)</td>
+                                <td>Manual ⚙️ (you must free it)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Use Case 💻</strong></td>
+                                <td>Function calls, Local variables 🗂️</td>
+                                <td>Dynamic memory, Objects 📦</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+
+                <section data-transition="fade">
+                    <h2 style="color: #FF5733;">Hidden Costs in C#</h2>
+                    <pre>
+                        <code data-trim data-noescape>
+                            string prefix = "Hello, ";
+                            int value = 42;
+
+                            string message = prefix + "Value is: " + value;
+
+                            Console.WriteLine(message);
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <p style="color: #FF5733; font-size: 3rem; margin-top: 20px; font-weight: bold;">
+                        ⚠️ Why this is problematic:
+                    </p>
+                    <ul>
+                        <li>Hidden <strong>control flow</strong> with `+` operators makes debugging harder.</li>
+                        <li>Multiple <strong>hidden memory allocations</strong> increase inefficiency.</li>
+                        <li>Developers may not notice the inefficiency at first glance!</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="https://raw.githubusercontent.com/rochacbruno/rust_memes/refs/heads/master/img/ferris_thinking.jpg"
+                        alt="Debugging Meme" style="width: 500px; margin-bottom: 20px;" />
+                    <h4 style="font-size: 2rem; text-align: center;">
+                        "Try a little bit in RUST"
+                    </h4>
+                </section>
+
+                <section>
+                    <h3>Ownership and Concurrency in Rust</h3>
+                    <pre><code class="rust" data-trim>
+                            use std::cell::RefCell;
+                            use std::rc::Rc;
+                            use std::sync::{Arc, Mutex};
+                            use std::thread;
+
+                            #[derive(Debug)]
+                            struct Cat {
+                            name: String,
+                            mood: String,
+                            }
+
+                            fn main() {
+                            // 1. A single cat in a Box
+                            let boxed_cat = Box::new(Cat {
+                            name: "Whiskers".to_string(),
+                            mood: "Happy".to_string(),
+                            });
+                            println!("Boxed cat: {:?}", boxed_cat);
+
+                            // 2. Shared cat using Rc
+                            let shared_cat = Rc::new(RefCell::new(Cat {
+                            name: "Fluffy".to_string(),
+                            mood: "Curious".to_string(),
+                            }));
+                            {
+                            let cat = shared_cat.borrow();
+                            println!("Shared cat: {:?}", cat);
+                            }
+
+                            // 3. Mutate the shared cat using RefCell
+                            {
+                            let mut cat = shared_cat.borrow_mut();
+                            cat.mood = "Playful".to_string();
+                            println!("Cat after mood change: {:?}", cat);
+                            }
+
+                            // 4. Use Mutex and Arc for thread-safe sharing
+                            let thread_safe_cat = Arc::new(Mutex::new(Cat {
+                            name: "Tiger".to_string(),
+                            mood: "Lazy".to_string(),
+                            }));
+
+                            let threads: Vec<_> = (0..3)
+                                .map(|i| {
+                                let cat_clone = Arc::clone(&thread_safe_cat);
+                                thread::spawn(move || {
+                                let mut cat = cat_clone.lock().unwrap();
+                                cat.mood = format!("Mood {} from thread {}", i, i);
+                                println!("Thread {} updated cat: {:?}", i, *cat);
+                                })
+                                })
+                                .collect();
+
+                                for thread in threads {
+                                thread.join().unwrap();
+                                }
+
+                                let final_cat = thread_safe_cat.lock().unwrap();
+                                println!("Final cat state: {:?}", *final_cat);
+                                }
+                        </code></pre>
                 </section>
                 <section>
                     <h2 style="text-align: center;">Why Choose Simplicity?</h2>
@@ -139,49 +280,65 @@
                         <li>🚫 No preprocessor, no macros</li>
                     </ul>
                 </section>
-                <section>
-                    <h3>Smart pointer in Rust</h3>
-                    <p>Box :: allocating vaules on the heap</p>
-                    <p>Rc :: reference counting enables multiple ownership</p>
-                    <p>Ref and RefMut or RefCell :: enforces the borrowing rules at runtime instead of compile time</p>
-                    <p>Mutex or Arc :: Threads safety right?</p>
+
+                <section data-background-color="#1E1E1E" style="color: white; text-align: center; padding: 50px;">
+                    <h2 style="font-size: 3.5rem; color: #F9C74F;">🌟 Features in Zig 🌟</h2>
+                    <ul style="list-style: none; padding: 0; font-size: 2.5rem; line-height: 2; margin-top: 30px;">
+                        <li style="color: #90BE6D;">💡 No Hidden Control Flow</li>
+                        <li style="color: #F94144;">⚡ High Performance</li>
+                        <li style="color: #577590;">🛠️ Manual Memory Management</li>
+                        <li style="color: #F3722C;">🔍 Clear Error Handling</li>
+                        <li style="color: #43AA8B;">📜 Cross-Compilation Built-In</li>
+                        <li style="color: #F9844A;">🌐 C Interoperability</li>
+                    </ul>
                 </section>
 
                 <section>
-                    <h3>On Custom-width integer types</h3>
-                    <pre><code data-trim data-noescape>
+                    <h2>Custom-Width Integer Types</h2>
+                    <pre><code data-trim>
                             const uint_u2: u2 = 2;
                             const int_i99: i99 = 1_000_000_000;
                         </code></pre>
+                    <p>
+                        Zig allows you to define integers with custom bit-widths like <code>u2</code> and
+                        <code>i99</code> for precise control over memory usage.
+                    </p>
                 </section>
 
                 <section>
-                    <h3>C Primitive Types</h3>
-                    <pre><code data-trim data-noescape>
+                    <h2>C Primitive Types</h2>
+                    <pre><code data-trim>
                             const c_short_zig: c_short = 255; // short
                             const c_int_zig: c_int = 1_000_000; // int
                         </code></pre>
+                    <p>
+                        Seamless interoperability with C by using primitive C types such as <code>c_short</code> and
+                        <code>c_int</code>.
+                    </p>
                 </section>
 
                 <section>
-                    <h3>Optional type instead of null pointers</h3>
-                    <pre><code data-trim data-noescape>
+                    <h2>Optional Type Instead of Null Pointers</h2>
+                    <h3>Example: Null Pointer Error</h3>
+                    <pre><code data-trim>
                             test "null @intToPtr" {
                             const foo: *i32 = @ptrFromInt(0x0);
                             _ = foo;
                             }
                         </code></pre>
-
-                    <pre><code data-trim data-noescape>
+                    <pre><code data-trim>
                             $ zig test 6-null-to-ptr.zig
-                            assets/zig-code/features/6-null-to-ptr.zig:2:35: error: pointer type '*i32' does not allow
-                            address zero
+                            error: pointer type '*i32' does not allow address zero
                         </code></pre>
+                    <p>
+                        Zig prevents null pointers by default, ensuring safer memory handling.
+                    </p>
                 </section>
 
                 <section>
-                    <h3>Optional type</h3>
-                    <pre><code data-trim data-noescape>
+                    <h2>Optional Type</h2>
+                    <h3>Example: Null Check with Optional Type</h3>
+                    <pre><code data-trim>
                             const std = @import("std");
                             const assert = std.debug.assert;
 
@@ -190,25 +347,32 @@
                             assert(ptr == null);
                             }
                         </code></pre>
-
-                    <pre><code data-trim data-noescape>
+                    <pre><code data-trim>
                             $ zig test 7-optional-syntax.zig
                             1/1 7-optional-syntax.test.null @intToPtr...OK
                             All 1 tests passed.
                         </code></pre>
+                    <p>
+                        Use optional types (<code>?*i32</code>) to explicitly handle null values safely.
+                    </p>
                 </section>
 
                 <section>
-                    <h3>Let's go error?</h3>
-                    <h4>Error in zig in just a value</h4>
-                    <pre><code data-trim data-noescape>
-                            // Error doesn't make sense
+                    <h2>Error Handling Made Simple</h2>
+                    <h3>Errors in Zig Are Just Values</h3>
+                    <pre><code data-trim>
                             const std = @import("std");
 
                             pub fn main() void {
+                            // Attempt to open a file
                             _ = std.fs.cwd().openFile("minji_haerin.txt", .{});
                             }
                         </code></pre>
+                    <p><strong>What happens here?</strong></p>
+                    <ul>
+                        <li>If the file doesn't exist, Zig returns an error value.</li>
+                        <li>You can handle it explicitly using <code>try</code> or <code>catch</code>.</li>
+                    </ul>
                 </section>
                 <section>
                     <h3>Cool error in zig</h3>
@@ -261,9 +425,9 @@
                 </section>
 
                 <section>
-                    <h3>Result</h3>
-                    <pre><code data-trim data-noescape>
-                            ➜ zigtest git:(main) ✗ zig run testerr.zig
+                    <h2>When running the code:</h2>
+                    <pre><code data-trim>
+                            ➜ zig run testerr.zig
                             Error occurred: File not found.
                             thread 30969 panic: reached unreachable code
                             .../zigtest/testerr.zig:12:9: 0x1037789 in main (testerr)
@@ -275,7 +439,6 @@
                             .../zig/lib/std/start.zig:240:5: 0x10372fd in _start (testerr)
                             asm volatile (switch (native_arch) {
                             ^
-                            ???:?:?: 0x0 in ??? (???)
                             [1] 30969 IOT instruction (core dumped) zig run testerr.zig
                         </code></pre>
                 </section>
@@ -443,7 +606,7 @@
                 </section>
 
                 <section>
-                    <h3>LLVM Backend</h3>
+                    <h3>LLVM Backend: Zig's Powerful Foundation</h3>
                     <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/LLVM_logo.png" />
                 </section>
                 <section>
@@ -537,18 +700,70 @@
                 <h4>0.14.0-dev</h4>
             </section>
 
-
             <section>
-                <h2>So ...</h2>
-                <h3>
-                    Zig is a general-purpose programming language and toolchain for maintaining robust, optimal, and
-                    reusable software.
-                </h3>
+                <h2>Comparison Table - Recap</h2>
+                <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Zig</th>
+                                <th>C</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Performance</strong></td>
+                                <td>High (Manual memory management)</td>
+                                <td>High (Close to hardware)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Memory Safety</strong></td>
+                                <td>Strong (Compile-time checks)</td>
+                                <td>Low (Manual memory management)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Concurrency</strong></td>
+                                <td>Limited (Single-threaded runtime)</td>
+                                <td>Low (Pthreads or manual concurrency)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ease of Use</strong></td>
+                                <td>Moderate (Explicit syntax)</td>
+                                <td>Low (Verbose and error-prone)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Use Cases</strong></td>
+                                <td>System programming, Game development</td>
+                                <td>Embedded systems, Legacy apps</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Build System</strong></td>
+                                <td>Integrated (<code>zig build</code>)</td>
+                                <td>External (e.g., Make, CMake)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
             <section>
-                <h3>Summary</h3>
-                <img width="500" src="./assets/images/zig_rust_d_c3_meme2.jpg" />
+                <h3>So ...</h3>
+                <div style="text-align: center;">
+                    <img <img
+                        src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/zig-mark.svg"
+                        alt="Zig Logo" style="height: 90px; margin-bottom: 2px;">
+                    <h3 style="font-size: 1.5em; line-height: 1.5; color: #f93;">
+                        <strong>Zig</strong> is not just a programming language...
+                    </h3>
+                    <h3>
+                        It's your ally for creating <strong>robust</strong>, <strong>optimal</strong>, and
+                        <strong>reusable</strong> software.
+                    </h3>
+                    <p style="margin-top: 20px; font-size: 1.2em; color: #666;">
+                        Designed to take on <strong>C</strong> with <em>clarity and precision!</em> 🚀
+                    </p>
+                </div>
             </section>
 
             <section>
