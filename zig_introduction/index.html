@@ -294,28 +294,53 @@
                 </section>
 
                 <section>
-                    <h2>Custom-Width Integer Types</h2>
+                    <h2>Custom-Width Integers: Zig Gets Precise! 🛠️</h2>
+                    <h3>Because Who Needs 8 Bits Anyway?</h3>
                     <pre><code data-trim>
-                            const uint_u2: u2 = 2;
-                            const int_i99: i99 = 1_000_000_000;
+                            const uint_u2: u2 = 2; // Just 2 bits! 🧵
+                            const int_i99: i99 = 1_000_000_000; // A whopping 99 bits! 💪
                         </code></pre>
-                    <p>
-                        Zig allows you to define integers with custom bit-widths like <code>u2</code> and
-                        <code>i99</code> for precise control over memory usage.
-                    </p>
+                    <p><strong>What’s Happening?</strong></p>
+                    <ul>
+                        <li><code>u2</code>: Unsigned 2-bit integer (yes, really 2 bits).</li>
+                        <li><code>i99</code>: Signed 99-bit integer (almost feels illegal).</li>
+                    </ul>
                 </section>
 
+
                 <section>
-                    <h2>C Primitive Types</h2>
+                    <h2>Seamless C Interop: Zig Speaks C! 💬</h2>
+                    <h3>Example: Borrowing C’s Types</h3>
                     <pre><code data-trim>
-                            const c_short_zig: c_short = 255; // short
-                            const c_int_zig: c_int = 1_000_000; // int
+                            const c_short_zig: c_short = 255; // Like C's short 🩳
+                            const c_int_zig: c_int = 1_000_000; // Like C's int 🏋️
                         </code></pre>
-                    <p>
-                        Seamless interoperability with C by using primitive C types such as <code>c_short</code> and
-                        <code>c_int</code>.
-                    </p>
+                    <p><strong>Why Use C Types?</strong></p>
+                    <ul>
+                        <li>Zig can talk directly to your C libraries. 🛠️</li>
+                        <li>No translation headaches for data types. 🚦</li>
+                        <li>Works like magic: same types, same behavior! ✨</li>
+                    </ul>
                 </section>
+
+
+                <section>
+                    <h2>C Interoperability: Zig Speaks C Fluently! 🗣️</h2>
+                    <h3>Example: Call a C Function in Zig</h3>
+                    <pre><code data-trim>
+                            const std = @import("std");
+                            const c = @cImport({
+                            @cInclude("math.h"); // Import C's math library 📚
+                            });
+
+                            pub fn main() void {
+                            const result = c.sqrt(64.0); // Zig calling C's sqrt function 🧮
+                            std.debug.print("sqrt(64.0) = {}\n", .{result}); // Output 🚀
+                            }
+                        </code></pre>
+                    <p><strong>Result: Zig + C = seamless teamwork. 🏆 🤔</strong></p>
+                </section>
+
 
                 <section>
                     <h3>Null Pointers? Not in Zig's House! 🛑</h3>
@@ -332,6 +357,8 @@
                         </code></pre>
                     <p><strong>Zig Says:</strong> "Pointers can’t be null. Safety first, folks!" 🚧</p>
                 </section>
+
+
 
                 <section>
                     <h2>Optional Types: Null? No Problem! 🌟</h2>
