@@ -620,21 +620,26 @@
                             ...
                         </code></pre>
                 </section>
+
                 <section>
-                    <h3>Cross-compiling is a first-class use case</h3>
+                    <h3>🌍 Cross-Compiling: Zig's Superpower!</h3>
+                    <p>Think of Zig as a world traveler 🌏. With cross-compiling, it can travel anywhere — whether it’s
+                        Linux, Windows, or Mac — without breaking a sweat! 🚀 You just tell Zig where to go, and it
+                        builds for that platform. No worries!</p>
                 </section>
+
                 <section>
-                    <h2>
-                        How about assembly?
-                    </h2>
-                    <pre><code data-line-numbers>const std = @import("std");
+                    <h4>🔧 How About Assembly? Let’s Get Low-Level!</h4>
+
+                    <pre><code data-line-numbers>
+                            const std = @import("std");
                             const expect = std.testing.expect;
 
                             comptime {
                             asm (
-                            \\.global my_func;
-                            \\.type my_func, @function;
-                            \\my_func:
+                            \\ .global my_func;
+                            \\ .type my_func, @function;
+                            \\ my_func:
                             \\ lea (%rdi,%rsi,1),%eax
                             \\ retq
                             );
@@ -647,13 +652,13 @@
                             }
                         </code></pre>
 
-                    <pre><code>$ zig test test_global_assembly.zig -target x86_64-linux
-                            1/1 test_global_assembly.test.global assembly...OK
-                            All 1 tests passed.</code></pre>
+                    <p>With this, Zig lets you embed assembly directly in your code, making you the captain of the CPU!
+                        🧑‍🚀 And when you run it, Zig will compile it for any target you want</p>
                 </section>
 
-
                 <section>
+                    <h3>💻 Build for Any Platform Like a Boss!</h3>
+
                     <pre><code data-trim data-noescape>
                             const std = @import("std");
 
@@ -661,6 +666,8 @@
                             std.debug.print("Hello, world!\n", .{});
                             }
                         </code></pre>
+
+                    <p>Here’s how you can build it for different platforms:</p>
 
                     <pre><code data-trim data-noescape data-line-numbers="1-2,4-5,7-8">
                             $ zig build-exe hello.zig -target x86_64-windows
