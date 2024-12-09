@@ -358,22 +358,105 @@
                 </section>
 
                 <section>
+                    <h3>Error Handling: Zig vs the Rest</h3>
+                    <h3>Scroll to See the Burns 🔥</h3>
+                    <div
+                        style="border: 1px solid #ccc; padding: 1em; max-height: 300px; overflow-y: auto; background: #f9f9f9;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th>Language</th>
+                                    <th>Error Handling Style</th>
+                                    <th>Zig’s Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>C#</strong></td>
+                                    <td>Try-Catch-Finally (with exceptions galore).</td>
+                                    <td>"Is the 'finally' block for cleaning up, or just for show?" 🙄</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>C++</strong></td>
+                                    <td>Segfaults and maybe a `try` (if you're lucky).</td>
+                                    <td>"Oh, you thought the compiler was your friend? Cute." 💥</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Java</strong></td>
+                                    <td>Checked exceptions everywhere 🚨.</td>
+                                    <td>"Throw it, catch it, log it, and hope for the best." 😂</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Go</strong></td>
+                                    <td>Errors as values (but you check them manually).</td>
+                                    <td>"Close, but no `try`. You could’ve been me." 🛠️</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><strong>Zig’s Flex:</strong> "Errors are values. Calm, simple, and powerful. Deal with it." 💪
+                    </p>
+                </section>
+
+                <section>
                     <h2>Error Handling Made Simple</h2>
-                    <h3>Errors in Zig Are Just Values</h3>
+                    <h3>Errors in Zig Are Like Mischievous Cats 🐈</h3>
+                    <p>Errors in Zig aren’t scary monsters; they’re just mischievous cats! If you don’t handle them,
+                        they’ll knock things over.
+                        But don’t worry—we’ve got ways to manage them with style. 🐾</p>
+                </section>
+
+                <section>
+                    <h2>Cats (Errors) Need Attention</h2>
+                    <h3>Let’s Look at an Example</h3>
                     <pre><code data-trim>
                             const std = @import("std");
 
                             pub fn main() void {
-                            // Attempt to open a file
+                            // We try to open a file
                             _ = std.fs.cwd().openFile("minji_haerin.txt", .{});
                             }
                         </code></pre>
-                    <p><strong>What happens here?</strong></p>
+                </section>
+
+                <!-- Slide 3 -->
+                <section>
+                    <h2>What Happens?</h2>
                     <ul>
-                        <li>If the file doesn't exist, Zig returns an error value.</li>
-                        <li>You can handle it explicitly using <code>try</code> or <code>catch</code>.</li>
+                        <li>If the file exists, hooray! 🎉 Zig quietly purrs and does the job.</li>
+                        <li>If it doesn’t? Bam! Here’s your error (or <strong>mischievous cat</strong>) delivered to
+                            you. 🐈</li>
                     </ul>
                 </section>
+
+                <!-- Slide 4 -->
+                <section>
+                    <h2>Two Ways to Handle Mischief</h2>
+                    <h3>1. Use <code>try</code> (Catch the Cat Gently 🐾)</h3>
+                    <pre><code data-trim>
+                            pub fn main() anyerror!void {
+                            const file = try std.fs.cwd().openFile("minji_haerin.txt", .{});
+                            std.debug.print("Opened file: {}\n", .{file});
+                            }
+                        </code></pre>
+                    <p>If the file doesn’t exist, Zig sends the error up the chain. You can handle it later.</p>
+                </section>
+
+                <!-- Slide 5 -->
+                <section>
+                    <h3>2. Use <code>catch</code> (Tell the Cat to Chill 🐱)</h3>
+                    <pre><code data-trim>
+                            pub fn main() void {
+                            const file = std.fs.cwd().openFile("minji_haerin.txt", .{}) catch |err| {
+                            std.debug.print("Oops! Error: {}\n", .{err});
+                            return;
+                            };
+                            std.debug.print("Opened file: {}\n", .{file});
+                            }
+                        </code></pre>
+                    <p>If there’s an error, you catch it on the spot and deal with it.</p>
+                </section>
+
                 <section>
                     <h3>Cool error in zig</h3>
                     <pre><code data-trim data-noescape data-line-numbers="3-7 | 3-7, 9-19 | 21-33 | 35-43">
