@@ -209,87 +209,94 @@
 
                 <section>
                     <h3>Ownership and Concurrency in Rust</h3>
-                    <pre><code class="rust" data-trim>
-                            use std::cell::RefCell;
-                            use std::rc::Rc;
-                            use std::sync::{Arc, Mutex};
-                            use std::thread;
+                    <pre><code class="rust" data-trim data-noescape>
+                        use std::cell::RefCell;
+                        use std::rc::Rc;
+                        use std::sync::{Arc, Mutex};
+                        use std::thread;
 
-                            #[derive(Debug)]
-                            struct Cat {
+                        #[derive(Debug)]
+                        struct Cat {
                             name: String,
                             mood: String,
-                            }
+                        }
 
-                            fn main() {
+                        fn main() {
                             // 1. A single cat in a Box
                             let boxed_cat = Box::new(Cat {
-                            name: "Whiskers".to_string(),
-                            mood: "Happy".to_string(),
+                                name: "Haerin".to_string(),
+                                mood: "Happy".to_string(),
                             });
                             println!("Boxed cat: {:?}", boxed_cat);
 
                             // 2. Shared cat using Rc
                             let shared_cat = Rc::new(RefCell::new(Cat {
-                            name: "Fluffy".to_string(),
-                            mood: "Curious".to_string(),
+                                name: "Minji".to_string(),
+                                mood: "Curious".to_string(),
                             }));
                             {
-                            let cat = shared_cat.borrow();
-                            println!("Shared cat: {:?}", cat);
+                                let cat = shared_cat.borrow();
+                                println!("Shared cat: {:?}", cat);
                             }
 
                             // 3. Mutate the shared cat using RefCell
                             {
                             let mut cat = shared_cat.borrow_mut();
-                            cat.mood = "Playful".to_string();
-                            println!("Cat after mood change: {:?}", cat);
+                                cat.mood = "Playful".to_string();
+                                println!("Cat after mood change: {:?}", cat);
                             }
 
                             // 4. Use Mutex and Arc for thread-safe sharing
                             let thread_safe_cat = Arc::new(Mutex::new(Cat {
-                            name: "Tiger".to_string(),
-                            mood: "Lazy".to_string(),
+                                name: "Haerinnnn".to_string(),
+                                mood: "Lazy".to_string(),
                             }));
 
                             let threads: Vec<_> = (0..3)
                                 .map(|i| {
-                                let cat_clone = Arc::clone(&thread_safe_cat);
-                                thread::spawn(move || {
-                                let mut cat = cat_clone.lock().unwrap();
-                                cat.mood = format!("Mood {} from thread {}", i, i);
-                                println!("Thread {} updated cat: {:?}", i, *cat);
-                                })
+                                    let cat_clone = Arc::clone(&thread_safe_cat);
+                                    thread::spawn(move || {
+                                        let mut cat = cat_clone.lock().unwrap();
+                                        cat.mood = format!("Mood {} from thread {}", i, i);
+                                        println!("Thread {} updated cat: {:?}", i, *cat);
+                                    })
                                 })
                                 .collect();
 
-                                for thread in threads {
+                            for thread in threads {
                                 thread.join().unwrap();
-                                }
+                            }
 
-                                let final_cat = thread_safe_cat.lock().unwrap();
-                                println!("Final cat state: {:?}", *final_cat);
-                                }
+                            let final_cat = thread_safe_cat.lock().unwrap();
+                            println!("Final cat state: {:?}", *final_cat);
+                        }
                         </code></pre>
                 </section>
+
+                <section>
+                    <h3>🐱 Meet the Cats in Action!</h3>
+
+                    <p>Let's see how our cats evolve through different moods, threads, and states. 😸</p>
+
+                    <h4>Cat Updates:</h4>
+                    <pre><code data-trim data-noescape>
+                        Boxed cat: Cat { name: "Haerin", mood: "Happy" }
+                        Shared cat: Cat { name: "Minji", mood: "Curious" }
+                        Cat after mood change: Cat { name: "Minji", mood: "Playful" }
+                        Thread 0 updated cat: Cat { name: "Haerinnnn", mood: "Mood 0 from thread 0" }
+                        Thread 1 updated cat: Cat { name: "Haerinnnn", mood: "Mood 1 from thread 1" }
+                        Thread 2 updated cat: Cat { name: "Haerinnnn", mood: "Mood 2 from thread 2" }
+                        Final cat state: Cat { name: "Haerinnnn", mood: "Mood 2 from thread 2" }
+                    </code></pre>
+
+                </section>
+
                 <section>
                     <h2 style="text-align: center;">Why Choose Simplicity?</h2>
                     <ul style="font-size: 3rem;">
                         <li>🛠 No hidden control flow</li>
                         <li>💾 No hidden memory allocations</li>
                         <li>🚫 No preprocessor, no macros</li>
-                    </ul>
-                </section>
-
-                <section data-background-color="#1E1E1E" style="color: white; text-align: center; padding: 50px;">
-                    <h2 style="font-size: 3.5rem; color: #F9C74F;">🌟 Features in Zig 🌟</h2>
-                    <ul style="list-style: none; padding: 0; font-size: 2.5rem; line-height: 2; margin-top: 30px;">
-                        <li style="color: #90BE6D;">💡 No Hidden Control Flow</li>
-                        <li style="color: #F94144;">⚡ High Performance</li>
-                        <li style="color: #577590;">🛠️ Manual Memory Management</li>
-                        <li style="color: #F3722C;">🔍 Clear Error Handling</li>
-                        <li style="color: #43AA8B;">📜 Cross-Compilation Built-In</li>
-                        <li style="color: #F9844A;">🌐 C Interoperability</li>
                     </ul>
                 </section>
 
@@ -327,16 +334,16 @@
                 <section>
                     <h2>C Interoperability: Zig Speaks C Fluently! 🗣️</h2>
                     <h3>Example: Call a C Function in Zig</h3>
-                    <pre><code data-trim>
-                            const std = @import("std");
-                            const c = @cImport({
+                    <pre><code data-trim data-noescape>
+                        const std = @import("std");
+                        const c = @cImport({
                             @cInclude("math.h"); // Import C's math library 📚
-                            });
+                        });
 
-                            pub fn main() void {
+                        pub fn main() void {
                             const result = c.sqrt(64.0); // Zig calling C's sqrt function 🧮
                             std.debug.print("sqrt(64.0) = {}\n", .{result}); // Output 🚀
-                            }
+                        }
                         </code></pre>
                     <p><strong>Result: Zig + C = seamless teamwork. 🏆 🤔</strong></p>
                 </section>
@@ -345,13 +352,13 @@
                 <section>
                     <h3>Null Pointers? Not in Zig's House! 🛑</h3>
                     <h3>Example: Null Pointer Error</h3>
-                    <pre><code data-trim>
+                    <pre><code data-trim data-noescape>
                             test "null @intToPtr" {
-                            const foo: *i32 = @ptrFromInt(0x0); // Uh-oh! Null pointer alert!
-                            _ = foo; // Boom 💥
+                                const foo: *i32 = @ptrFromInt(0x0); // Uh-oh! Null pointer alert!
+                                _ = foo; // Boom 💥
                             }
                         </code></pre>
-                    <pre><code data-trim>
+                    <pre><code data-trim data-noescape>
                             $ zig test 6-null-to-ptr.zig
                             error: pointer type '*i32' does not allow address zero
                         </code></pre>
@@ -363,14 +370,14 @@
                 <section>
                     <h2>Optional Types: Null? No Problem! 🌟</h2>
                     <h3>Example: Safe Null Check</h3>
-                    <pre><code data-trim>
-                            const std = @import("std");
-                            const assert = std.debug.assert;
+                    <pre><code data-trim data-noescape>
+                        const std = @import("std");
+                        const assert = std.debug.assert;
 
-                            test "null @intToPtr" {
+                        test "null @intToPtr" {
                             const ptr: ?*i32 = @ptrFromInt(0x0); // Optional pointer: maybe null, maybe not!
                             assert(ptr == null); // Zig: "I see you, null, and I’m ready!" 😎
-                            }
+                        }
                         </code></pre>
                     <p>
                         Optional types (<code>?*i32</code>) are like a VIP pass for nulls. 🎫
@@ -431,13 +438,13 @@
                 <section>
                     <h2>Cats (Errors) Need Attention</h2>
                     <h3>Let’s Look at an Example</h3>
-                    <pre><code data-trim>
-                            const std = @import("std");
+                    <pre><code data-trim data-noescape>
+                        const std = @import("std");
 
-                            pub fn main() void {
+                        pub fn main() void {
                             // We try to open a file
                             _ = std.fs.cwd().openFile("minji_haerin.txt", .{});
-                            }
+                        }
                         </code></pre>
                 </section>
 
@@ -455,11 +462,11 @@
                 <section>
                     <h2>Two Ways to Handle Mischief</h2>
                     <h3>1. Use <code>try</code> (Catch the Cat Gently 🐾)</h3>
-                    <pre><code data-trim>
-                            pub fn main() anyerror!void {
+                    <pre><code data-trim data-noescape>
+                        pub fn main() anyerror!void {
                             const file = try std.fs.cwd().openFile("minji_haerin.txt", .{});
                             std.debug.print("Opened file: {}\n", .{file});
-                            }
+                        }
                         </code></pre>
                     <p>If the file doesn’t exist, Zig sends the error up the chain. You can handle it later.</p>
                 </section>
@@ -467,14 +474,14 @@
                 <!-- Slide 5 -->
                 <section>
                     <h3>2. Use <code>catch</code> (Tell the Cat to Chill 🐱)</h3>
-                    <pre><code data-trim>
-                            pub fn main() void {
+                    <pre><code data-trim data-noescape>
+                        pub fn main() void {
                             const file = std.fs.cwd().openFile("minji_haerin.txt", .{}) catch |err| {
-                            std.debug.print("Oops! Error: {}\n", .{err});
-                            return;
+                                std.debug.print("Oops! Error: {}\n", .{err});
+                                return;
                             };
                             std.debug.print("Opened file: {}\n", .{file});
-                            }
+                        }
                         </code></pre>
                     <p>If there’s an error, you catch it on the spot and deal with it.</p>
                 </section>
@@ -483,10 +490,10 @@
                     <h3>🚀 Compile Time: Prepping for Launch!</h3>
 
                     <pre><code data-trim data-noescape>
-                            test "integer overflow at compile time" {
+                        test "integer overflow at compile time" {
                             const x: u8 = 255;
                             _ = x + 1; // Uh-oh! We're going over the top!
-                            }
+                        }
                         </code></pre>
 
 
@@ -504,10 +511,10 @@
                     <h3>⏳ Runtime: Oops, We Went Too Far!</h3>
 
                     <pre><code data-trim data-noescape>
-                            test "integer overflow at runtime" {
+                        test "integer overflow at runtime" {
                             var x: u8 = 255;
                             x += 1; // Oops! The rocket can't handle this boost!
-                            }
+                        }
                         </code></pre>
 
                     <pre><code data-trim data-noescape>
@@ -588,31 +595,31 @@
                     <h3>Build</h3>
                     <a href="https://github.com/ppp3ppj/monkey_zig/blob/main/build.zig">Zig build example</a>
                     <pre><code data-trim data-noescape>
-                            pub fn build(b: *std.Build) void {
+                        pub fn build(b: *std.Build) void {
                             const target = b.standardTargetOptions(.{});
                             const optimize = b.standardOptimizeOption(.{});
                             const token_module = b.addModule("token",.{
-                            .root_source_file = b.path("src/token/token.zig"),
+                                .root_source_file = b.path("src/token/token.zig"),
                             });
 
                             const lexer_module = b.addModule("lexer", .{
-                            .root_source_file = b.path("src/lexer/lexer.zig"),
+                                .root_source_file = b.path("src/lexer/lexer.zig"),
                             });
 
                             lexer_module.addImport("token", token_module);
 
                             const lib = b.addStaticLibrary(.{
-                            .name = "monkey_zig",
-                            .root_source_file = b.path("src/root.zig"),
-                            .target = target,
-                            .optimize = optimize,
+                                .name = "monkey_zig",
+                                .root_source_file = b.path("src/root.zig"),
+                                .target = target,
+                                .optimize = optimize,
                             });
                             b.installArtifact(lib);
                             const exe = b.addExecutable(.{
-                            .name = "monkey_zig",
-                            .root_source_file = b.path("src/repl.zig"),
-                            .target = target,
-                            .optimize = optimize,
+                                .name = "monkey_zig",
+                                .root_source_file = b.path("src/repl.zig"),
+                                .target = target,
+                                .optimize = optimize,
                             });
                             exe.root_module.addImport("token", token_module);
                             exe.root_module.addImport("lexer", lexer_module);
@@ -631,11 +638,11 @@
                 <section>
                     <h4>🔧 How About Assembly? Let’s Get Low-Level!</h4>
 
-                    <pre><code data-line-numbers>
-                            const std = @import("std");
-                            const expect = std.testing.expect;
+                    <pre><code data-trim data-noescape data-line-numbers>
+                        const std = @import("std");
+                        const expect = std.testing.expect;
 
-                            comptime {
+                        comptime {
                             asm (
                             \\ .global my_func;
                             \\ .type my_func, @function;
@@ -643,13 +650,13 @@
                             \\ lea (%rdi,%rsi,1),%eax
                             \\ retq
                             );
-                            }
+                        }
 
-                            extern fn my_func(a: i32, b: i32) i32;
+                        extern fn my_func(a: i32, b: i32) i32;
 
-                            test "global assembly" {
+                        test "global assembly" {
                             try expect(my_func(12, 34) == 46);
-                            }
+                        }
                         </code></pre>
 
                     <p>With this, Zig lets you embed assembly directly in your code, making you the captain of the CPU!
@@ -660,26 +667,25 @@
                     <h3>💻 Build for Any Platform Like a Boss!</h3>
 
                     <pre><code data-trim data-noescape>
-                            const std = @import("std");
-
-                            pub fn main() void {
-                            std.debug.print("Hello, world!\n", .{});
-                            }
-                        </code></pre>
+                    const std = @import("std");
+                        pub fn main() void {
+                        std.debug.print("Hello, world!\n", .{});
+                    }
+                    </code></pre>
 
                     <p>Here’s how you can build it for different platforms:</p>
 
                     <pre><code data-trim data-noescape data-line-numbers="1-2,4-5,7-8">
-                            $ zig build-exe hello.zig -target x86_64-windows
-                            $ file hello.exe
-                            hello.exe: PE32+ executable (console) x86-64, for MS Windows
-                            $ zig build-exe hello.zig -target x86_64-macos
-                            $ file hello
-                            hello: Mach-O 64-bit x86_64 executable, flags:<NOUNDEFS|DYLDLINK|TWOLEVEL|PIE>
-                                $ zig build-exe hello.zig -target aarch64-linux
-                                $ file hello
-                                hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, with
-                                debug_info, not stripped
+                    $ zig build-exe hello.zig -target x86_64-windows
+                    $ file hello.exe
+                    hello.exe: PE32+ executable (console) x86-64, for MS Windows
+                    $ zig build-exe hello.zig -target x86_64-macos
+                    $ file hello
+                    hello: Mach-O 64-bit x86_64 executable, flags:<NOUNDEFS|DYLDLINK|TWOLEVEL|PIE>
+                    $ zig build-exe hello.zig -target aarch64-linux
+                    $ file hello
+                    hello: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, with
+                    debug_info, not stripped
                         </code></pre>
                 </section>
 
@@ -697,7 +703,7 @@
                 <section>
                     <h3>🎯 Why Zig? Let’s Find Out!</h3>
 
-                    <pre><code data-line-numbers="5-6, 20-23 | 6, 8-9 | 6, 9-11 | 9, 13-17">
+                    <pre><code data-trim data-noescape data-line-numbers="5-6, 20-23 | 6, 8-9 | 6, 9-11 | 9, 13-17">
                         const std = @import("std");
                         const stdout = std.io.getStdOut().writer();
 
@@ -727,7 +733,7 @@
                     <h4>💥 Result: Let’s See What Happens!</h4>
                     <p>Now, let’s run the code and see the magic happen:</p>
 
-                    <pre><code data-trim data-noescape>
+                    <pre><code data-trim data-noescape data-trim data-noescape>
                         testzig git:(main) ✗ zig run main.zig
                         result y is 0, ptr is still 0
                         thread 27687 panic: reached unreachable code
