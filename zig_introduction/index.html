@@ -687,52 +687,64 @@
                     <h3>LLVM Backend: Zig's Powerful Foundation</h3>
                     <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/LLVM_logo.png" />
                 </section>
+
                 <section>
-                    <h3>Why Zig? ...</h3>
-                    <pre><code data-line-numbers="5-6, 20-23 | 6, 8-9 | 6, 9-11 | 9, 13-17">const std = @import("std");
-                            const stdout = std.io.getStdOut().writer();
-
-                            pub fn main() !void {
-                            const x: i32 = 3412;
-                            const y: ?i32 = return_null(x);
-
-                            // ptr have type *?i32
-                            const ptr = &y;
-                            try stdout.print("result y is {d}, ptr is still {d}\n",
-                            .{(y orelse 0), (ptr.* orelse 0)});
-
-                            if(ptr.*) |not_null_ptr| {
-                            try stdout.print("{d}", .{not_null_ptr});
-                            } else {
-                            unreachable;
-                            }
-                            }
-
-                            fn return_null(n: i32) ?i32 {
-                            if (n == 3412) return null;
-                            return n;
-                            }
-                        </code></pre>
+                    <h3>⚡️ LLVM Backend: The Powerhouse Behind Zig</h3>
+                    <p>Ever wondered what makes Zig so fast and efficient? 🤔 Well, meet LLVM! It’s the magical engine that powers Zig’s code compilation. 🚗💨</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/LLVM_logo.png" alt="LLVM logo" style="max-width: 150px; margin-top: 10px;" />
                 </section>
 
                 <section>
-                    <h3>Result</h3>
+                    <h3>🎯 Why Zig? Let’s Find Out!</h3>
+
+                    <pre><code data-line-numbers="5-6, 20-23 | 6, 8-9 | 6, 9-11 | 9, 13-17">
+                        const std = @import("std");
+                        const stdout = std.io.getStdOut().writer();
+
+                        pub fn main() !void {
+                            const x: i32 = 3412;
+                            const y: ?i32 = return_null(x); // You might get a null! 🤔
+
+                            // Here we’re getting a pointer to `y`, and yes, it can be null. 😱
+                            const ptr = &y;
+                            try stdout.print("result y is {d}, ptr is still {d}\n", .{(y orelse 0), (ptr.* orelse 0)});
+
+                            if(ptr.*) |not_null_ptr| {
+                                try stdout.print("{d}", .{not_null_ptr}); // You got a real pointer here! 🎯
+                            } else {
+                                unreachable; // Oops! How did we get here? 🚨
+                            }
+                        }
+
+                        fn return_null(n: i32) ?i32 {
+                            if (n == 3412) return null; // Returning null is perfectly fine! 😎
+                            return n; // Otherwise, return the number.
+                        }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h4>💥 Result: Let’s See What Happens!</h4>
+                    <p>Now, let’s run the code and see the magic happen:</p>
+
                     <pre><code data-trim data-noescape>
-                            testzig git:(main) ✗ zig run main.zig
-                            result y is 0, ptr is still 0
-                            thread 27687 panic: reached unreachable code
-                            /.../testzig/main.zig:21:9: 0x1037b5b in main (main)
-                            unreachable;
-                            ^
-                            /.../zig/lib/std/start.zig:623:37: 0x103781f in posixCallMainAndExit (main)
-                            const result = root.main() catch |err| {
-                            ^
-                            /.../zig/lib/std/start.zig:240:5: 0x103740d in _start (main)
-                            asm volatile (switch (native_arch) {
-                            ^
-                            ???:?:?: 0x0 in ??? (???)
-                            [1] 27687 IOT instruction (core dumped) zig run main.zig
-                        </code></pre>
+                        testzig git:(main) ✗ zig run main.zig
+                        result y is 0, ptr is still 0
+                        thread 27687 panic: reached unreachable code
+                        /.../testzig/main.zig:21:9: 0x1037b5b in main (main)
+                        unreachable;
+                        ^
+                        /.../zig/lib/std/start.zig:623:37: 0x103781f in posixCallMainAndExit (main)
+                        const result = root.main() catch |err| {
+                        ^
+                        /.../zig/lib/std/start.zig:240:5: 0x103740d in _start (main)
+                        asm volatile (switch (native_arch) {
+                        ^
+                        ???:?:?: 0x0 in ??? (???)
+                        [1] 27687 IOT instruction (core dumped) zig run main.zig
+                    </code></pre>
+
+                    <p>Whoops! 👀 It seems like we tried to access the unreachable code! 🛑</p>
                 </section>
 
             </section>
