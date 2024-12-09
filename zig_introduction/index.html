@@ -480,95 +480,33 @@
                 </section>
 
                 <section>
-                    <h3>Cool error in zig</h3>
-                    <pre><code data-trim data-noescape data-line-numbers="3-7 | 3-7, 9-19 | 21-33 | 35-43">
-                            const std = @import("std");
+                    <h3>🚀 Compile Time: Prepping for Launch!</h3>
 
-                            const CustomFileError = error{
-                            FileNotFound,
-                            PermissionDenied,
-                            UnknownError,
-                            };
-
-                            fn openFilePathStr(path: []const u8) CustomFileError!std.fs.File {
-                            var file = std.fs.cwd().openFile(path, .{}) catch |err| switch (err) {
-                            error.FileNotFound => return CustomFileError.FileNotFound,
-                            error.AccessDenied => return CustomFileError.PermissionDenied,
-                            else => return CustomFileError.UnknownError,
-                            };
-
-                            defer file.close();
-
-                            return file;
-                            }
-
-                            fn printError(err: CustomFileError) void {
-                            switch (err) {
-                            CustomFileError.FileNotFound => {
-                            std.debug.print("Error occurred: File not found.\n", .{});
-                            },
-                            CustomFileError.PermissionDenied => {
-                            std.debug.print("Error occurred: Permission denied.\n", .{});
-                            },
-                            CustomFileError.UnknownError => {
-                            std.debug.print("Error occurred: An unknown error occurred.\n", .{});
-                            },
-                            }
-                            }
-
-                            pub fn main() !void {
-                            const r = openFilePathStr("minji_haerin.txt") catch |err| {
-                            printError(err);
-                            unreachable;
-                            };
-
-                            std.debug.print("File opened successfully: {s}\n", .{"minji_haerin.txt"});
-                            _ = r;
-                            }
-                        </code></pre>
-
-                </section>
-
-                <section>
-                    <h2>When running the code:</h2>
-                    <pre><code data-trim>
-                            ➜ zig run testerr.zig
-                            Error occurred: File not found.
-                            thread 30969 panic: reached unreachable code
-                            .../zigtest/testerr.zig:12:9: 0x1037789 in main (testerr)
-                            unreachable;
-                            ^
-                            .../zig/lib/std/start.zig:623:37: 0x10376ee in posixCallMainAndExit (testerr)
-                            const result = root.main() catch |err| {
-                            ^
-                            .../zig/lib/std/start.zig:240:5: 0x10372fd in _start (testerr)
-                            asm volatile (switch (native_arch) {
-                            ^
-                            [1] 30969 IOT instruction (core dumped) zig run testerr.zig
-                        </code></pre>
-                </section>
-
-                <section>
-                    <h3>Compile time</h3>
                     <pre><code data-trim data-noescape>
                             test "integer overflow at compile time" {
                             const x: u8 = 255;
-                            _ = x + 1;
+                            _ = x + 1; // Uh-oh! We're going over the top!
                             }
                         </code></pre>
+
 
                     <pre><code data-trim data-noescape>
                             $ zig test 1-integer-overflow.zig
                             assets/zig-code/features/1-integer-overflow.zig:3:11: error: overflow of integer type 'u8'
                             with value '256'
                         </code></pre>
+
+                    <p><strong>Why?</strong> Zig is smart! It stops you from making mistakes before they even happen.
+                        Just like how a rocket would never launch if it wasn't safe to fly! ✨</p>
                 </section>
+
                 <section>
-                    <h3>Runtime</h3>
+                    <h3>⏳ Runtime: Oops, We Went Too Far!</h3>
+
                     <pre><code data-trim data-noescape>
                             test "integer overflow at runtime" {
                             var x: u8 = 255;
-                            x += 1;
+                            x += 1; // Oops! The rocket can't handle this boost!
                             }
                         </code></pre>
 
@@ -582,7 +520,12 @@
                             ^
                             ...
                         </code></pre>
+
+                    <p><strong>Why?</strong> The rocket tried to boost too fast, and Zig had to pull the emergency
+                        brakes! ⚠️ That's runtime: when things get out of control, Zig makes sure you’re aware of it and
+                        helps you fix it before disaster strikes.</p>
                 </section>
+
                 <section>
                     <h3>Constants Overflow? Not in Zig! 🎯</h3>
                     <h4>Let’s Push These Numbers Too Far...</h4>
@@ -789,7 +732,7 @@
             <section>
                 <section>
                     <h3>
-                        Zig in action
+                        🚀 Zig in Action
                     </h3>
                 </section>
                 <section>
