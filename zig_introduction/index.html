@@ -584,39 +584,62 @@
                         </code></pre>
                 </section>
                 <section>
-                    <h3>Constant has the wrong vaule?</h3>
-                    <pre><code data-trim data-noescape>
-                            const _u8: u8 = 256; // 255
-                            const _u16: u16 = 65_536; // 65_535
-                            const _u32: u32 = 4_294_967_296;
-                            const _u64: u64 = 18_446_744_073_709_551_616;
-                            const _u128: u128 = 340_282_366_920_938_463_463_374_607_431_768_211_456;
+                    <h3>Constants Overflow? Not in Zig! 🎯</h3>
+                    <h4>Let’s Push These Numbers Too Far...</h4>
+                    <pre><code data-trim>
+                            const _u8: u8 = 256; // 255 (Oops, max for u8 is 255!) 🔥
+                            const _u16: u16 = 65_536; // 65_535 (u16 maxed out!) 🚫
+                            const _u32: u32 = 4_294_967_296; // u32's limit is 4_294_967_295! 😱
+                            const _u64: u64 = 18_446_744_073_709_551_616; // Boom! 💥
+                            const _u128: u128 = 340_282_366_920_938_463_463_374_607_431_768_211_456; // Nope. ✋
                         </code></pre>
+                    <p><strong>What Happens? 🤔</strong></p>
+                    <ul>
+                        <li>Each constant exceeds its maximum value. 🚀</li>
+                        <li>Zig helps you catch these mistakes early. 🛑</li>
+                        <li>Compile-time error: “You can’t do that!” 💡</li>
+                    </ul>
                 </section>
 
                 <section>
-                    <h3>comptime_int vaule?</h3>
-                    <pre><code data-trim data-noescape>
-                            const _u8: comptime_int = 256;
-                            const _u16: comptime_int = 65_536;
-                            const _u32: comptime_int = 4_294_967_296;
-                            const _u64: comptime_int = 18_446_744_073_709_551_616;
-                            const _u128: comptime_int = 340_282_366_920_938_463_463_374_607_431_768_211_456;
+                    <h3>comptime_int: Handle Big Numbers Like a Boss! 🤘</h3>
+                    <h4>No Limits. Just Flexibility. 💪</h4>
+                    <pre><code data-trim>
+                            const _u8: comptime_int = 256; // Perfectly fine! ✅
+                            const _u16: comptime_int = 65_536; // Works like a charm. 🌟
+                            const _u32: comptime_int = 4_294_967_296; // No complaints here. 👌
+                            const _u64: comptime_int = 18_446_744_073_709_551_616; // Easy! 🏗️
+                            const _u128: comptime_int = 340_282_366_920_938_463_463_374_607_431_768_211_456; // Hold my
+                            bits. 🖥️
                         </code></pre>
+                    <p><strong>Why Use comptime_int? 🌈</strong></p>
+                    <ul>
+                        <li>No fixed-size limit: it adapts to your needs. 🎩</li>
+                        <li>Use it when calculating values at compile time. 🕰️</li>
+                        <li>Stops you from feeling constrained. 🦅</li>
+                    </ul>
                 </section>
 
                 <section>
-                    <img width="300" height="300"
+                    <img width="200" height="200"
                         src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/carmen.svg" />
-                    <h3>Zig never allocates on the heap unless you explicitly instruct it to.</h3>
+                    <h3>Zig: The Memory Ninja 🥷</h3>
+                    <p>
+                        Zig doesn’t just go around allocating memory on the heap like some chaotic adventurer. 🧳
+                        It only does it when you tell it to! 🛑
+                    </p>
+                    <p>
+                        Keep your memory tight and your code faster. 🏃‍♂️💨 Zig's motto: "Only when absolutely
+                        necessary!" 🎯
+                    </p>
                 </section>
 
                 <section>
-                    <h3>Performance and Safety for Build Mode</h3>
-                    <p class="fragment">Debug</p>
-                    <p class="fragment">ReleaseSafe</p>
-                    <p class="fragment">ReleaseFast</p>
-                    <p class="fragment">ReleaseSmall</p>
+                    <h3>Performance and Safety: The Four Build Mode Avengers! 🦸‍♂️🦸‍♀️</h3>
+                    <p class="fragment">🚀 <strong>Debug</strong>: Where you catch bugs in style 🐞💡</p>
+                    <p class="fragment">🛡️ <strong>ReleaseSafe</strong>: The guardian of performance AND safety 🏰</p>
+                    <p class="fragment">⚡ <strong>ReleaseFast</strong>: Lightning-fast builds—no time to wait! ⚡</p>
+                    <p class="fragment">🔧 <strong>ReleaseSmall</strong>: Super compact, the minimalist hero! 🌍</p>
                 </section>
                 <section>
                     <h3>Build</h3>
