@@ -124,7 +124,7 @@
                     </h4>
                 </section>
 
-                <section>
+                <section data-visibility="hidden">
                     <h2>What is Memory?</h2>
                     <div style="text-align: center;">
                         <img src="https://www.conniehertz.com/wp-content/uploads/2021/01/Memory-meme.png" alt="Memory Concept"
@@ -133,7 +133,7 @@
                 </section>
 
 
-                <section>
+                <section data-visibility="hidden">
                     <h2>Quick Recap: Stack vs Heap</h2>
                     <table style="width: 100%; border-collapse: collapse; text-align: center;">
                         <thead>
@@ -194,7 +194,7 @@
                     </ul>
                 </section>
 
-                <section>
+                <section data-visibility="hidden">
                     <img src="https://raw.githubusercontent.com/rochacbruno/rust_memes/refs/heads/master/img/ferris_thinking.jpg"
                         alt="Debugging Meme" style="width: 500px; margin-bottom: 20px;" />
                     <h4 style="font-size: 2rem; text-align: center;">
@@ -202,7 +202,7 @@
                     </h4>
                 </section>
 
-                <section>
+                <section data-visibility="hidden">
                     <h3>Ownership and Concurrency in Rust</h3>
                     <pre><code class="rust" data-trim data-noescape>
                         use std::cell::RefCell;
@@ -268,7 +268,7 @@
                         </code></pre>
                 </section>
 
-                <section>
+                <section data-visibility="hidden">
                     <h3>🐱 Meet the Cats in Action!</h3>
 
                     <p>Let's see how our cats evolve through different moods, threads, and states. 😸</p>
@@ -287,7 +287,7 @@
                 </section>
 
                 <section>
-                    <h2 style="text-align: center;">Why Choose Simplicity?</h2>
+                    <h2 style="text-align: center;">This is 'ZIG'</h2>
                     <ul style="font-size: 3rem;">
                         <li>🛠 No hidden control flow</li>
                         <li>💾 No hidden memory allocations</li>
@@ -565,6 +565,44 @@
                     </ul>
                 </section>
 
+              <section>
+                <h2>Example: Type Info</h2>
+                <pre><code data-trim data-noescape>
+                    fn addSmallInts(comptime T: type, a: T, b: T) T {
+                        return switch (@typeInfo(T)) {
+                            .ComptimeInt => a + b,
+                            .Int => |info| if (info.bits <= 16) a + b else @compileError("ints too large"),
+                            else => @compileError("only ints accepted"),
+                        };
+                    }
+                </code></pre>
+              </section>
+              <section>
+                <h2>Testing Type Info</h2>
+                <pre><code data-trim data-noescape>
+                    test "typeinfo switch" {
+                        const x = addSmallInts(u8, 20, 30);
+                        try expect(@TypeOf(x) == u8);
+                        try expect(x == 50);
+                    }
+                </code></pre>
+                <p>
+                  Here's the test. <code>addSmallInts</code> is adding two <code>u8</code> numbers like a math wizard. Is the result <code>u8</code>? Yes! Is the sum correct? Absolutely!
+                </p>
+              </section>
+              <section>
+                <h2>Branching with Flair</h2>
+                <pre><code data-trim data-noescape>
+                    test "branching on types" {
+                        const a = 5;
+                        const b: if (a < 10) f32 else i32 = 5;
+                        try expect(b == 5);
+                        try expect(@TypeOf(b) == f32);
+                    }
+                </code></pre>
+                <p>Time to show off some type gymnastics! Zig decides the type like a psychic 🧙.</p>
+              </section>
+
                 <section>
                     <img width="200" height="200"
                         src="https://raw.githubusercontent.com/ziglang/logo/4f97e7a9ebce12fa48511c0b6502b6190005bc0e/carmen.svg" />
@@ -579,7 +617,7 @@
                     </p>
                 </section>
 
-                <section>
+                <section data-visibility="hidden">
                     <h3>Performance and Safety: The Four Build Mode Avengers! 🦸‍♂️🦸‍♀️</h3>
                     <p class="fragment">🚀 <strong>Debug</strong>: Where you catch bugs in style 🐞💡</p>
                     <p class="fragment">🛡️ <strong>ReleaseSafe</strong>: The guardian of performance AND safety 🏰</p>
@@ -690,7 +728,16 @@
                     <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/LLVM_logo.png" alt="LLVM logo" style="max-width: 150px; margin-top: 10px;" />
                 </section>
 
-                <section>
+      <section>
+        <h2>Why Zig is Cool</h2>
+        <ul>
+          <li>✨ Compile-time decisions = Optimized magic</li>
+          <li>✨ Errors at compile-time = Save debugging tears</li>
+          <li>✨ Type gymnastics = Flexibility + Fun!</li>
+        </ul>
+      </section>
+
+                <section data-visibility="hidden">
                     <h3>🎯 Why Zig? Let’s Find Out!</h3>
 
                     <pre><code data-trim data-noescape data-line-numbers="4-6, 20-23 | 6, 8-9, 19-22 | 6, 9-10 | 9, 12-16">
@@ -719,7 +766,7 @@
                     </code></pre>
                 </section>
 
-                <section>
+                <section data-visibility="hidden">
                     <h4>💥 Result: Let’s See What Happens!</h4>
                     <p>Now, let’s run the code and see the magic happen:</p>
 
