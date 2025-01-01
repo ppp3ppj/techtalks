@@ -91,25 +91,199 @@
 
             <!-- Slide 6: Code Example -->
             <section>
-                <h2>Code: OOP vs FP</h2>
-                <div>
-                    <h3>OOP:</h3>
-                    <pre><code class="language-python">
-                            class Chef:
-                            def make_pizza(self, toppings):
-                            return f"Pizza with {toppings}"
-                            chef = Chef()
-                            print(chef.make_pizza("cheese"))</code></pre>
-                </div>
-                <div>
-                    <h3>FP:</h3>
-                    <pre><code class="language-python">
-                            def make_pizza(toppings):
-                            return f"Pizza with {toppings}"
-                            print(make_pizza("cheese"))</code></pre>
-                </div>
-                <p>See? No need for fancy hats. 🎩</p>
+                <h1>OOP vs FP</h1>
+                <p>Let’s compare Object-Oriented Programming and Functional Programming.</p>
             </section>
+
+            <section>
+                <h2>Object-Oriented Programming</h2>
+                <pre><code class="language-csharp">
+class Chef
+{
+    public string MakePizza(string toppings)
+    {
+        return $"Pizza with {toppings}";
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Chef chef = new Chef();
+        Console.WriteLine(chef.MakePizza("cheese"));
+    }
+}
+                </code></pre>
+            </section>
+
+            <!-- Slide 3: FP -->
+            <section>
+                <h2>Functional Programming</h2>
+                <pre><code class="language-ocaml">
+let make_pizza toppings =
+  "Pizza with " ^ toppings
+
+let () =
+  print_endline (make_pizza "cheese")
+                </code></pre>
+            </section>
+
+            <section>
+                <h1>Monad in OCaml vs Error Handling in C#</h1>
+                <p>Two approaches to handling errors and computation contexts effectively.</p>
+            </section>
+
+            <!-- Slide 2: Monad in OCaml -->
+            <section>
+                <h2>Monad in OCaml</h2>
+                <p>Monads in OCaml encapsulate computations with context, such as handling errors without exceptions.</p>
+                <pre><code class="language-ocaml">
+(* Safe division using Option Monad *)
+let safe_divide x y =
+  if y = 0 then None else Some (x / y)
+
+(* Monad bind function *)
+let bind opt f =
+  match opt with
+  | None -> None
+  | Some value -> f value
+
+let () =
+  let result = bind (safe_divide 10 2) (fun x ->
+                safe_divide x 0) in
+  match result with
+  | None -> print_endline "Error: Division by zero!"
+  | Some value -> print_endline (string_of_int value)
+(* Output: Error: Division by zero! *)
+                </code></pre>
+            </section>
+
+            <!-- Slide 3: Error Handling in C# -->
+            <section>
+                <h2>Error Handling in C#</h2>
+                <p>In C#, exceptions provide a structured way to handle errors in a program.</p>
+                <pre><code class="language-csharp">
+using System;
+
+class Program
+{
+    static double SafeDivide(double x, double y)
+    {
+        if (y == 0)
+            throw new DivideByZeroException("Cannot divide by zero");
+        return x / y;
+    }
+
+    static void Main()
+    {
+        try
+        {
+            double result = SafeDivide(10, 2);
+            result = SafeDivide(result, 0); // Throws exception
+            Console.WriteLine(result);
+        }
+        catch (DivideByZeroException e)
+        {
+            Console.WriteLine($"Error: {e.Message}");
+        }
+    }
+}
+// Output: Error: Cannot divide by zero
+                </code></pre>
+            </section>
+
+
+         <section>
+            <h2>Error Handling in C#</h2>
+            <p>Using <strong>Option&lt;T&gt;</strong> type to handle errors without exceptions.</p>
+        </section>
+
+        <section>
+            <h2>Problem with Exceptions</h2>
+            <p>Using exceptions for control flow:</p>
+            <pre><code class="language-csharp">using System;
+
+class Program
+{
+    static double SafeDivide(double x, double y)
+    {
+        if (y == 0)
+            throw new DivideByZeroException("Cannot divide by zero");
+        return x / y;
+    }
+
+    static void Main()
+    {
+        try
+        {
+            double result = SafeDivide(10, 2);
+            result = SafeDivide(result, 0); // Throws exception
+            Console.WriteLine(result);
+        }
+        catch (DivideByZeroException e)
+        {
+            Console.WriteLine($"Error: {e.Message}");
+        }
+    }
+}</code></pre>
+            <p><strong>Issues:</strong> Exception handling interrupts flow, and testing is harder.</p>
+        </section>
+
+        <section>
+            <h2>Introducing Option&lt;T&gt;</h2>
+            <p>A functional programming approach to handle errors gracefully.</p>
+            <pre><code>public class Option<T>
+{
+    private readonly T _value;
+    public bool IsSome { get; }
+    public bool IsNone => !IsSome;
+
+    private Option(T value, bool isSome)
+    {
+        _value = value;
+        IsSome = isSome;
+    }
+
+    public static Option<T> Some(T value) => new Option<T>(value, true);
+    public static Option<T> None() => new Option<T>(default, false);
+
+    public T UnwrapOr(T defaultValue) => IsSome ? _value : defaultValue;
+    public T UnwrapOrThrow(string errorMessage)
+    {
+        if (IsSome) return _value;
+        throw new InvalidOperationException(errorMessage);
+    }
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>Safe Division with Option&lt;T&gt;</h2>
+            <pre><code class="csharp">static Option<double> SafeDivide(double x, double y)
+{
+    if (y == 0)
+        return Option<double>.None(); // Return None when division by zero
+    return Option<double>.Some(x / y);
+}
+
+static void Main()
+{
+    var result1 = SafeDivide(10, 2); // Valid division
+    var result2 = SafeDivide(result1.UnwrapOr(0), 0); // Invalid division, returns None
+
+    if (result2.IsSome)
+    {
+        Console.WriteLine($"Result: {result2.UnwrapOr(0)}");
+    }
+    else
+    {
+        Console.WriteLine("Error: Cannot divide by zero");
+    }
+}</code></pre>
+            <p>Output: <code>Error: Cannot divide by zero</code></p>
+        </section>
+
+
 
             <!-- Slide 7: Why FP in OOP World -->
             <section>
