@@ -97,7 +97,7 @@
 
             <section>
                 <h2>Object-Oriented Programming</h2>
-                <pre><code class="language-csharp">
+                <pre><code class="language-csharp" data-trim data-noescape>
 class Chef
 {
     public string MakePizza(string toppings)
@@ -120,7 +120,7 @@ class Program
             <!-- Slide 3: FP -->
             <section>
                 <h2>Functional Programming</h2>
-                <pre><code class="language-ocaml">
+                <pre><code class="language-ocaml" data-trim data-noescape>
 let make_pizza toppings =
   "Pizza with " ^ toppings
 
@@ -138,7 +138,7 @@ let () =
             <section>
                 <h2>Monad in OCaml</h2>
                 <p>Monads in OCaml encapsulate computations with context, such as handling errors without exceptions.</p>
-                <pre><code class="language-ocaml">
+                <pre><code class="language-ocaml" data-trim data-noescape>
 (* Safe division using Option Monad *)
 let safe_divide x y =
   if y = 0 then None else Some (x / y)
@@ -163,7 +163,7 @@ let () =
             <section>
                 <h2>Error Handling in C#</h2>
                 <p>In C#, exceptions provide a structured way to handle errors in a program.</p>
-                <pre><code class="language-csharp">
+                <pre><code class="language-csharp" data-trim data-noescape>
 using System;
 
 class Program
@@ -202,7 +202,7 @@ class Program
         <section>
             <h2>Problem with Exceptions</h2>
             <p>Using exceptions for control flow:</p>
-            <pre><code class="language-csharp">using System;
+            <pre><code class="language-csharp" data-trim data-noescape>using System;
 
 class Program
 {
@@ -233,7 +233,7 @@ class Program
         <section>
             <h2>Introducing Option&lt;T&gt;</h2>
             <p>A functional programming approach to handle errors gracefully.</p>
-            <pre><code>public class Option<T>
+            <pre><code data-trim data-noescape>public class Option<T>
 {
     private readonly T _value;
     public bool IsSome { get; }
@@ -259,7 +259,7 @@ class Program
 
         <section>
             <h2>Safe Division with Option&lt;T&gt;</h2>
-            <pre><code class="csharp">static Option<double> SafeDivide(double x, double y)
+            <pre><code class="csharp" data-trim data-noescape>static Option<double> SafeDivide(double x, double y)
 {
     if (y == 0)
         return Option<double>.None(); // Return None when division by zero
