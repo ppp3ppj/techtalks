@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Functional programing vs OOP</title>
+    <title>Functional 101</title>
 
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
@@ -20,86 +20,61 @@
         <div class="slides">
             <!-- Slide 1: Title -->
             <section>
-                <h1>OOP Meets Functional Programming</h1>
-                <h3>"When Objects and Functions Become Friends"</h3>
+                <h1>Functional 101</h1>
+                <h3>"More Than Just Functions"</h3>
             </section>
+
+            <section>
+                <h2>Disclaimer</h2>
+                <p>This presentation is your friendly introduction to the basic mindset of Functional Programming (FP). 🌱</p>
+                <p>We’re keeping it light, fun, and simple—no deep dives (yet). 😄</p>
+                <p>Next up? Pure Functions! 🎯</p>
+                <p>So, sit back, relax, and let’s get those FP vibes started! 🧘‍♂️</p>
+            </section>
+
+            <section>
+                <h3>Hi OO!!</h3>
+                <img width="900" src="image/oo_fp_meme_ns.jpg" />
+            </section>
+
             <section>
                 <img src="image/fp_lang_list.png"
                     alt="fp lang list" style="width: 1200px; margin-bottom: 20px;" />
             </section>
 
-            <!-- Slide 2: Why We’re Here -->
-            <section>
-                <h2>Why Are We Here?</h2>
-                <ul>
-                    <li>Because our code has more bugs than features 🐛</li>
-                    <li>Because mutating state feels like black magic 🎩</li>
-                    <li>Because Functional Programming sounds fancy 💅</li>
-                </ul>
-            </section>
 
-
-            <!-- Slide 3: OOP vs. FP (Funny Table) -->
+            <!-- Slide 3: OOP vs. FP (Emoji Sentences) -->
             <section>
                 <h2>OOP vs. FP: A Showdown</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Aspect</th>
-                            <th>OOP</th>
-                            <th>FP</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>State Management</td>
-                            <td>Everything changes! Chaos reigns! 😱</td>
-                            <td>Immutable. Chill vibes. 🧘‍♂️</td>
-                        </tr>
-                        <tr>
-                            <td>Focus</td>
-                            <td>Objects = “I own everything” 🏢</td>
-                            <td>Functions = “I transform everything” 🔄</td>
-                        </tr>
-                        <tr>
-                            <td>Side Effects</td>
-                            <td>"What happens in methods... doesn’t stay there." 💥</td>
-                            <td>"No surprises. Ever." 🎯</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <ul>
+                    <li>OOP: "I show **how** things work. 🛠️"</li>
+                    <li>FP: "I focus on **what** the result is. 🎯"</li>
+                    <li>OOP: "State changes all the time! 🔄"</li>
+                    <li>FP: "State stays the same. 🧘‍♂️"</li>
+                    <li>OOP: "Watch out for side effects! 💥"</li>
+                    <li>FP: "No side effects, no surprises! 🤝"</li>
+                </ul>
             </section>
 
-            <!-- Slide 4: OOP Analogy -->
+            <!-- Slide 1: Functional Programming 101 -->
             <section>
-                <h2>OOP Is Like a Restaurant</h2>
-                <p>You have:</p>
+                <h2>FP 101</h2>
                 <ul>
-                    <li>A **Chef** (Object) who <em>knows everything</em>.</li>
-                    <li>A kitchen full of ingredients (state) 🍅🥩.</li>
-                    <li>Sometimes, the chef burns the food (side effects) 🔥.</li>
+                    <li><strong>Immutability:</strong> "No touchy! Data stays the same." 🛑</li>
+                    <li><strong>Pure Functions:</strong> "What you give is what you get." 🎁</li>
+                    <li><strong>Higher-Order Functions:</strong> "Functions that date other functions." 💞</li>
                 </ul>
-                <p>Functional Programming is like... A fast-food joint: precise, consistent, no surprises 🍔.</p>
+                <p>FP = <em>No drama, just results! ✌️</em></p>
             </section>
 
-            <!-- Slide 5: Core Concepts -->
-            <section>
-                <h2>Functional Programming 101</h2>
-                <ul>
-                    <li><strong>Immutability</strong>: "Hands off my data!" 🛑</li>
-                    <li><strong>Pure Functions</strong>: "What you give is what you get." 🎁</li>
-                    <li><strong>Higher-Order Functions</strong>: "Functions that love other functions." 💞</li>
-                </ul>
-                <p>FP is basically: <em>Data in, data out, no drama!</em></p>
-            </section>
             <!-- Slide 2: Core Features -->
             <section>
                 <h2>Core Features</h2>
                 <ul>
-                    <li><b>First-Class Functions:</b> Functions treated as values.</li>
-                    <li><b>Pure Functions:</b> No side effects, consistent output.</li>
-                    <li><b>Immutability:</b> Data is unchangeable.</li>
-                    <li><b>Function Composition:</b> Build complex functions.</li>
+                    <li><strong>First-Class:</strong> "Functions are VIPs." 🎩</li>
+                    <li><strong>Pure:</strong> "Zero surprises, pinky swear!" 🌈</li>
+                    <li><strong>Immutable:</strong> "Forever young, never changing." 🎶</li>
+                    <li><strong>Compose:</strong> "Small pieces, big ideas!" 🧩</li>
                 </ul>
             </section>
 
@@ -107,10 +82,10 @@
             <section>
                 <h2>Advanced Features</h2>
                 <ul>
-                    <li><b>Currying:</b> Convert multi-argument functions to single-argument ones.</li>
-                    <li><b>Monads:</b> Handle effects and abstraction.</li>
-                    <li><b>Lazy Evaluation:</b> Evaluate only when needed.</li>
-                    <li><b>Referential Transparency:</b> Replace expressions with their values.</li>
+                    <li><strong>Currying:</strong> "One bite at a time." 🍛</li>
+                    <li><strong>Monads:</strong> "I clean up your mess." 🧹</li>
+                    <li><strong>Lazy:</strong> "Work later, chill now." 😎</li>
+                    <li><strong>Transparent:</strong> "Replace me anytime!" 🎯</li>
                 </ul>
             </section>
 
@@ -195,41 +170,6 @@ let () =
                 </code></pre>
             </section>
 
-            <!-- Slide 3: Error Handling in C# -->
-            <section>
-                <h2>Error Handling in C#</h2>
-                <p>In C#, exceptions provide a structured way to handle errors in a program.</p>
-                <pre><code class="language-csharp" data-trim data-noescape>
-using System;
-
-class Program
-{
-    static double SafeDivide(double x, double y)
-    {
-        if (y == 0)
-            throw new DivideByZeroException("Cannot divide by zero");
-        return x / y;
-    }
-
-    static void Main()
-    {
-        try
-        {
-            double result = SafeDivide(10, 2);
-            result = SafeDivide(result, 0); // Throws exception
-            Console.WriteLine(result);
-        }
-        catch (DivideByZeroException e)
-        {
-            Console.WriteLine($"Error: {e.Message}");
-        }
-    }
-}
-// Output: Error: Cannot divide by zero
-                </code></pre>
-            </section>
-
-
          <section>
             <h2>Error Handling in C#</h2>
             <p>Using <strong>Option&lt;T&gt;</strong> type to handle errors without exceptions.</p>
@@ -267,9 +207,9 @@ class Program
         </section>
 
         <section>
-            <h2>Introducing Option&lt;T&gt;</h2>
-            <p>A functional programming approach to handle errors gracefully.</p>
-            <pre><code data-trim data-noescape>public class Option<T>
+            <h2>Implement Option&lt;T&gt; in C#</h2>
+<pre><code data-trim data-noescape>
+public class Option&lt;T&gt;
 {
     private readonly T _value;
     public bool IsSome { get; }
@@ -281,55 +221,57 @@ class Program
         IsSome = isSome;
     }
 
-    public static Option<T> Some(T value) => new Option<T>(value, true);
-    public static Option<T> None() => new Option<T>(default, false);
+    public static Option&lt;T&gt; Some(T value)
+    {
+        if (value == null)
+            throw new ArgumentNullException(nameof(value), "Cannot create an Option.Some with a null value.");
+        return new Option&lt;T&gt;(value, true);
+    }
+
+    public static Option&lt;T&gt; None() => new Option&lt;T&gt;(default, false);
+
+    public Option&lt;TResult&gt; Bind&lt;TResult&gt;(Func&lt;T, Option&lt;TResult&gt;&gt; binder)
+    {
+        if (binder == null)
+            throw new ArgumentNullException(nameof(binder));
+        return IsSome ? binder(_value) : Option&lt;TResult&gt;.None();
+    }
 
     public T UnwrapOr(T defaultValue) => IsSome ? _value : defaultValue;
-    public T UnwrapOrThrow(string errorMessage)
-    {
-        if (IsSome) return _value;
-        throw new InvalidOperationException(errorMessage);
-    }
-}</code></pre>
+
+    public override string ToString() => IsSome ? $"Some({_value})" : "None";
+}
+</code></pre>
         </section>
 
         <section>
             <h2>Safe Division with Option&lt;T&gt;</h2>
-            <pre><code class="csharp" data-trim data-noescape>static Option<double> SafeDivide(double x, double y)
+            <pre><code class="csharp" data-trim data-noescape>
+public class Program
 {
-    if (y == 0)
-        return Option<double>.None(); // Return None when division by zero
-    return Option<double>.Some(x / y);
+    public static Option&lt;int&gt; SafeDivide(int x, int y)
+    {
+        return y == 0 ? Option&lt;int&gt;.None() : Option&lt;int&gt;.Some(x / y);
+    }
+
+    public static void Main()
+    {
+        var result = SafeDivide(10, 2).Bind(x => SafeDivide(x, 0));
+
+        if (result.IsNone)
+        {
+            Console.WriteLine("Error: Division by zero!");
+        }
+        else
+        {
+            Console.WriteLine($"Result: {result.UnwrapOr(0)}");
+        }
+    }
 }
-
-static void Main()
-{
-    var result1 = SafeDivide(10, 2); // Valid division
-    var result2 = SafeDivide(result1.UnwrapOr(0), 0); // Invalid division, returns None
-
-    if (result2.IsSome)
-    {
-        Console.WriteLine($"Result: {result2.UnwrapOr(0)}");
-    }
-    else
-    {
-        Console.WriteLine("Error: Cannot divide by zero");
-    }
-}</code></pre>
-            <p>Output: <code>Error: Cannot divide by zero</code></p>
+</code></pre>
+            <p><code>Error: Cannot divide by zero</code></p>
         </section>
 
-
-
-            <!-- Slide 7: Why FP in OOP World -->
-            <section>
-                <h2>FP in an OOP World</h2>
-                <ul>
-                    <li>Use FP for **utilities** (e.g., data transformations).</li>
-                    <li>Mix both worlds: It's like peanut butter and chocolate! 🥜🍫</li>
-                    <li>Examples: React (FP) in a Class-based App (OOP).</li>
-                </ul>
-            </section>
             <!-- Slide 8: Practical Benefits -->
             <section>
                 <h2>Why Should You Care?</h2>
@@ -338,7 +280,6 @@ static void Main()
                     <li>Easier testing: Pure functions don’t lie. 🕵️‍♂️</li>
                     <li>Concurrency: No shared state = no headaches. 🧠</li>
                 </ul>
-                <p>Bonus: You’ll sound smart in meetings! 😎</p>
             </section>
             <!-- Slide 9: Closing & Resources -->
             <section>

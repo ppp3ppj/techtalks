@@ -12,40 +12,45 @@ public class Option<T>
         IsSome = isSome;
     }
 
-    public static Option<T> Some(T value) => new Option<T>(value, true);
+    public static Option<T> Some(T value)
+    {
+        if (value == null)
+            throw new ArgumentNullException(nameof(value), "Cannot create an Option.Some with a null value.");
+        return new Option<T>(value, true);
+    }
+
     public static Option<T> None() => new Option<T>(default, false);
 
-    public T UnwrapOr(T defaultValue) => IsSome ? _value : defaultValue;
-    public T UnwrapOrThrow(string errorMessage)
+    public Option<TResult> Bind<TResult>(Func<T, Option<TResult>> binder)
     {
-        if (IsSome) return _value;
-        throw new InvalidOperationException(errorMessage);
+        if (binder == null)
+            throw new ArgumentNullException(nameof(binder));
+        return IsSome ? binder(_value) : Option<TResult>.None();
     }
+
+    public T UnwrapOr(T defaultValue) => IsSome ? _value : defaultValue;
+
+    public override string ToString() => IsSome ? $"Some({_value})" : "None";
 }
 
-
-class Program
+public class Program
 {
-    static Option<double> SafeDivide(double x, double y)
+    public static Option<int> SafeDivide(int x, int y)
     {
-        if (y == 0)
-            return Option<double>.None(); // Return None when division by zero
-        return Option<double>.Some(x / y);
+        return y == 0 ? Option<int>.None() : Option<int>.Some(x / y);
     }
 
-    static void Main()
+    public static void Main()
     {
-        var result1 = SafeDivide(10, 2); // Valid division
-        var result2 = SafeDivide(result1.UnwrapOr(0), 0); // Invalid division, returns None
+        var result = SafeDivide(10, 2).Bind(x => SafeDivide(x, 0));
 
-        if (result2.IsSome)
+        if (result.IsNone)
         {
-            Console.WriteLine($"Result: {result2.UnwrapOr(0)}");
+            Console.WriteLine("Error: Division by zero!");
         }
         else
         {
-            Console.WriteLine("Error: Cannot divide by zero");
+            Console.WriteLine($"Result: {result.UnwrapOr(0)}");
         }
     }
 }
-// Output: Error: Cannot divide by zero
