@@ -145,6 +145,26 @@ let () =
                     alt="Monad meme" style="width: 800px; margin-bottom: 20px;" />
             </section>
 
+<section>
+    <h3>A polymorphic type that's basically Schrödinger's Cat Box</h3>
+    <pre><code class="language-ocaml" data-trim data-noescape>
+(* Meet the 'a option type, now with cats! *)
+type 'a option =
+  | None  (* "No cat in the box 😿" *)
+  | Some of 'a (* "There's a cat in the box! 😺" *)
+
+(* The 'a option is like a mysterious cat box.
+   You never know if it's empty or if there's a cat inside until you check! *)
+
+(* Example *)
+Some "Whiskers";;  (* "Congrats, you found Whiskers in the box!" *)
+- : string option = Some "Whiskers"
+
+None;;             (* "Uh-oh, the box is empty. No cat today." *)
+- : 'a option = None
+    </code></pre>
+</section>
+
             <!-- Slide 2: Monad in OCaml -->
             <section>
                 <h2>Monad in OCaml</h2>
