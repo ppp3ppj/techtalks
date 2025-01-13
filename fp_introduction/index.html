@@ -297,6 +297,40 @@ public class Program
             <p><code>Error: Cannot divide by zero</code></p>
         </section>
 
+        <section>
+            <h2>Is Same ?</h2>
+            <pre><code class="csharp" data-trim data-noescape>
+class Program
+{
+    static double? SafeDivide(double x, double y)
+    {
+        if (y == 0)
+            return null;
+        return x / y;
+    }
+
+    static void Main()
+    {
+        double? result = SafeDivide(10, 2);
+        if (result.HasValue)
+        {
+            result = SafeDivide(result.Value, 0); // Attempt to divide
+        }
+
+        if (result.HasValue)
+        {
+            Console.WriteLine($"Result: {result.Value}");
+        }
+        else
+        {
+            Console.WriteLine("Error: Division by zero!");
+        }
+    }
+}
+</code></pre>
+            <p><code>Nullable in C#</code></p>
+        </section>
+
             <!-- Slide 8: Practical Benefits -->
             <section>
                 <h2>Why Should You Care?</h2>
