@@ -86,15 +86,29 @@ main = print (take 5 nums)</code></pre>
         <p>Output: <code>[1, 2, 3, 4, 5]</code></p>
       </section>
 
-            <!-- Slide 3: Advanced Features -->
             <section>
-                <h2>Advanced Features</h2>
-                <ul>
-                    <li><strong>Currying:</strong> "One bite at a time." 🍛</li>
-                    <li><strong>Monads:</strong> "I clean up your mess." 🧹</li>
-                    <li><strong>Lazy:</strong> "Work later, chill now." 😎</li>
-                    <li><strong>Transparent:</strong> "Replace me anytime!" 🎯</li>
-                </ul>
+                <h2>Algebraic Data Type (ADT) in OCaml</h2>
+                <pre><code class="language-ocaml" data-trim data-noescape>
+type shape =
+  | Circle of float
+  | Rectangle of float * float
+  | Triangle of { base : float; height : float }
+
+let area s =
+  match s with
+  | Circle r -> 3.14159 *. r *. r
+  | Rectangle (w, h) -> w *. h
+  | Triangle t -> 0.5 *. t.base *. t.height
+
+let () =
+  let circle = Circle 5.0 in
+  let rectangle = Rectangle (4.0, 6.0) in
+  let triangle = Triangle { base = 8.0; height = 5.0 } in
+
+  Printf.printf "The area of the circle is: %.2f\n" (area circle);
+  Printf.printf "The area of the rectangle is: %.2f\n" (area rectangle);
+  Printf.printf "The area of the triangle is: %.2f\n" (area triangle)
+                </code></pre>
             </section>
 
 
