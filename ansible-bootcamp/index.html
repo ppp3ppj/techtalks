@@ -43,39 +43,89 @@
               </ul>
             </section>
 
+
+            <section>
+                <h2>Infrastructure as Code</h2>
+                <p>Why it matters:</p>
+                <img width="300" src="https://i.imgflip.com/8fg1t4.jpg" alt="Infrastructure as Code Meme" >
+                <p><small>Source: imgflip.com</small></p>
+            </section>
+
 <section>
-<h2>Ansible in Action</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Feature</th>
-      <th>Ansible</th>
-      <th>Terraform</th>
-      <th>Nix</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Language</td>
-      <td>YAML-based DSL</td>
-      <td>HCL (HashiCorp Language)</td>
-      <td>Nix Expression Language</td>
-    </tr>
-    <tr>
-      <td>Push vs Pull</td>
-      <td>Push-based</td>
-      <td>Declarative state-based</td>
-      <td>Declarative, functional</td>
-    </tr>
-    <tr>
-      <td>State Mgmt</td>
-      <td>Agentless, no state file</td>
-      <td>Uses state file</td>
-      <td>Functional derivation caching</td>
-    </tr>
-  </tbody>
-</table>
-</section>
+                <h2>Comparison</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Terraform</th>
+                            <th>Ansible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Focus</td>
+                            <td>Infrastructure provisioning</td>
+                            <td>Configuration management</td>
+                        </tr>
+                        <tr>
+                            <td>State Management</td>
+                            <td>Tracks state</td>
+                            <td>Does not track state</td>
+                        </tr>
+                        <tr>
+                            <td>Provisioning</td>
+                            <td>Yes</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>Language</td>
+                            <td>HCL</td>
+                            <td>YAML</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Terraform Example</h2>
+                <p><strong>Use Case:</strong> Provision an EC2 Instance</p>
+                <pre><code class="hljs language-hcl">provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_instance" "app_server" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "AppServer"
+  }
+}</code></pre>
+            </section>
+
+     <section>
+                <h2>Ansible Example</h2>
+                <p><strong>Use Case:</strong> Configure an EC2 Instance with Apache</p>
+                <pre><code class="hljs language-yaml">- name: Configure EC2 instance with Apache
+  hosts: web_servers
+  tasks:
+    - name: Install Apache
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+
+    - name: Start and enable Apache
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Copy website content
+      ansible.builtin.copy:
+        src: /path/to/index.html
+        dest: /var/www/html/index.html</code></pre>
+            </section>
+
 
             <section>
                 <div class="r-stack">
