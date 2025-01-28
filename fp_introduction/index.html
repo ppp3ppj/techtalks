@@ -68,6 +68,31 @@
           </h2>
         </section>
 
+      <section>
+        <h2>🚧 OOP with Mutable List (C#)</h2>
+        <pre><code class="language-csharp" data-trim data-noescape>
+        var numbers = new List&lt;int&gt { 1, 2, 3, 4 };
+
+        numbers.Add(5);
+
+        Console.WriteLine("Numbers: " + string.Join(", ", numbers));
+        </code></pre>
+        <p>🛑 List is mutable. Data can change freely.</p>
+        <p>Output: <code>Numbers: 1, 2, 3, 4, 5</code></p>
+      </section>
+
+      <section>
+        <h2>✨ FP with Immutable List (OCaml)</h2>
+        <pre><code class="language-ocaml" data-trim data-noescape>
+let numbers = [1; 2; 3; 4];;
+
+let updated_numbers = numbers @ [5];;
+
+List.iter (fun x -> Printf.printf "%d " x) updated_numbers;;
+        </code></pre>
+        <p>🚀 Lists are immutable. You create a new list instead.</p>
+        <p>Output: <code>1 2 3 4 5</code></p>
+      </section>
 
  <section>
         <h2>Lazy Evaluation in Haskell</h2>
