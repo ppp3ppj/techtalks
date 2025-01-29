@@ -94,6 +94,83 @@ List.iter (fun x -> Printf.printf "%d " x) updated_numbers;;
         <p>Output: <code>1 2 3 4 5</code></p>
       </section>
 
+
+<section>
+          <h2>What is Currying?</h2>
+          <p>
+            In OCaml, currying is the process of transforming a function that takes multiple arguments
+            into a series of functions that each take a single argument.
+          </p>
+          <pre><code>let add x y = x + y</code></pre>
+          <p><strong>Curried Function:</strong></p>
+          <pre><code>let add x = fun y -> x + y</code></pre>
+          <h4>Code Example:</h4>
+          <pre><code data-trim data-noescape>
+let add x = fun y -> x + y
+let add2 = add 2
+let result = add2 3  (* result = 5 *)
+          </code></pre>
+        </section>
+
+
+<section>
+          <h2>What is Partial Application?</h2>
+          <p>
+            Partial application is when you apply some, but not all, of the arguments to a function.
+            It creates a simpler function that still needs the remaining arguments.
+          </p>
+          <pre><code>let add x y = x + y</code></pre>
+          <pre><code>let add5 = add 5</code></pre>
+          <h4>Code Example:</h4>
+          <pre><code data-trim data-noescape>
+let add x y = x + y
+let add5 = add 5
+let result = add5 3  (* result = 8 *)
+          </code></pre>
+        </section>
+
+
+<section>
+  <h2>What is Function Composition?</h2>
+  <p>
+    Function composition is like making a new function by combining two functions, where the output of one function
+    becomes the input of the other.
+  </p>
+  <pre><code data-trim data-noescape>
+let add2 x = x + 2
+let multiply3 x = x * 3
+  </code></pre>
+  <h4>Composing them:</h4>
+  <pre><code data-trim data-noescape>
+let compose f g x = f (g x)
+let f = compose add2 multiply3
+  </code></pre>
+</section>
+
+<section>
+  <h4>Code Example:</h4>
+  <pre><code data-trim data-noescape>
+let add2 x = x + 2
+let multiply3 x = x * 3
+let compose f g x = f (g x)
+let f = compose add2 multiply3
+let result = f 4  (* result = 14 *)
+(*
+    let f x = x
+            |&gt  multiply3
+            |&gt add2;;
+                        *)
+(* f 4;; *)
+  </code></pre>
+  <h4>How it works:</h4>
+  <ul>
+    <li><code>multiply3 4 = 12</code></li>
+    <li><code>add2 12 = 14</code></li>
+  </ul>
+  <h4>Final Result:</h4>
+  <p><code>f(4) = 14</code></p>
+</section>
+
  <section>
         <h2>Lazy Evaluation in Haskell</h2>
         <pre><code>nums = [1..]
