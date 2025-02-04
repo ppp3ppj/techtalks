@@ -34,15 +34,42 @@
               }
             </style>
 
+
+
+
             <section>
-              <h2>What/Why Ansible?</h2>
-              <ul>
-                <li class="fragment custom blur">🤖 <strong>Simple Automation</strong>: Automate tasks across servers easily.</li>
-                <li class="fragment custom blur">📜 <strong>YAML</strong>: No coding, just simple configurations.</li>
-                <li class="fragment custom blur">🚀 <strong>Effortless Usage</strong>: Set it up in minutes!</li>
-              </ul>
+                <div class="r-stack">
+                    <div class="fragment fade-out" data-fragment-index="0">
+                        <h2>Manual install?</h2>
+                        <img width="877" height="550" class="r-stretch" src="https://hvops.com/news/ansible/11/batman-robin-ansible.jpg" />
+                        <p><em>Manual installs are so... last decade.</em></p>
+                    </div>
+                    <div class="fragment current-visible" data-fragment-index="1">
+                        <h3>Stop copying & pasting!</h3>
+                        <img width="677" height="360" class="r-stretch" src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*Rg8GKCA4gSrROd3O6J47sA.jpeg" />
+                        <p><strong>Start automating with Ansible!</strong></p>
+                    </div>
+                </div>
             </section>
 
+
+            <section>
+              <h2>Manual Install vs Ansible</h2>
+              <div class="r-stack">
+                <!-- Before Ansible -->
+                <div class="fragment fade-out" data-fragment-index="0">
+                  <h3>Before Ansible... 😩</h3>
+                  <img width="300"  src="https://media1.tenor.com/m/tgrDE9IAnncAAAAd/omw-slow.gif" alt="Stressed person with papers" width="700" />
+                  <p><em>"Manual install? Took me hours to copy-paste commands! Now, I can’t feel my fingers..."</em></p>
+                </div>
+                <!-- After Ansible -->
+                <div class="fragment current-visible" data-fragment-index="1">
+                  <h3>With Ansible... 💪</h3>
+                  <img width="300" src="https://media1.tenor.com/m/iCqG_iT-h48AAAAd/bills-ugh.gif" alt="Superhero relaxing" width="700" />
+                  <p><em>"Now I just run the playbook and let Ansible do all the work... Easy and cool!"</em></p>
+                </div>
+              </div>
+            </section>
 
             <section>
                 <h2>Infrastructure as Code</h2>
@@ -126,39 +153,13 @@ resource "aws_instance" "app_server" {
         dest: /var/www/html/index.html</code></pre>
             </section>
 
-
             <section>
-                <div class="r-stack">
-                    <div class="fragment fade-out" data-fragment-index="0">
-                        <h2>Manual install?</h2>
-                        <img width="877" height="550" class="r-stretch" src="https://hvops.com/news/ansible/11/batman-robin-ansible.jpg" />
-                        <p><em>Manual installs are so... last decade.</em></p>
-                    </div>
-                    <div class="fragment current-visible" data-fragment-index="1">
-                        <h3>Stop copying & pasting!</h3>
-                        <img width="677" height="360" class="r-stretch" src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*Rg8GKCA4gSrROd3O6J47sA.jpeg" />
-                        <p><strong>Start automating with Ansible!</strong></p>
-                    </div>
-                </div>
-            </section>
-
-
-            <section>
-              <h2>Manual Install vs Ansible</h2>
-              <div class="r-stack">
-                <!-- Before Ansible -->
-                <div class="fragment fade-out" data-fragment-index="0">
-                  <h3>Before Ansible... 😩</h3>
-                  <img width="300"  src="https://media1.tenor.com/m/tgrDE9IAnncAAAAd/omw-slow.gif" alt="Stressed person with papers" width="700" />
-                  <p><em>"Manual install? Took me hours to copy-paste commands! Now, I can’t feel my fingers..."</em></p>
-                </div>
-                <!-- After Ansible -->
-                <div class="fragment current-visible" data-fragment-index="1">
-                  <h3>With Ansible... 💪</h3>
-                  <img width="300" src="https://media1.tenor.com/m/iCqG_iT-h48AAAAd/bills-ugh.gif" alt="Superhero relaxing" width="700" />
-                  <p><em>"Now I just run the playbook and let Ansible do all the work... Easy and cool!"</em></p>
-                </div>
-              </div>
+              <h2>What/Why Ansible?</h2>
+              <ul>
+                <li class="fragment custom blur">🤖 <strong>Simple Automation</strong>: Automate tasks across servers easily.</li>
+                <li class="fragment custom blur">📜 <strong>YAML</strong>: No coding, just simple configurations.</li>
+                <li class="fragment custom blur">🚀 <strong>Effortless Usage</strong>: Set it up in minutes!</li>
+              </ul>
             </section>
 
             <section>
@@ -241,6 +242,7 @@ resource "aws_instance" "app_server" {
                     <li>⚡ <strong>Callbacks</strong>: Add custom functionality to your workflow.</li>
                 </ul>
             </section>
+
 
             <section>
                 <h2>Bootcamp Internship Environment</h2>
