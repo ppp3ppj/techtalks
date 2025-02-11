@@ -152,6 +152,28 @@ let result = add5 3  (* result = 8 *)
 
 
 <section>
+  <h2>OOP Horrible Call Chain</h2>
+  <pre><code class="language-csharp">
+class MathOperations {
+    public int Add2(int x) => x + 2;
+    public int Multiply3(int x) => x * 3;
+}
+
+class Example {
+    static void Main() {
+        var mathOps = new MathOperations();
+        int result = mathOps.Add2(mathOps.Multiply3(4));
+        Console.WriteLine(result); // Outputs: 14
+    }
+}
+  </code></pre>
+  <ul>
+    <li>Deeply nested calls</li>
+    <li>Harder to read and maintain</li>
+  </ul>
+</section>
+
+<section>
   <h2>What is Function Composition?</h2>
   <p>
     Function composition is like making a new function by combining two functions, where the output of one function
