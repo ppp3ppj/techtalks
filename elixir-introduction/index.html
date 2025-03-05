@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Elixir 101</title>
+    <title>Elixir</title>
 
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
@@ -56,72 +56,12 @@
             </section>
 
             <section>
-                <h2>Why Learn Elixir?</h2>
-                <ul>
-                    <li>Scalable, Fault-Tolerant, and Functional</li>
-                    <li>Runs on the <strong>Erlang VM (BEAM)</strong></li>
-                    <li>Used by <strong>Discord</strong></li>
-                </ul>
-
-                <img width="100"
-                    src="https://media.tenor.com/_EY3vJNgjgUAAAAj/meme-pepe.gif" />
+                <h2>Elixir process world</h2>
+                <img width="700" src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*Mqxgq6aE9dYOKhIxz_3Gdg.jpeg"/> </section>
             </section>
 
             <section>
-                <h2>Basics of Elixir</h2>
-                <pre><code class="elixir">IO.puts("Hello, Elixir!")</code></pre>
-                <p>Interactive shell: <code>iex</code></p>
-            </section>
 
-            <section>
-                <h3>Data Types & Pattern Matching</h3>
-                <pre><code data-trim data-noescape data-trim data-noescape class="elixir">
-                {:ok, value} = {:ok, 42}
-                IO.puts(value) # 42
-
-                {:ok, ^value} = {:ok, 42}
-                # {:ok, 42}
-
-                {:ok, ^value} = {:ok, :go}
-                # (MatchError) ...
-                </code></pre>
-            </section>
-
-            <section>
-                <h2>Functions & Pipelines</h2>
-                <pre><code data-trim data-noescape data-trim data-noescape class="elixir">
-                defmodule Math do
-                    def add(a, b), do: a + b
-                end</code></pre>
-                <pre><code data-trim data-noescape data-trim data-noescape class="elixir">
-                "hello world"
-                |> String.upcase()
-                |> IO.puts()</code></pre>
-            </section>
-
-
-            <section>
-                <h2>Lightweight processes</h2>
-                <img width="700" src="https://raw.githubusercontent.com/pierrelegall/erlang-elixir-presentation/master/images/lightweight-processes.png"/> </section>
-
-            <section>
-                <h2>Concurrency with Elixir</h2>
-                <pre><code data-trim data-noescape data-trim data-noescape class="elixir">spawn(fn -> IO.puts("Running in parallel!") end)</code></pre>
-                <pre><code data-trim data-noescape data-trim data-noescape class="elixir">
-                task = Task.async(fn -> :timer.sleep(1000); "Done!" end)
-                IO.puts(Task.await(task))
-                </code></pre>
-            </section>
-
-            <section>
-                <h2>How fast is elixir?</h2>
-                <img width="550" src="https://img.stackshare.io/stackups/golang_vs_elixir-graph.png" />
-                <p>
-                    https://stackshare.io/stackups/elixir-vs-golang
-                </p>
-            </section>
-
-            <section>
                 <h2>Defensive Programming 🛑</h2>
                 <pre><code data-trim data-noescape data-trim data-noescape>
                         def process_order(order)
@@ -138,16 +78,84 @@
                     </code></pre>
             </section>
 
+
             <section>
-                <h2>"Let it Crash"</h2>
+                <h2>"Worker"</h2>
                 <pre><code data-trim data-noescape data-trim data-noescape>
                     defmodule OrderProcessor do
-                      def process_order("bad order"), do: raise "Order failed!"
-                      def process_order(order), do: IO.puts("✅ Order processed successfully: #{order}")
-                    end
+                      use GenServer
 
-                    OrderProcessor.process_order("bad order")
+                      def start_link(order) do
+                        GenServer.start_link(__MODULE__, order, name: via_tuple(order))
+                      end
+
+                      defp via_tuple(order), do: {:via, Registry, {OrderRegistry, order}}
+
+                      def init("bad order"), do: raise("💥 Order failed!")
+
+                      def init(order) do
+                        IO.puts("✅ Order processed successfully: #{order}")
+                        {:ok, order}
+                      end
+                    end
                 </code></pre>
+            </section>
+
+            <section>
+                <h2>"Supervisor"</h2>
+                <pre><code data-trim data-noescape data-trim data-noescape>
+                    defmodule OrderSupervisor do
+                      use DynamicSupervisor
+
+                      def start_link(_arg) do
+                        DynamicSupervisor.start_link(__MODULE__, [], name: __MODULE__)
+                      end
+
+                      @impl true
+                      def init(_arg) do
+                        DynamicSupervisor.init(strategy: :one_for_one)
+                      end
+
+                      def start_order(order) do
+                        DynamicSupervisor.start_child(__MODULE__, {OrderProcessor, order})
+                      end
+                    end
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>"Test"</h2>
+                <pre><code data-trim data-noescape data-trim data-noescape>
+                    children = [
+                      {DynamicSupervisor, name: OrderSupervisor, strategy: :one_for_one},
+                      {Registry, keys: :unique, name: OrderRegistry}
+                    ]
+
+                    Supervisor.start_link(children, strategy: :one_for_one)
+                    OrderSupervisor.start_order("good order")
+                    OrderSupervisor.start_order("bad order")  # This crashes but won't affect other processes
+                    OrderSupervisor.start_order("another good order")
+                </code></pre>
+            </section>
+
+            <section>
+                <h4>Normal - Supervisor tree</h4>
+                <img width="500" src="image/order_sup_tree_normal.png" style="background-color: white;"/>
+            </section>
+
+            <section>
+                <h4>Crash - Supervisor tree</h4>
+                <img width="500" src="image/order_sup_tree_crashed.png" style="background-color: white;"/>
+            </section>
+
+            <section>
+                <h4>Restart - Supervisor tree</h4>
+                <img width="500" src="image/order_sup_tree_normal.png" style="background-color: white;"/>
+            </section>
+
+            <section>
+                <h4>Order - "Let it crash"</h4>
+                <img width="600" src="image/order_let_it_crash.png" style="background-color: white;"/>
             </section>
 
             <section>
@@ -160,12 +168,6 @@
                 <h2>Demo</h2>
                 <img width="400"
                     src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGZzNm45ZWJyZHJhaDBpZXQ1M2FhdHFhdWFyeXM2Y3gzYXdkNXlieSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4JGsvG6bDPAfMc45ID/giphy.gif" />
-            </section>
-
-            <section>
-                <h3>What if real-life web server</h3>
-                <img width="1000"
-                    src="https://elixirforum.com/uploads/default/original/2X/f/fdd70a4b0535040bca8d0a3310ec5c4a03647dce.jpeg" />
             </section>
 
             <section>
