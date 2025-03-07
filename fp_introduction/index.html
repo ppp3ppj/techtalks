@@ -79,6 +79,22 @@
         </section>
 
       <section>
+        <h2>We are Focus on <em>What</em> > <em>How</em></h2>
+        <ul>
+          <li><strong>Describe</strong> the result, not the steps to achieve it.</li>
+          <li>Use <strong>declarative</strong> logic instead of imperative instructions.</li>
+          <li>Avoid manual iteration and state manipulation.</li>
+          <li>Compose transformations instead of writing explicit loops.</li>
+          <li>Code becomes <strong>more readable, maintainable, and predictable.</strong></li>
+        </ul>
+      </section>
+
+      <section>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/OCaml_Logo.svg/525px-OCaml_Logo.svg.png"
+              alt="fp lang list" style="width: 1200px; margin-bottom: 20px;" />
+      </section>
+
+      <section>
         <h2>What is OCaml?</h2>
         <ul>
           <li><strong>OCaml</strong> is a functional, imperative, and object-oriented programming language.</li>
@@ -117,11 +133,7 @@ List.iter (fun x -> Printf.printf "%d " x) updated_numbers;;
 
 
 <section>
-          <h2>What is Currying?</h2>
-          <p>
-            In OCaml, currying is the process of transforming a function that takes multiple arguments
-            into a series of functions that each take a single argument.
-          </p>
+          <h2>Currying?</h2>
           <pre><code>let add x y = x + y</code></pre>
           <p><strong>Curried Function:</strong></p>
           <pre><code>let add x = fun y -> x + y</code></pre>
@@ -135,11 +147,7 @@ let result = add2 3  (* result = 5 *)
 
 
 <section>
-          <h2>What is Partial Application?</h2>
-          <p>
-            Partial application is when you apply some, but not all, of the arguments to a function.
-            It creates a simpler function that still needs the remaining arguments.
-          </p>
+          <h2>Partial Application?</h2>
           <pre><code>let add x y = x + y</code></pre>
           <pre><code>let add5 = add 5</code></pre>
           <h4>Code Example:</h4>
@@ -150,34 +158,10 @@ let result = add5 3  (* result = 8 *)
           </code></pre>
         </section>
 
-
 <section>
-  <h2>OOP Horrible Call Chain</h2>
-  <pre><code class="language-csharp">
-class MathOperations {
-    public int Add2(int x) => x + 2;
-    public int Multiply3(int x) => x * 3;
-}
-
-class Example {
-    static void Main() {
-        var mathOps = new MathOperations();
-        int result = mathOps.Add2(mathOps.Multiply3(4));
-        Console.WriteLine(result); // Outputs: 14
-    }
-}
-  </code></pre>
-  <ul>
-    <li>Deeply nested calls</li>
-    <li>Harder to read and maintain</li>
-  </ul>
-</section>
-
-<section>
-  <h2>What is Function Composition?</h2>
+  <h2>Function Composition?</h2>
   <p>
-    Function composition is like making a new function by combining two functions, where the output of one function
-    becomes the input of the other.
+    (f ∘ g)(x) = f(g(x)) 
   </p>
   <pre><code data-trim data-noescape>
 let add2 x = x + 2
@@ -262,29 +246,9 @@ let () =
             </section>
 
             <section>
-                <img src="https://www.rms.com/sites/default/files/inline-images/Converted_0.jpg"
-                    alt="schrodingers cat in side the box" style="width: 800px; margin-bottom: 20px;" />
+                <img src="https://images.ctfassets.net/cnu0m8re1exe/2X2fRTnvMBP8QhjcWwjlSa/cd278daf53ceffa934b78c8ed23d66a0/shutterstock_1719135910__1_.png"
+                    alt="schrodingers cat in side the box" style="width: 700px; margin-bottom: 20px;" />
             </section>
-
-<section>
-    <h3>A polymorphic type that's basically Schrödinger's Cat Box</h3>
-    <pre><code class="language-ocaml" data-trim data-noescape>
-(* Meet the 'a option type, now with cats! *)
-type 'a option =
-  | None  (* "No cat in the box 😿" *)
-  | Some of 'a (* "There's a cat in the box! 😺" *)
-
-(* The 'a option is like a mysterious cat box.
-   You never know if it's empty or if there's a cat inside until you check! *)
-
-(* Example *)
-Some "Whiskers";;  (* "Congrats, you found Whiskers in the box!" *)
-- : string option = Some "Whiskers"
-
-None;;             (* "Uh-oh, the box is empty. No cat today." *)
-- : 'a option = None
-    </code></pre>
-</section>
 
             <!-- Slide 2: Monad in OCaml -->
             <section>
@@ -323,6 +287,7 @@ let () =
             <!-- Slide 9: Closing & Resources -->
             <section>
                   <h3>Summary:</h3>
+                  <img width="400" src="image/oo_fp_meme_ns.jpg" />
                   <blockquote>
                     <strong>"After learning FP, OOP just feels like unnecessary pain." 😭</strong>
                   </blockquote>
@@ -330,17 +295,12 @@ let () =
 
             <section>
                 <h2>
-                    Q/A
+                   Q/A |> Exit(0) |> Next section:
                 </h2>
-
-                <img width="900" src="image/oo_fp_meme_ns.jpg" />
-            </section>
-
-
-            <section>
-                <h2>
-                    Exit(0)
-                </h2>
+                <ul>
+                  <li>Elixir fault tolerance</li>
+                  <li>[Go] Composition over inheritance</li>
+                </ul> 
             </section>
         </div>
     </div>
