@@ -165,15 +165,11 @@ JS can be functional, whereas Elixir is (always) Functional!
             <section>
                 <h2>"Test"</h2>
                 <pre><code data-trim data-noescape data-trim data-noescape>
-                    children = [
-                      {DynamicSupervisor, name: OrderSupervisor, strategy: :one_for_one},
-                      {Registry, keys: :unique, name: OrderRegistry}
-                    ]
-
-                    Supervisor.start_link(children, strategy: :one_for_one)
-                    OrderSupervisor.start_order("good order")
-                    OrderSupervisor.start_order("bad order")  # This crashes but won't affect other processes
-                    OrderSupervisor.start_order("another good order")
+                {:ok, sup_pid} = SumSupervisor.start_link(:ok)
+                Supervisor.which_children(sup_pid)
+                SumWorker.calc_sum(:worker1, 5)
+                SumWorker.calc_sum(:worker2, 5)
+                SumWorker.calc_sum(:worker3, 5)
                 </code></pre>
             </section>
 
@@ -195,12 +191,6 @@ JS can be functional, whereas Elixir is (always) Functional!
             <section>
                 <h4>Order - "Let it crash"</h4>
                 <img width="600" src="image/order_let_it_crash.png" style="background-color: white;"/>
-            </section>
-
-            <section>
-                <h2>restartson for one</h2>
-                <img width="700"
-                    src="https://raw.githubusercontent.com/pierrelegall/erlang-elixir-presentation/refs/heads/master/images/supervisor-restartson-for-one.png" />
             </section>
 
             <section>
