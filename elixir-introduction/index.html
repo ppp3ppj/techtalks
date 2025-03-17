@@ -61,8 +61,8 @@ JS can be functional, whereas Elixir is (always) Functional!
             </section>
            <section>
                 <h3>Definition</h3>
-                <p><strong>Fault:</strong> A defect or error in the software.</p>
-                <p><strong>Failure:</strong> The observable incorrect behavior caused by the fault.</p>
+                <p><strong>Fault:</strong> A defect or error in the software. <strong>(Cause)</strong></p>
+                <p><strong>Failure:</strong> The observable incorrect behavior caused by the fault. <strong>(Side Effect)</strong></p>
             </section>
 
             <section>
@@ -114,20 +114,26 @@ JS can be functional, whereas Elixir is (always) Functional!
             <section>
                 <h2>"Worker"</h2>
                 <pre><code data-trim data-noescape data-trim data-noescape>
-                    defmodule OrderProcessor do
+                    defmodule SumWorker do
                       use GenServer
 
-                      def start_link(order) do
-                        GenServer.start_link(__MODULE__, order, name: via_tuple(order))
+                      def start_link(name) do
+                        GenServer.start_link(__MODULE__, %{}, name: name)
                       end
 
-                      defp via_tuple(order), do: {:via, Registry, {OrderRegistry, order}}
+                      def calc_sum(worker_name, n), do: GenServer.call(worker_name, {:sum, n})
 
-                      def init("bad order"), do: raise("💥 Order failed!")
+                      def init(state) do
+                        {:ok, state}
+                      end
 
-                      def init(order) do
-                        IO.puts("✅ Order processed successfully: #{order}")
-                        {:ok, order}
+                      def handle_call({:sum, 13}, _from, _state) do
+                        raise "Worker crashed because n == 13"
+                      end
+
+                      def handle_call({:sum, n}, _from, state) do
+                        sum = div(n * (n + 1), 2)
+                        {:reply, {:ok, sum}, state}
                       end
                     end
                 </code></pre>
@@ -136,20 +142,21 @@ JS can be functional, whereas Elixir is (always) Functional!
             <section>
                 <h2>"Supervisor"</h2>
                 <pre><code data-trim data-noescape data-trim data-noescape>
-                    defmodule OrderSupervisor do
-                      use DynamicSupervisor
+                    defmodule SumSupervisor do
+                      use Supervisor
 
-                      def start_link(_arg) do
-                        DynamicSupervisor.start_link(__MODULE__, [], name: __MODULE__)
+                      def start_link(_) do
+                        Supervisor.start_link(__MODULE__, :ok, name: __MODULE__)
                       end
 
-                      @impl true
-                      def init(_arg) do
-                        DynamicSupervisor.init(strategy: :one_for_one)
-                      end
+                      def init(:ok) do
+                        children = [
+                          Supervisor.child_spec({SumWorker, :worker1}, id: :worker1),
+                          Supervisor.child_spec({SumWorker, :worker2}, id: :worker2),
+                          Supervisor.child_spec({SumWorker, :worker3}, id: :worker3),
+                        ]
 
-                      def start_order(order) do
-                        DynamicSupervisor.start_child(__MODULE__, {OrderProcessor, order})
+                        Supervisor.init(children, strategy: :one_for_one)
                       end
                     end
                 </code></pre>
