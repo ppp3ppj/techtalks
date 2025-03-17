@@ -65,3 +65,16 @@ graph TD;
 
     OrderSupervisor --> OrderProcessor1
 
+
+graph TD;
+    SumSupervisor["🟢 SumSupervisor"]
+    SumWorker1["🟢 SumWorker1"]
+    SumWorker2["💥 SumWorker2(Crashed)"]
+    SumWorker3["🟢 SumWorker3"]
+
+
+    SumSupervisor --> SumWorker1
+    SumSupervisor --> SumWorker2
+    SumSupervisor --> SumWorker3
+
+
