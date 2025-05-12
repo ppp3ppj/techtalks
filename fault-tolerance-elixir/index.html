@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Elixir</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/dracula.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section style="background-color: white; border-radius: 1rem;">
+                <img width="400"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Official_Elixir_logo.png/800px-Official_Elixir_logo.png" />
+                <h3>Scalable, Fault-Tolerant, Functional</h3>
+            </section>
+
+            <section>
+                <h3>Designed by</h3>
+                <img width="400" src="https://2023.elixirconf.com/images/presenters/jose-valim.jpg" />
+                <h5>José Valim</h5>
+            </section>
+
+            <section>
+                <h2>Why was Elixir Created?</h2>
+                <ul>
+                    <li>José Valim made Elixir because:</li>
+                    <ul>
+                        <li>Ruby (MRI) threads are not real threads</li>
+                        <li>Ruby on Rails thread safety is hard to keep</li>
+                        <li>He heard about what we can do with Erlang</li>
+                    </ul>
+                </ul>
+                <ul>
+                    <li>Development:</li>
+                    <ul>
+                        <li>Started in 2010</li>
+                        <li>Version 1.0 released in 2014</li>
+                    </ul>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Comparison ?</h3>
+                <img width="900"
+                    src="https://i.ytimg.com/vi/AN9y0k8Hy9o/maxresdefault.jpg" />
+            </section>
+
+           <section>
+                <h3>Definition</h3>
+                <p><strong>Fault:</strong> A defect or error in the software. <strong>(Cause)</strong></p>
+                <p><strong>Failure:</strong> The observable incorrect behavior caused by the fault. <strong>(Side Effect)</strong></p>
+            </section>
+
+            <section>
+                <h3>Example : Bug in Code</h3>
+                <p><strong>Fault:</strong> Incorrect discount calculation (e.g., division by zero).</p>
+                <p><strong>Failure:</strong> The application crashes when a user applies a discount.</p>
+            </section>
+
+            <section>
+                <h2>Elixir process world</h2>
+                <img width="700" src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*Mqxgq6aE9dYOKhIxz_3Gdg.jpeg"/> </section>
+            </section>
+
+            <section>
+                <h2>Demo: Process</h2>
+                <img width="400"
+                    src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGZzNm45ZWJyZHJhaDBpZXQ1M2FhdHFhdWFyeXM2Y3gzYXdkNXlieSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4JGsvG6bDPAfMc45ID/giphy.gif" />
+            </section>
+
+            <section>
+                <h3><strong>OOP?</strong> Will Crash on Error</h3>
+                    <h4>Handle exception with <strong>(try-catch)</strong> block</h4>
+                <pre><code data-trim data-noescape data-trim data-noescape>
+                class SumCalculator
+                  def calc_sum(n)
+                    raise "error" if n == 13
+                    (1..n).sum
+                  end
+                end
+
+                calc = SumCalculator.new
+
+                begin
+                  puts calc.calc_sum(10)  # Output: 55
+                  puts calc.calc_sum(13)  # Error, but program continues
+                rescue => e
+                  puts "Caught error: #{e}"  # Handles error manually
+                end
+                    </code></pre>
+            </section>
+
+            <section>
+                <h2>we don’t handle errors with <strong>try-catch</strong></h2>
+                <img width="200" src="https://media1.tenor.com/m/SWnJcKoRB6EAAAAd/haerin-newjeans-haerin.gif" style="background-color: white;"/>
+            </section>
+
+            <section>
+                <h3><strong>Fail fast, let it crash</strong></h3>
+                <h4>a software development principle advocating for immediate error reporting and system termination (or "crash") rather than attempting to continue execution in an invalid state</h4>
+                <img width="200"
+                    src="https://media1.tenor.com/m/OT9Am8Bg9-cAAAAd/haerin-newjeans.gif" />
+            </section>
+
+           <section>
+                <h3>Example</h3>
+                <h2><strong>SUM-SYSTEM</strong></h2>
+                <h3><strong>+</strong></h3>
+                <h2><strong>Supervision tree</strong></h2>
+            </section>
+
+            <section>
+                <h3>Normal</h3>
+                <img width="900" src="image/sum_normal.png" style="background-color: white;"/>
+            </section>
+
+            <section>
+                <h3>Crash</h3>
+                <img width="900" src="image/sum_crash.png" style="background-color: white;"/>
+            </section>
+
+            <section>
+                <h3>Restart</h3>
+                <img width="900" src="image/sum_restarted.png" style="background-color: white;"/>
+            </section>
+
+            <section>
+                <h2>"Worker"</h2>
+                <pre><code data-trim data-noescape data-trim data-noescape>
+                    defmodule SumWorker do
+                      use GenServer
+
+                      def start_link(name) do
+                        GenServer.start_link(__MODULE__, %{}, name: name)
+                      end
+
+                      def calc_sum(worker_name, n), do: GenServer.call(worker_name, {:sum, n})
+
+                      def init(state) do
+                        {:ok, state}
+                      end
+
+                      def handle_call({:sum, 13}, _from, _state) do
+                        raise "Worker crashed because n == 13"
+                      end
+
+                      def handle_call({:sum, n}, _from, state) do
+                        sum = div(n * (n + 1), 2)
+                        {:reply, {:ok, sum}, state}
+                      end
+                    end
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>"Supervisor"</h2>
+                <pre><code data-trim data-noescape data-trim data-noescape>
+                    defmodule SumSupervisor do
+                      use Supervisor
+
+                      def start_link(_) do
+                        Supervisor.start_link(__MODULE__, :ok, name: __MODULE__)
+                      end
+
+                      def init(:ok) do
+                        children = [
+                          Supervisor.child_spec({SumWorker, :worker1}, id: :worker1),
+                          Supervisor.child_spec({SumWorker, :worker2}, id: :worker2),
+                          Supervisor.child_spec({SumWorker, :worker3}, id: :worker3),
+                        ]
+
+                        Supervisor.init(children, strategy: :one_for_one)
+                      end
+                    end
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>"Test"</h2>
+                <pre><code data-trim data-noescape data-trim data-noescape>
+                {:ok, sup_pid} = SumSupervisor.start_link(:ok)
+                Supervisor.which_children(sup_pid)
+                SumWorker.calc_sum(:worker1, 5)
+                SumWorker.calc_sum(:worker2, 5)
+                SumWorker.calc_sum(:worker3, 5)
+                </code></pre>
+            </section>
+
+
+            <section>
+                <h2>Demo: Let it crash + Realtime app</h2>
+                <img width="200"
+                    src="https://media1.tenor.com/m/R1TTUaq_hMcAAAAC/haerin-newjeans.gif" />
+            </section>
+
+           <section>
+                <h2>Why Choose Elixir?</h2>
+                <ul>
+                    <li><strong>Scalability</strong> → Handles millions of concurrent users.</li>
+                    <li><strong>Fault Tolerance</strong> → Process crashes don’t break the whole system.</li>
+                    <li><strong>High Availability</strong> → 99.999% uptime in distributed setups.</li>
+                    <li><strong>Real-time Performance</strong> → Great for chat apps, live updates, and notifications.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Real world application</h2>
+                <ul>
+                    <li><strong>Discord</strong></li>
+                    <li><strong>WhatsApp(Meta)</strong></li>
+                    <li><strong>Heroku</strong></li>
+                    <li><strong>PepsiCo</strong></li>
+                    <li><strong>RabbitMQ(Erlang OTP)</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Summary</h2>
+                <ul>
+                    <li><strong>Let It Crash</strong> – No try-catch, processes crash on failure</li>
+                    <li><strong>Auto-Restart</strong> – If a worker crashes, the supervisor restarts it</li>
+                    <li><strong>Isolation</strong> – A crashing process doesn't affect others</li>
+                    <li><strong>Runs on BEAM, great for scalability</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <img width="200"
+                    src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGZzNm45ZWJyZHJhaDBpZXQ1M2FhdHFhdWFyeXM2Y3gzYXdkNXlieSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4JGsvG6bDPAfMc45ID/giphy.gif" />
+                    <h3>QA |> ... |> Elixir - Phoenix |> exit(0)</h3>
+            </section>
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</body>
+
+</html>
