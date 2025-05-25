@@ -45,7 +45,7 @@
             </section>
 
             <section>
-                <h3>Designed by</h3>
+                <h3>[Elixir] Designed by</h3>
                 <div style="text-align: center;">
                     <img src="https://2023.elixirconf.com/images/presenters/jose-valim.jpg"
                         style="height: 320px; border-radius: 50%;" />
@@ -78,9 +78,9 @@
                 <p><strong>OOP style:</strong></p>
                 <pre><code class="language-ruby" data-trim data-noescape data-trim data-noescape>
                         begin
-                        raise "error"
+                            raise "error"
                         rescue => e
-                        puts "Caught error: #{e}" # Handles error manually
+                            puts "Caught error: #{e}" # Handles error manually
                         end
                     </code></pre>
             </section>
@@ -124,9 +124,9 @@
                 <h2>🧑 Meet the Stage Manager = Supervisor</h2>
                 <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
                         children = [
-                        Supervisor.child_spec({Member, "Haerin"}, id: :haerin),
-                        Supervisor.child_spec({Member, "Minji"}, id: :minji),
-                        # ...
+                            Supervisor.child_spec({Member, "Haerin"}, id: :haerin),
+                            Supervisor.child_spec({Member, "Minji"}, id: :minji),
+                            # ...
                         ]
                     </code></pre>
             </section>
@@ -163,8 +163,8 @@
                 <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
                         test "crashed member is restarted automatically" do
                         ...
-                        Member.crash("Hanni")
-                        Process.sleep(200)
+                            Member.crash("Hanni")
+                            Process.sleep(200)
                         ...
                         end
                     </code></pre>
