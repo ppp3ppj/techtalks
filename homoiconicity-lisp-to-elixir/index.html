@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Homoiconicity</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/blood.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-color="white">
+                <img width="250"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Lisp_logo.svg/1024px-Lisp_logo.svg.png" />
+                    <blockquote style="color: black; font-weight: 800;">
+                        "Homoiconicity: From Lisp to Elixir"
+                    </blockquote>
+            </section>
+
+            <section>
+                <h2>What is Lisp</h2>
+                <ul>
+                    <li>Born in 1960 (~65 years ago).</li>
+                    <li>One of the oldest programming languages still alive.</li>
+                    <li>Parentheses.</li>
+                    <li>Everything is built from lists (LISt Processing).</li>
+                </ul>
+            </section>
+
+            <section>
+                <img width="650"
+                    src="image/elixir-to-lisp.jpg" />
+                <h5>My Journey Into "Homoiconicity"</h5>
+            </section>
+
+            <section>
+                <h3>Lisp showed me something shocking</h3>
+            </section>
+
+            <section>
+                <img width="650"
+                    src="image/enter-lisp.jpg" />
+            </section>
+
+	    <section>
+	      <h4>
+		Exapmle C#
+	      </h4>
+              <pre><code data-trim data-noescape data-trim data-noescape>
+		  // Data
+		  var list = new List<int> {1, 2, 3, 4};
+		  // Code
+		  int sum = list.Sum();
+              </code></pre>
+	      <h5>
+		Code != Data
+	      </h5>
+	    </section>
+
+	    <section>
+	      <h4>
+		What if your code and your data spoke the same language?
+	      </h4>
+              <pre><code data-trim data-noescape data-trim data-noescape>
+		  ; Data
+		  '(1 2 3 4)
+		  ; Code
+		  (+ 1 2 3 4)
+              </code></pre>
+	      <h5>
+		Code = Data
+	      </h5>
+	    </section>
+
+            <section>
+                <h2>What is Homoiconicity?</h2>
+                <ul>
+                  <li>Language where code and data share the same representation</li>
+		  <li>In Lisp, you can let data describe the logic</li>
+		  <li>Your program can create and run new programs at runtime</li>
+                </ul>
+            </section>
+
+	    <section>
+                <h2>Lisp (s-expression)?</h2>
+                <ul>
+                    <li>Language where code and data share the same representation</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Let’s make a fun little chat app</h2>
+                <ul>
+                    <li>Minji and Haerin</li>
+                    <li>Send messages to each other</li>
+                    <li>Nothing fancy... or is it?</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>What we're building</h2>
+                <ul>
+                    <li>A terminal-based chat app</li>
+                    <li>Each user runs their own terminal</li>
+                    <li>They connect to the same chat room</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Start Nodes</h2>
+                <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
+                        # Terminal 1
+                        iex --sname node1 -S mix
+
+                        # Terminal 2
+                        iex --sname node2 -S mix
+                        Node.connect(:'node1@127.0.0.1')
+                    </code></pre>
+            </section>
+
+            <section>
+                <h2>Start Chat</h2>
+                <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
+                        # Node 1
+                        UserClient.start("Minji", :room)
+
+                        # Node 2
+                        UserClient.start("Haerin", :room)
+
+                        # [Node 2] Send message
+                        ChatRoom.send_message(:room, "Haerin", "Hi! Minji")
+                    </code></pre>
+            </section>
+
+
+            <section>
+                <h2>Demo</h2>
+                <img width="200" src="https://media1.tenor.com/m/R1TTUaq_hMcAAAAC/haerin-newjeans.gif" />
+            </section>
+
+
+
+            <section>
+                <h2>🎉SURPRISE</h2>
+                <h2>
+                    This is a Distributed System
+                </h2>
+            </section>
+
+            <section>
+                <h2>How It Worked</h2>
+                <ul>
+                    <li>Each terminal is a node</li>
+                    <li>Processes register with a distributed registry(:global)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Newjeans on <strong>STAGE</strong></h3>
+                <img width="900" src="image/newjeans_process_stage.png" />
+            </section>
+
+            <section>
+                <h2>What Happens When a Node Fails</h2>
+                <ul>
+                    <li>Kill Node 1 (Haerin’s terminal)</li>
+                    <li>Wait...</li>
+                    <li><del>Haerin reappears from Node 2</del></li>
+                    <li><del>Chat continues 💬✨</del></li>
+                    <li>❌ Haerin is gone (no state recovery)</li>
+                    <li>✅ Chat works again if Haerin reconnects manually</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Tools for Building Distributed Elixir Systems</h2>
+                <ul>
+                    <li>CRDTs</li>
+                    <li>Horde</li>
+                    <li>libcluster</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Real-World Applications of Distributed Systems</h3>
+                <ul>
+                    <li><strong>WhatsApp and Messenger (real-time messaging)</strong></li>
+                    <li><strong>Multiplayer online games (state sharing between nodes)</strong></li>
+                    <li><strong>Discord and Slack</strong></li>
+                    <li><strong>IoT systems (sensor nodes sharing data)</strong></li>
+                    <li><strong>Financial trading systems</strong></li>
+                    <li><strong>Kubernetes and container orchestration</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <img width="200" src="https://media1.tenor.com/m/OT9Am8Bg9-cAAAAd/haerin-newjeans.gif" />
+                <h2>Summary</h2>
+                <blockquote>
+                    “Elixir makes distributed systems... simple.” 🦸‍♂️💥
+                </blockquote>
+            </section>
+
+            <section>
+                <img width="200" src="https://media1.tenor.com/m/SWnJcKoRB6EAAAAd/haerin-newjeans-haerin.gif"
+                    style="background-color: white;" />
+                <h3>QA |> exit(0)</h3>
+            </section>
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</body>
+
+</html>
