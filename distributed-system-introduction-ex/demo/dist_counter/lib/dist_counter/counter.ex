@@ -18,7 +18,7 @@ defmodule DistCounter.MyCrdt do
 
   # Get current value
   def value(pid \\ __MODULE__) do
-    GenServer.call(pid, :value)
+    GenServer.call(__MODULE__, :value)
   end
 
   # Add a custom key/value
@@ -36,7 +36,6 @@ defmodule DistCounter.MyCrdt do
   # Sever (Private)
   @doc false
   def init(_) do
-
     {:ok, crdt} =
       DeltaCrdt.start_link(
         DeltaCrdt.AWLWWMap,
@@ -66,33 +65,28 @@ defmodule DistCounter.MyCrdt do
   end
 
   def handle_call(:increment, _from, state) do
-
-    Logger.info(
-      "[StateHandoff] Adding to the CRDT with current stage"
-    )
+    Logger.info("[StateHandoff] Adding to the CRDT with current stage")
 
     case DeltaCrdt.get(Crdt, :counter) do
       nil ->
         DeltaCrdt.put(Crdt, :counter, 1)
         Logger.info("Add 1 to CRDT")
-      _ ->
-        #TODO ADD to key :counter if exit
-        Logger.info("PPPP")
+
+      x when x > 0 ->
+        DeltaCrdt.put(Crdt, :counter, x + 1)
     end
 
-
     #    crdt |> dbg()
-    #map = DeltaCrdt.to_map(crdt)
-    #current = Map.get(map, :counter, 0)
+    # map = DeltaCrdt.to_map(crdt)
+    # current = Map.get(map, :counter, 0)
 
-
-    #DeltaCrdt.put(crdt, :counter, current + 1)
-    #DeltaCrdt.update(crdt, :update, ["counter", 0, fn x -> x + 1 end])
+    # DeltaCrdt.put(crdt, :counter, current + 1)
+    # DeltaCrdt.update(crdt, :update, ["counter", 0, fn x -> x + 1 end])
     {:reply, :ok, state}
   end
 
-  def handle_call(:value, _from, %{crdt: crdt} = state) do
-    val = Map.get(DeltaCrdt.to_map(crdt), "counter", 0)
+  def handle_call(:value, _from, state) do
+    val = Map.get(DeltaCrdt.to_map(Crdt), :counter, 0)
     {:reply, val, state}
   end
 
