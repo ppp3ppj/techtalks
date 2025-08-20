@@ -31,9 +31,20 @@ defmodule DistCounter.MyCrdt do
     GenServer.call(__MODULE__, :to_map)
   end
 
+  @doc """
+  Returns the number of games currently stored in the CRDT.
+  """
+  @spec size :: non_neg_integer()
+  def size do
+    GenServer.call(__MODULE__, :size)
+  catch
+    :exit, _ -> 0
+  end
+
   ## GenServer callbacks
 
-  # Sever (Private)
+  # Server (Private)
+
   @doc false
   def init(_) do
     {:ok, crdt} =
@@ -113,6 +124,11 @@ defmodule DistCounter.MyCrdt do
     end
 
     {:noreply, state}
+  end
+
+  def handle_call(:size, _from, state) do
+    size = Crdt |> DeltaCrdt.to_map() |> map_size()
+    {:reply, size, state}
   end
 
   @spec update_neighbors :: :ok
