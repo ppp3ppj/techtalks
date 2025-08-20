@@ -64,6 +64,13 @@ defmodule DistCounter.MyCrdt do
     {:noreply, state}
   end
 
+  @doc """
+  Reset the current state of the CRDT
+  """
+  def clear do
+    GenServer.cast(__MODULE__, :clear)
+  end
+
   def handle_call(:increment, _from, state) do
     Logger.info("[StateHandoff] Adding to the CRDT with current stage")
 
@@ -96,6 +103,15 @@ defmodule DistCounter.MyCrdt do
 
   def handle_cast({:put, key, val}, %{crdt: crdt} = state) do
     DeltaCrdt.put(crdt, key, val)
+    {:noreply, state}
+  end
+
+  @doc false
+  def handle_cast(:clear, state) do
+    for {key, _} <- DeltaCrdt.to_map(Crdt) do
+      DeltaCrdt.delete(Crdt, key)
+    end
+
     {:noreply, state}
   end
 
