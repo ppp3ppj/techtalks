@@ -41,6 +41,13 @@ defmodule DistCounter.MyCrdt do
     :exit, _ -> 0
   end
 
+  @doc """
+  Notify the CRDT that shutdown is imminent
+  """
+  def prepare_for_shutdown do
+    GenServer.cast(__MODULE__, :prepare_for_shutdown)
+  end
+
   ## GenServer callbacks
 
   # Server (Private)
@@ -129,6 +136,10 @@ defmodule DistCounter.MyCrdt do
   def handle_call(:size, _from, state) do
     size = Crdt |> DeltaCrdt.to_map() |> map_size()
     {:reply, size, state}
+  end
+
+  def handle_cast(:prepare_for_shutdown, _state) do
+    {:noreply, :terminating}
   end
 
   @spec update_neighbors :: :ok
