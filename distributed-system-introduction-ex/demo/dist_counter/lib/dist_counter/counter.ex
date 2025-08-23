@@ -17,13 +17,19 @@ defmodule DistCounter.MyCrdt do
   end
 
   # Get current value
-  def value(pid \\ __MODULE__) do
+  def value() do
     GenServer.call(__MODULE__, :value)
   end
 
   # Add a custom key/value
-  def put(pid \\ __MODULE__, key, val) do
-    GenServer.cast(pid, {:put, key, val})
+  def put(val) do
+    case val do
+      x when is_number(x) and x >= 0 ->
+        GenServer.cast(__MODULE__, {:put, x})
+
+      _ ->
+        Logger.debug(fn -> "[CounterCRDT] Value #{val} is not number please try put value again" end)
+    end
   end
 
   # Get full map
@@ -71,13 +77,15 @@ defmodule DistCounter.MyCrdt do
   end
 
   # Handle the message received when a new node joins the cluster
-  def handle_info({:nodeup, _node, _node_type}, state) do
+  def handle_info({:nodeup, node, _node_type}, state) do
+    Logger.debug(fn -> "[CounterCRDT] #{inspect(node)} - Up" end)
     update_neighbors()
     {:noreply, state}
   end
 
   # Handle the message received when a node leaves the cluster
-  def handle_info({:nodedown, _node, _node_type}, state) do
+  def handle_info({:nodedown, node, _node_type}, state) do
+    Logger.debug(fn -> "[CounterCRDT] #{inspect(node)} - Down" end)
     update_neighbors()
     {:noreply, state}
   end
@@ -90,23 +98,16 @@ defmodule DistCounter.MyCrdt do
   end
 
   def handle_call(:increment, _from, state) do
-    Logger.info("[StateHandoff] Adding to the CRDT with current stage")
-
     case DeltaCrdt.get(Crdt, :counter) do
       nil ->
+        Logger.debug(fn -> "[CounterCRDT] Adding 1 to the CRDT current stage" end)
         DeltaCrdt.put(Crdt, :counter, 1)
-        Logger.info("Add 1 to CRDT")
 
       x when x > 0 ->
+        Logger.debug(fn -> "[CounterCRDT] Adding #{x + 1} to the CRDT current stage" end)
         DeltaCrdt.put(Crdt, :counter, x + 1)
     end
 
-    #    crdt |> dbg()
-    # map = DeltaCrdt.to_map(crdt)
-    # current = Map.get(map, :counter, 0)
-
-    # DeltaCrdt.put(crdt, :counter, current + 1)
-    # DeltaCrdt.update(crdt, :update, ["counter", 0, fn x -> x + 1 end])
     {:reply, :ok, state}
   end
 
@@ -119,8 +120,8 @@ defmodule DistCounter.MyCrdt do
     {:reply, DeltaCrdt.to_map(Crdt), state}
   end
 
-  def handle_cast({:put, key, val}, %{crdt: crdt} = state) do
-    DeltaCrdt.put(crdt, key, val)
+  def handle_cast({:put, val}, state) do
+    DeltaCrdt.put(Crdt, :counter, val)
     {:noreply, state}
   end
 
@@ -145,7 +146,7 @@ defmodule DistCounter.MyCrdt do
   @spec update_neighbors :: :ok
   defp update_neighbors do
     neighbors = for node <- Node.list(), do: {Crdt, node}
-    Logger.debug(fn -> "[StateHandoff] Setting neighbors to #{inspect(neighbors)}" end)
+    Logger.debug(fn -> "[CounterCRDT] Setting neighbors to #{inspect(neighbors)}" end)
     DeltaCrdt.set_neighbours(Crdt, neighbors)
   end
 end
