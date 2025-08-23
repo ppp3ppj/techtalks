@@ -1,6 +1,5 @@
 defmodule DistCounter.MyCrdt do
   use GenServer
-  alias DeltaCrdt.AWLWWMap
 
   require Logger
 
