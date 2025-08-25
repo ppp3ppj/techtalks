@@ -116,6 +116,83 @@
         </section>
 
         <section>
+            <h4>Why Distributed systems are hard?</h4>
+            <ul>
+              <li>Unreliable network</li>
+              <li>Partial failures</li>
+              <li>Hard data consistency</li>
+              <li>Concurrency conflicts</li>
+              <li>Slow coordination</li>
+              <li>Hard to debug</li>
+            </ul>
+        </section>
+
+        <section data-background-color="#ffffff">
+            <h3>Old Example</h3>
+            <img width="900" src="image/newjeans_process_stage.png" />
+        </section>
+
+        <section data-background-color="#ffffff">
+            <h3>Newjeans on <strong>STAGE</strong></h3>
+            <img width="900" src="image/distributed_newjeans.png" />
+        </section>
+
+        <section>
+            <h3>⚡ Basic Distributed System in Elixir</h3>
+            <ul>
+              <li>Start nodes: <code>iex --sname node1 -S mix</code></li>
+              <li>Connect nodes: <code>Node.connect(:'node2@host')</code></li>
+              <li>Check nodes: <code>Node.list()</code></li>
+              <li>Run remote call: <code>Node.spawn(:'node2@host', fn -> IO.puts("Hi") end)</code></li>
+              <li>Share state: use <code>:global</code> / <code>:pg</code> / libraries (e.g., DeltaCrdt)</li>
+            </ul>
+        </section>
+
+
+        <section data-background-color="#ffffff">
+          <h3>Distributed Counter 3 Node</h3>
+          <img width="900" src="image/counter_3_node.png" />
+        </section>
+
+        <section>
+          <h3>Increament Counter</h3>
+  <div class="mermaid" style="width: auto; height: 500px; overflow-y: auto; margin: 0 auto;"
+            <pre>
+              %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
+sequenceDiagram
+    participant Node1
+    participant Node2
+    participant Node3
+
+    %% Initial state
+    Node1->>Node1: Counter = 0
+    Node2->>Node2: Counter = 0
+    Node3->>Node3: Counter = 0
+
+    %% Node1 increments
+    Node1->>Node1: Counter = Counter + 1
+    Node1->>Node2: Sync delta
+    Node1->>Node3: Sync delta
+
+    %% Node2 increments
+    Node2->>Node2: Counter = Counter + 1
+    Node2->>Node1: Sync delta
+    Node2->>Node3: Sync delta
+
+    %% Node3 increments
+    Node3->>Node3: Counter = Counter + 1
+    Node3->>Node1: Sync delta
+    Node3->>Node2: Sync delta
+
+    %% Final state after all syncs
+    Node1->>Node1: Counter = 3
+    Node2->>Node2: Counter = 3
+    Node3->>Node3: Counter = 3
+            </pre>
+          </div>
+        </section>
+
+        <section>
             <h2>Demo</h2>
             <img width="200" src="https://media1.tenor.com/m/R1TTUaq_hMcAAAAC/haerin-newjeans.gif" />
         </section>
@@ -278,15 +355,18 @@
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@11.4.1/plugin/mermaid/mermaid.js"></script>
     <script>
         // More info about initialization & config:
         // - https://revealjs.com/initialization/
         // - https://revealjs.com/config/
         Reveal.initialize({
             hash: true,
+            mermaid: {
+            },
 
             // Learn about plugins: https://revealjs.com/plugins/
-            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMermaid]
         });
     </script>
 </body>
