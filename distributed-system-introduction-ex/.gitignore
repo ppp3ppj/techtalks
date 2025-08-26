@@ -9,7 +9,18 @@ log/*.log
 tmp/**
 node_modules/
 .sass-cache
+
+# Elixir
+/_build
+/cover
+/deps
+/doc
+/.fetch
+erl_crash.dump
+*.ez
 *.beam
 
 # .lexical all sub directories
+# LSP 
 .lexical/
+.elixir_ls/
