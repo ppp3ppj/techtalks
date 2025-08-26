@@ -18,48 +18,69 @@
 <body>
     <div class="reveal">
         <div class="slides">
+            <!-- Title Slide -->
             <section data-background-color="white">
-                <img width="200"
-                    src="https://learnyousomeerlang.com/static/img/cbttf.png" />
-                <h3>
-                    Distributed System
-                </h3>
+                <img width="200" src="https://learnyousomeerlang.com/static/img/cbttf.png" />
+                <h3>Distributed System</h3>
                 <blockquote style="color: black; font-weight: 800;">
                     "The BEAM way"
                 </blockquote>
             </section>
 
-        <section data-background-color="#ffffff">
-            <h3>What is a Distributed System?</h3>
-            <blockquote style="color: black; font-weight: 800;">
-                “A distributed system is just many computers pretending to be one big computer.”
-            </blockquote>
-        </section>
+            <!-- What is a Distributed System? -->
+            <section data-background-color="#ffffff">
+                <h3>What is a Distributed System?</h3>
+                <blockquote style="color: black; font-weight: 800;">
+                    “A distributed system is just many computers pretending to be one big computer.”
+                </blockquote>
+                <div style="background: #fffde7; color: #fbc02d; border-left: 6px solid #fbc02d; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
+                    💡 <strong>Pro Tip:</strong> If it feels like magic, it's probably a distributed system!
+                </div>
+            </section>
 
-        <section>
-            <h3>Everyday Examples</h3>
-            <ul>
-                <li>Bank ATMs</li>
+
+            <!-- Everyday Example: Bank ATMs -->
+            <section>
+                <h3>Everyday Example: Bank ATMs 🏧</h3>
                 <ul>
                     <li>All ATMs share the same account info.</li>
                 </ul>
-                <li>WhatsApp</li>
+                <div style="background: #e3f2fd; color: #1976d2; border-left: 6px solid #1976d2; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
+                    🏦 <strong>Fun Fact:</strong> If one ATM goes down, others still work!
+                </div>
+            </section>
+
+            <!-- Everyday Example: WhatsApp -->
+            <section>
+                <h3>Everyday Example: WhatsApp 💬</h3>
                 <ul>
-                    <li>Send message on your phone, it appears on your friend's phone on the other side of the world</li>
+                    <li>Send a message on your phone, it appears on your friend's phone on the other side of the world.</li>
                 </ul>
-                <li>Google Docs</li>
+                <div style="background: #e0f7fa; color: #00796b; border-left: 6px solid #00bfae; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
+                    🧠 <strong>Fun Fact:</strong> WhatsApp uses Erlang (on the BEAM VM) to handle billions of messages every day!
+                </div>
+            </section>
+
+            <!-- Everyday Example: Google Docs -->
+            <section>
+                <h3>Everyday Example: Google Docs 📝</h3>
                 <ul>
-                    <li>Two people type at the same time, the system merges changes</li>
+                    <li>Two people type at the same time, the system merges changes.</li>
                 </ul>
-            </ul>
-        </section>
+                <div style="background: #f3e5f5; color: #6a1b9a; border-left: 6px solid #8e24aa; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
+                    ✨ <strong>Pro Tip:</strong> Real-time collaboration is powered by distributed magic!
+                </div>
+            </section>
 
         <section data-background-color="#ffffff">
             <img width="180" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/WhatsApp_Logo_green.svg/1024px-WhatsApp_Logo_green.svg.png" />
-            <h3>Why Should We Care?</h3>
+            <h3>Why Should We Care? 🤔</h3>
             <blockquote style="color: black; font-weight: 800;">
                 “When WhatsApp sends a message to millions of people, or when your payment app never goes down”
             </blockquote>
+            <div style="background: #e0f7fa; color: #00796b; border-left: 6px solid #00bfae; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
+                🧠 <strong>Fun Fact:</strong> WhatsApp uses Erlang (on the BEAM VM) to handle <span style="color:#00bfae;">billions</span> of messages every day!
+            </div>
         </section>
 
         <section data-background-color="#ffffff">
@@ -77,15 +98,16 @@
         </section>
 
         <section>
-            <h3>Why Elixir/BEAM is cool?</h3>
+            <h3>Why Elixir/BEAM is cool? ✨</h3>
             <ul>
-                <li>Concepts that sound magical but real</li>
-                <ul>
-                    <li>Processes are cheap (millions of them).</li>
-                    <li>Message passing, not shared memory.</li>
-                    <li>Supervisors and "let it crash" philosophy.</li>
-                    <li>Out-of-the-box distribution: Node.connect(:node@machine)</li>
-                </ul>
+                <li>Processes are cheap (millions of them) 🐣</li>
+                <li>Message passing, not shared memory 📬</li>
+            </ul>
+        </section>
+        <section>
+            <ul>
+                <li>Supervisors and "let it crash" philosophy 🚨</li>
+                <li>Out-of-the-box distribution: <code>Node.connect(:node@machine)</code> 🌐</li>
             </ul>
         </section>
 
@@ -116,24 +138,24 @@
         </section>
 
         <section>
-            <h4>Why Distributed systems are hard?</h4>
+            <h4>Why are distributed systems hard? 🤯</h4>
             <ul>
-              <li>Unreliable network</li>
-              <li>Partial failures</li>
-              <li>Hard data consistency</li>
-              <li>Concurrency conflicts</li>
-              <li>Slow coordination</li>
-              <li>Hard to debug</li>
+              <li>Unreliable networks 🌐</li>
+              <li>Some parts can fail 💥</li>
+              <li>Keeping data in sync 🔄</li>
+              <li>Conflicting changes ⚔️</li>
+              <li>Slow coordination 🐢</li>
+              <li>Hard to debug 🐞</li>
             </ul>
         </section>
 
         <section data-background-color="#ffffff">
-            <h3>Old Example</h3>
+            <h3>How It Was: The Old Way</h3>
             <img width="900" src="image/newjeans_process_stage.png" />
         </section>
 
         <section data-background-color="#ffffff">
-            <h3>Newjeans on <strong>STAGE</strong></h3>
+            <h3>How It Feels Today: Distributed System in Action</h3>
             <img width="900" src="image/distributed_newjeans.png" />
         </section>
 
@@ -155,7 +177,7 @@
         </section>
 
         <section>
-          <h3>Increament Counter</h3>
+          <h3>Increament Counter (Sync)</h3>
   <div class="mermaid" style="width: auto; height: 500px; overflow-y: auto; margin: 0 auto;"
             <pre>
               %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
@@ -188,6 +210,42 @@ sequenceDiagram
     Node1->>Node1: Counter = 3
     Node2->>Node2: Counter = 3
     Node3->>Node3: Counter = 3
+            </pre>
+          </div>
+        </section>
+
+        <section>
+          <h3>Increament Counter (Offline)</h3>
+  <div class="mermaid" style="width: auto; height: 500px; overflow-y: auto; margin: 0 auto;"
+            <pre>
+              %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
+sequenceDiagram
+    participant Node1
+    participant Node2
+    participant Node3
+
+    %% Initial state
+    Node1->>Node1: Counter = 0
+    Node2->>Node2: Counter = 0
+    Node3->>Node3: Counter = 0 (offline)
+
+    %% Node1 increments
+    Node1->>Node1: Counter = Counter + 1
+
+    %% Sync delta to Node2 only
+    Node1->>Node2: Sync delta
+    Node2->>Node2: Counter = 1
+
+    %% Node3 comes online and syncs with Node1 or Node2
+    Node3-->>Node1: Request latest delta
+    Node1->>Node3: Send delta
+    Node3->>Node3: Counter = 1
+
+    %% Final state
+    Node1->>Node1: Counter = 1
+    Node2->>Node2: Counter = 1
+    Node3->>Node3: Counter = 1
+
             </pre>
           </div>
         </section>
