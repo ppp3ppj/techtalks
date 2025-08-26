@@ -10,3 +10,6 @@ tmp/**
 node_modules/
 .sass-cache
 *.beam
+
+# .lexical all sub directories
+.lexical/
