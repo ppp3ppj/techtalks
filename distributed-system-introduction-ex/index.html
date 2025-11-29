@@ -33,42 +33,72 @@
                 <blockquote style="color: black; font-weight: 800;">
                     “A distributed system is just many computers pretending to be one big computer.”
                 </blockquote>
-                <div style="background: #fffde7; color: #fbc02d; border-left: 6px solid #fbc02d; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
-                    💡 <strong>Pro Tip:</strong> If it feels like magic, it's probably a distributed system!
-                </div>
             </section>
 
-
-            <!-- Everyday Example: Bank ATMs -->
-            <section>
-                <h3>Everyday Example: Bank ATMs 🏧</h3>
-                <ul>
-                    <li>All ATMs share the same account info.</li>
-                </ul>
-                <div style="background: #e3f2fd; color: #1976d2; border-left: 6px solid #1976d2; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
-                    🏦 <strong>Fun Fact:</strong> If one ATM goes down, others still work!
+        <section>
+            <h3>The Single Machine Problem</h3>
+            <div style="display: flex; justify-content: space-around; margin-top: 30px;">
+                <div style="text-align: center;">
+                    <span style="font-size: 3em;">💥</span>
+                    <p><strong>Single Point<br/>of Failure</strong></p>
+                    <p style="font-size: 0.7em; color: #ef5350;">1 crash = game over</p>
                 </div>
-            </section>
-
-            <!-- Everyday Example: WhatsApp -->
-            <section>
-                <h3>Everyday Example: WhatsApp 💬</h3>
-                <ul>
-                    <li>Send a message on your phone, it appears on your friend's phone on the other side of the world.</li>
-                </ul>
-                <div style="background: #e0f7fa; color: #00796b; border-left: 6px solid #00bfae; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
-                    🧠 <strong>Fun Fact:</strong> WhatsApp uses Erlang (on the BEAM VM) to handle billions of messages every day!
+                <div style="text-align: center;">
+                    <span style="font-size: 3em;">📈</span>
+                    <p><strong>Can't Scale</strong></p>
+                    <p style="font-size: 0.7em; color: #ef5350;">Limited CPU/RAM</p>
                 </div>
-            </section>
+                <div style="text-align: center;">
+                    <span style="font-size: 3em;">🌍</span>
+                    <p><strong>Geography</strong></p>
+                    <p style="font-size: 0.7em; color: #ef5350;">Far users = slow</p>
+                </div>
+            </div>
+        </section>
 
-            <!-- Everyday Example: Google Docs -->
-            <section>
-                <h3>Everyday Example: Google Docs 📝</h3>
-                <ul>
-                    <li>Two people type at the same time, the system merges changes.</li>
-                </ul>
-                <div style="background: #f3e5f5; color: #6a1b9a; border-left: 6px solid #8e24aa; padding: 12px; margin-top: 18px; font-weight: 600; border-radius: 6px;">
-                    ✨ <strong>Pro Tip:</strong> Real-time collaboration is powered by distributed magic!
+        <!-- Slide 2: The Solution -->
+        <section>
+            <h3>Why Go Distributed?</h3>
+            <div style="display: flex; justify-content: space-around; margin-top: 30px;">
+                <div style="text-align: center;">
+                    <span style="font-size: 3em;">🛡️</span>
+                    <p><strong>Fault Tolerance</strong></p>
+                    <p style="font-size: 0.7em; color: #66bb6a;">Node dies? Others continue!</p>
+                </div>
+                <div style="text-align: center;">
+                    <span style="font-size: 3em;">🚀</span>
+                    <p><strong>Horizontal Scale</strong></p>
+                    <p style="font-size: 0.7em; color: #66bb6a;">Add nodes = more power</p>
+                </div>
+                <div style="text-align: center;">
+                    <span style="font-size: 3em;">⚡</span>
+                    <p><strong>Low Latency</strong></p>
+                    <p style="font-size: 0.7em; color: #66bb6a;">Nodes close to users</p>
+                </div>
+            </div>
+        </section>
+
+   <section>
+                <h3>Distributed Concepts in Real Life 🌍</h3>
+                <div style="display: flex; justify-content: space-around; text-align: center;">
+                    <div>
+                        <span style="font-size: 3em;">🎮</span>
+                        <h4>Discord</h4>
+                        <p style="font-size: 0.7em; color: #90caf9;"><strong>Pub/Sub</strong></p>
+                        <p style="font-size: 0.6em;">Message → broadcast<br/>to all listeners</p>
+                    </div>
+                    <div>
+                        <span style="font-size: 3em;">📝</span>
+                        <h4>Google Docs</h4>
+                        <p style="font-size: 0.7em; color: #a5d6a7;"><strong>CRDTs</strong></p>
+                        <p style="font-size: 0.6em;">Conflict-free<br/>data merge</p>
+                    </div>
+                    <div>
+                        <span style="font-size: 3em;">🚗</span>
+                        <h4>Grab/Uber</h4>
+                        <p style="font-size: 0.7em; color: #ffab91;"><strong>Consistency</strong></p>
+                        <p style="font-size: 0.6em;">1 driver can't accept<br/>2 rides at once</p>
+                    </div>
                 </div>
             </section>
 
@@ -76,50 +106,66 @@
             <img width="150" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Erlang_logo.svg/140px-Erlang_logo.svg.png" />
             <h3>The Erlang Legacy</h3>
             <ul>
-                <li>1980s at Ericsson 📞</li>
+                <li>1980s at Ericsson</li>
                 <li>Built for telecom: needed to handle millions of calls, never crash!</li>
-                <li>Superpowers: Concurrency 🏃‍♂️, Fault tolerance 💪, Distribution 🌍</li>
+                <li>Superpowers: Concurrency, Fault tolerance, Distribution</li>
             </ul>
         </section>
 
         <section>
-            <h3>Why Elixir/BEAM is cool? ✨</h3>
-            <ul>
-                <li>Processes are cheap (millions of them) 🐣</li>
-                <li>Message passing, not shared memory 📬</li>
-            </ul>
-        </section>
-        <section>
-            <ul>
-                <li>Supervisors and "let it crash" philosophy 🚨</li>
-                <li>Out-of-the-box distribution: <code>Node.connect(:node@machine)</code> 🌐</li>
-            </ul>
-        </section>
-
-        <section>
-
-            <img width="300" src="https://media1.tenor.com/m/5ety3Lx3QccAAAAC/its-fine-dog-fine.gif" />
-            <h4>One Machine vs. Distributed World</h4>
-            <blockquote style="color: white; font-weight: 800;">
-                “One machine: Simple, but limited.”
+            <img width="180" style="border-radius: 50%;" src="https://2023.elixirconf.com/images/presenters/jose-valim.jpg" />
+            <h3>José Valim</h3>
+            <p style="font-size: 0.8em; color: #aaa;">Creator of Elixir, former Rails core team</p>
+            <blockquote style="font-size: 0.95em; margin-top: 20px; border-left: 4px solid #9c27b0;">
+                "I loved Ruby, but I needed better concurrency and distribution. <br/>
+                I found everything I wanted in the Erlang VM."
             </blockquote>
         </section>
 
         <section>
-            <img width="300" src="image/same_spider_man_node7.png" />
-            <h4>One Machine vs. Distributed World</h4>
-            <blockquote style="color: white; font-weight: 800;">
-                “Distributed: Resilient, but hard.”
-            </blockquote>
+            <h3>Why BEAM is Cool? ✨</h3>
+            <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 20px;">
+                <div>
+                    <span style="font-size: 2.5em;">🐣</span>
+                    <p style="font-size: 0.8em;"><strong>Lightweight</strong><br/>Millions of processes</p>
+                </div>
+                <div>
+                    <span style="font-size: 2.5em;">📬</span>
+                    <p style="font-size: 0.8em;"><strong>Message Passing</strong><br/>No shared memory</p>
+                </div>
+                <div>
+                    <span style="font-size: 2.5em;">🚨</span>
+                    <p style="font-size: 0.8em;"><strong>Let It Crash</strong><br/>Supervisors restart</p>
+                </div>
+                <div>
+                    <span style="font-size: 2.5em;">🌐</span>
+                    <p style="font-size: 0.8em;"><strong>Built-in Dist</strong><br/><code style="font-size: 0.7em;">Node.connect/1</code></p>
+                </div>
+            </div>
         </section>
 
-
         <section>
-            <img width="500" src="image/se_catch_distributedsystem.jpg" />
-            <h4>Challenge</h4>
-            <blockquote style="color: white; font-weight: 800;">
-                “Distributed systems are HARD”
-            </blockquote>
+            <h3>Why BEAM Excels at Distribution 🚀</h3>
+            <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 20px;">
+                <div>
+                    <span style="font-size: 2.5em;">🔗</span>
+                    <h4 style="font-size: 0.9em;">Built-in Clustering</h4>
+                    <p style="font-size: 0.6em;">Nodes connect with<br/>one line of code</p>
+                </div>
+                <div>
+                    <span style="font-size: 2.5em;">📍</span>
+                    <h4 style="font-size: 0.9em;">Location Transparency</h4>
+                    <p style="font-size: 0.6em;">Send message to process<br/>local or remote = same!</p>
+                </div>
+                <div>
+                    <span style="font-size: 2.5em;">💀</span>
+                    <h4 style="font-size: 0.9em;">Failure Detection</h4>
+                    <p style="font-size: 0.6em;">Node dies?<br/>Others know instantly</p>
+                </div>
+            </div>
+            <div style="background: #e8f5e9; color: #2e7d32; border-left: 6px solid #4caf50; padding: 12px; margin-top: 20px; font-weight: 600; border-radius: 6px; font-size: 0.8em;">
+                🧠 <strong>Key:</strong> Same code works for 1 node or 100 nodes!
+            </div>
         </section>
 
         <section>
@@ -133,14 +179,24 @@
               <li>Hard to debug 🐞</li>
             </ul>
         </section>
+        <section>
+            <h3>Why Elixir Makes Distributed Easy? 🎯</h3>
+            <p style="font-size: 1.2em;">Because you <strong>already learned it!</strong></p>
+            <div style="font-size: 0.85em; margin-top: 30px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <p>✅ Process = isolated unit → <strong>Node = isolated unit</strong></p>
+                <p>✅ Message passing → <strong>same across nodes</strong></p>
+                <p>✅ Supervisor restart → <strong>works for remote too</strong></p>
+                <p>✅ Let it crash → <strong>let the node crash</strong></p>
+            </div>
+        </section>
 
         <section data-background-color="#ffffff">
-            <h3>How It Was: The Old Way</h3>
+            <h3>Newjeans Stage</h3>
             <img width="900" src="image/newjeans_process_stage.png" />
         </section>
 
         <section data-background-color="#ffffff">
-            <h3>How It Feels Today: Distributed System in Action</h3>
+            <h3>Newjeans State in Distributed System</h3>
             <img width="900" src="image/distributed_newjeans.png" />
         </section>
 
@@ -159,6 +215,61 @@
         <section data-background-color="#ffffff">
           <h3>Distributed Counter 3 Node</h3>
           <img width="900" src="image/counter_3_node.png" />
+        </section>
+
+        <section>
+            <h3>3 Nodes Counting Together</h3>
+            <div style="font-size: 0.9em; text-align: left; max-width: 650px; margin: 20px auto;">
+                <p>🏪 <strong>3 shops</strong> in different cities</p>
+                <p>📊 Each shop counts <strong>its own sales</strong></p>
+                <p>📵 Sometimes internet goes down</p>
+                <p>🔄 When online → <strong>sync & merge</strong></p>
+            </div>
+            <div style="display: flex; justify-content: space-around; margin-top: 30px;">
+                <div style="background: #1e88e5; padding: 15px 25px; border-radius: 10px;">
+                    🏪 A: <strong>+2</strong>
+                </div>
+                <div style="font-size: 2em;">+</div>
+                <div style="background: #43a047; padding: 15px 25px; border-radius: 10px;">
+                    🏪 B: <strong>+3</strong>
+                </div>
+                <div style="font-size: 2em;">+</div>
+                <div style="background: #fb8c00; padding: 15px 25px; border-radius: 10px;">
+                    🏪 C: <strong>+1</strong>
+                </div>
+                <div style="font-size: 2em;">=</div>
+                <div style="background: #7b1fa2; padding: 15px 25px; border-radius: 10px;">
+                    Total: <strong>6</strong>
+                </div>
+            </div>
+            <p style="margin-top: 25px; font-size: 0.85em; color: #aaa;">
+                This is how <strong>G-Counter CRDT</strong> works! 
+            </p>
+        </section>
+
+        <section>
+            <h3>What is G-Counter (CRDT)?</h3>
+            <p style="font-size: 0.9em;">Each node keeps its <strong>own counter</strong>, then we <strong>merge</strong> them!</p>
+            <div style="display: flex; justify-content: space-around; margin-top: 30px; text-align: center;">
+                <div style="background: #1e88e5; padding: 15px; border-radius: 10px;">
+                    <p><strong>Node1</strong></p>
+                    <code>{node1: 2, node2: 0, node3: 0}</code>
+                </div>
+                <div style="background: #43a047; padding: 15px; border-radius: 10px;">
+                    <p><strong>Node2</strong></p>
+                    <code>{node1: 0, node2: 3, node3: 0}</code>
+                </div>
+                <div style="background: #fb8c00; padding: 15px; border-radius: 10px;">
+                    <p><strong>Node3</strong></p>
+                    <code>{node1: 0, node2: 0, node3: 1}</code>
+                </div>
+            </div>
+            <div style="margin-top: 30px;">
+                <p style="font-size: 1.2em;">⬇️ <strong>Merge = take max of each</strong> ⬇️</p>
+                <code style="font-size: 1.1em; background: #7b1fa2; padding: 10px; border-radius: 5px;">
+                    {node1: 2, node2: 3, node3: 1} → Total = <strong>6</strong>
+                </code>
+            </div>
         </section>
 
         <section>
@@ -238,15 +349,6 @@ sequenceDiagram
         <section>
             <h2>Demo</h2>
             <img width="200" src="https://media1.tenor.com/m/R1TTUaq_hMcAAAAC/haerin-newjeans.gif" />
-        </section>
-
-        <section>
-            <h3 style="font-size: 2.2em; color: #00e676; text-shadow: 1px 2px 8px #222;">
-            How about code it not hard?
-            </h3>
-            <blockquote style="color: #fff; background: #222; border-left: 5px solid #00e676; font-size: 1.3em; margin-top: 30px;">
-            "Distributed code can be simple, if you have the right tools."
-            </blockquote>
         </section>
 
         <section>
