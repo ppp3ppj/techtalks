@@ -95,129 +95,67 @@
                 <p style="margin-top: 30px;">But desktop apps? That's a different world...</p>
             </section>
 
-            <!-- TWO PATHS -->
+            <!-- THE CHOICE -->
             <section>
-                <h2>Two Paths Forward</h2>
-                <p>I found two technologies that let web developers build desktop apps:</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                <h2>Two Options for Building Desktop Apps</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;">
                     <div style="padding: 20px; border: 2px solid #4a90e2; border-radius: 10px;">
                         <h3>Electron</h3>
-                        <p style="font-size: 0.9em;">The popular choice</p>
-                        <p style="font-size: 0.8em; color: #666;">Used by VS Code, Slack, Discord</p>
+                        <p style="font-size: 0.9em; margin-top: 10px;">Popular, mature</p>
+                        <p style="font-size: 0.85em; color: #666; margin-top: 10px;">VS Code, Slack, Discord</p>
+                        <p style="font-size: 0.85em; margin-top: 15px;">~150 MB apps</p>
                     </div>
                     <div style="padding: 20px; border: 2px solid #e67e22; border-radius: 10px;">
                         <h3>Tauri</h3>
-                        <p style="font-size: 0.9em;">The new kid</p>
-                        <p style="font-size: 0.8em; color: #666;">Built with Rust</p>
+                        <p style="font-size: 0.9em; margin-top: 10px;">New, fast, small</p>
+                        <p style="font-size: 0.85em; color: #666; margin-top: 10px;">Built with Rust</p>
+                        <p style="font-size: 0.85em; margin-top: 15px;">~6 MB apps</p>
                     </div>
                 </div>
             </section>
 
-            <!-- THE NUMBERS -->
+            <!-- WHY TAURI -->
             <section>
-                <h2>Let's Look at the Numbers</h2>
-                <table style="font-size: 0.85em; margin-top: 30px;">
-                    <thead>
-                        <tr>
-                            <th>Metric</th>
-                            <th>Electron</th>
-                            <th>Tauri</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>App Size</strong></td>
-                            <td>120-150 MB</td>
-                            <td>3-10 MB</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Memory Used</strong></td>
-                            <td>150-300 MB</td>
-                            <td>50-100 MB</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Startup Time</strong></td>
-                            <td>2-3 seconds</td>
-                            <td>Under 1 second</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Backend</strong></td>
-                            <td>Node.js</td>
-                            <td>Rust</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p style="font-size: 0.9em; margin-top: 30px;">
-                    <strong>15x smaller, 3x less memory, 3x faster startup</strong>
-                </p>
-            </section>
-
-            <!-- WHY IT MATTERS -->
-            <section>
-                <h2>Why This Matters for StandClock</h2>
-                <p>Remember: this app needs to run all day, every day</p>
-                <ul style="margin-top: 30px;">
-                    <li><strong>Memory matters:</strong> Less memory = computer stays fast</li>
-                    <li><strong>Size matters:</strong> Quick to download and update</li>
-                    <li><strong>Speed matters:</strong> Starts when computer boots</li>
-                    <li><strong>Battery matters:</strong> For laptop users working remotely</li>
+                <h2>Why I Chose Tauri</h2>
+                <p style="font-size: 1.1em; margin-top: 30px;">This app runs all day in the background</p>
+                <ul style="margin-top: 30px; font-size: 0.95em;">
+                    <li><strong>Tauri apps are 15x smaller</strong> (6 MB vs 150 MB)</li>
+                    <li><strong>Uses 3x less memory</strong> (won't slow down your computer)</li>
+                    <li><strong>Starts instantly</strong> (under 1 second)</li>
+                    <li><strong>Better battery life</strong> (important for laptops)</li>
                 </ul>
-                <p style="margin-top: 30px; font-size: 1.1em;">
-                    <strong>For a background app, Tauri is perfect</strong>
+                <p style="margin-top: 40px; font-size: 1.1em;">
+                    <strong>Perfect for a background timer app</strong>
                 </p>
             </section>
 
             <!-- WHAT IS TAURI -->
             <section>
-                <h2>So What Exactly Is Tauri?</h2>
-                <p style="margin-bottom: 30px;">Think of it as a bridge between web and desktop</p>
-                <ul>
-                    <li><strong>Frontend:</strong> HTML, CSS, JavaScript (any framework!)</li>
-                    <li><strong>Backend:</strong> Rust (handles system stuff)</li>
-                    <li><strong>Smart approach:</strong> Uses your OS's browser engine</li>
-                    <li><strong>Result:</strong> Small, fast, secure apps</li>
+                <h2>What Is Tauri?</h2>
+                <p style="font-size: 1.1em; margin: 40px 0;">Web frontend + Rust backend = Tiny desktop app</p>
+                <ul style="margin-top: 30px;">
+                    <li>Build UI with HTML/CSS/JavaScript</li>
+                    <li>Use Rust for system operations</li>
+                    <li>Uses your OS's browser (no need to bundle one)</li>
                 </ul>
-                <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
-                    <em>Web UI + Rust backend + System browser = Tiny desktop app</em>
+                <p style="margin-top: 40px; font-size: 1.1em;">
+                    <strong>The tradeoff:</strong> I had to learn Rust<br>
+                    <span style="font-size: 0.9em; color: #666;">(But it was worth it)</span>
                 </p>
-            </section>
-
-            <!-- THE TRADEOFF -->
-            <section>
-                <h2>But There's a Catch</h2>
-                <p style="font-size: 1.2em; margin: 30px 0;">I had to learn Rust</p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
-                    <div>
-                        <h3>Electron</h3>
-                        <p style="color: #27ae60;">✓ Just JavaScript</p>
-                        <p style="color: #27ae60;">✓ Lots of examples</p>
-                        <p style="color: #27ae60;">✓ Big community</p>
-                        <p style="color: #e74c3c;">✗ Large apps</p>
-                    </div>
-                    <div>
-                        <h3>Tauri</h3>
-                        <p style="color: #27ae60;">✓ Tiny apps</p>
-                        <p style="color: #27ae60;">✓ Fast & efficient</p>
-                        <p style="color: #e74c3c;">✗ Learn Rust</p>
-                        <p style="color: #e74c3c;">✗ Smaller community</p>
-                    </div>
-                </div>
-                <p style="margin-top: 30px;"><strong>My choice:</strong> Learn Rust. It'll be worth it.</p>
             </section>
 
             <!-- BUILDING IT -->
             <section>
-                <h2>Time to Build</h2>
-                <p>Here's what I wanted in the app:</p>
+                <h2>So I Started Building</h2>
+                <p style="font-size: 1.1em; margin-top: 30px;">What I needed was simple:</p>
                 <ul style="margin-top: 30px;">
-                    <li>Simple timer interface</li>
-                    <li>Choose break activities (stretch, walk, water)</li>
-                    <li>Track my break history</li>
-                    <li>Customizable (I like dark themes)</li>
-                    <li>Notifications when time is up</li>
+                    <li>Timer that counts down</li>
+                    <li>Pick my break activity</li>
+                    <li>Notification when time's up</li>
+                    <li>Track my history</li>
                 </ul>
-                <p style="margin-top: 30px; font-size: 1.1em;">
-                    Sounds simple, right? Well...
+                <p style="margin-top: 40px; font-size: 1.2em;">
+                    <strong>Simple, right?</strong>
                 </p>
             </section>
 
@@ -264,42 +202,16 @@
                 </p>
             </section>
 
-            <!-- HOW IT WORKS -->
+            <!-- THE TECH STACK -->
             <section>
-                <h2>How It All Fits Together</h2>
-                <div style="text-align: left; max-width: 800px; margin: 30px auto;">
-                    <p><strong>Frontend (Solid.js):</strong></p>
-                    <ul style="font-size: 0.9em;">
-                        <li>Timer UI, buttons, settings</li>
-                        <li>Talks to Rust backend via Tauri commands</li>
-                    </ul>
-                    <p style="margin-top: 20px;"><strong>Backend (Rust):</strong></p>
-                    <ul style="font-size: 0.9em;">
-                        <li>Manages timer logic</li>
-                        <li>Saves data to SQLite</li>
-                        <li>Triggers notifications</li>
-                        <li>Handles app startup/shutdown</li>
-                    </ul>
-                    <p style="margin-top: 20px;"><strong>Tauri (The Bridge):</strong></p>
-                    <ul style="font-size: 0.9em;">
-                        <li>Connects frontend to backend safely</li>
-                        <li>Manages the window and system tray</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- RUST BENEFITS -->
-            <section>
-                <h2>Why Rust in the Backend Works Great</h2>
-                <ul>
-                    <li><strong>Type safety:</strong> Catches bugs at compile time</li>
-                    <li><strong>No garbage collector:</strong> Predictable performance</li>
-                    <li><strong>Fast database operations:</strong> SQLite queries are instant</li>
-                    <li><strong>Memory efficient:</strong> Perfect for background apps</li>
-                    <li><strong>Safe concurrency:</strong> Timer runs smoothly without blocking</li>
+                <h2>The Final Tech Stack</h2>
+                <ul style="margin-top: 40px; font-size: 1.05em;">
+                    <li><strong>UI:</strong> Solid.js + DaisyUI (32 themes!)</li>
+                    <li><strong>Backend:</strong> Rust + Tauri</li>
+                    <li><strong>Database:</strong> SQLite (stores history locally)</li>
                 </ul>
-                <p style="margin-top: 30px; font-size: 0.9em;">
-                    Rust handles the heavy lifting, JavaScript handles the pretty UI
+                <p style="margin-top: 50px; font-size: 1.1em;">
+                    <strong>Result:</strong> 6 MB app that uses 50 MB RAM
                 </p>
             </section>
 
@@ -315,107 +227,56 @@
                 </div>
             </section>
 
-            <!-- CHALLENGES -->
-            <section>
-                <h2>The Hard Parts</h2>
-
-                <p style="margin-bottom: 30px;">Learning Rust while building was tough</p>
-                <ul>
-                    <li><strong>Ownership & borrowing:</strong> Rust's core concepts took time</li>
-                    <li><strong>Compiler errors:</strong> Helpful but overwhelming at first</li>
-                    <li><strong>Async programming:</strong> Different from JavaScript promises</li>
-                    <li><strong>Less Stack Overflow:</strong> Fewer answers for Tauri-specific issues</li>
-                    <li><strong>Platform quirks:</strong> Windows, Mac, Linux all behave slightly differently</li>
-                </ul>
-                <p style="margin-top: 30px; font-size: 1.1em;">
-                    But I got through it, and you can too
-                </p>
-            </section>
-
-            <!-- WINS -->
-            <section>
-                <h2>What Went Really Well</h2>
-                <ul>
-                    <li><strong>Performance:</strong> App uses only 50MB RAM, starts instantly</li>
-                    <li><strong>Final app size:</strong> 6MB download (compared to 150MB for Electron)</li>
-                    <li><strong>Development speed:</strong> Once past Rust learning curve, very productive</li>
-                    <li><strong>Type safety:</strong> TypeScript + Rust caught bugs before testing</li>
-                    <li><strong>Clean architecture:</strong> Clear separation between UI and logic</li>
-                    <li><strong>DaisyUI themes:</strong> 32 beautiful themes with minimal effort</li>
-                </ul>
-            </section>
-
             <!-- LESSONS LEARNED -->
             <section>
-                <h2>Key Lessons</h2>
-                <ul>
-                    <li><strong>Don't go full Rust on frontend:</strong> Use mature JS frameworks</li>
-                    <li><strong>Start simple:</strong> Get basic version working before adding features</li>
-                    <li><strong>Rust is worth learning:</strong> But budget time for the learning curve</li>
-                    <li><strong>Community matters:</strong> Join Tauri Discord for help</li>
-                    <li><strong>Test on all platforms early:</strong> Don't wait until the end</li>
+                <h2>What I Learned</h2>
+                <p style="margin-top: 30px; font-size: 1.1em;"><strong>The Hard Parts:</strong></p>
+                <ul style="margin-top: 20px; font-size: 0.95em;">
+                    <li>Learning Rust took time</li>
+                    <li>Smaller community = fewer examples online</li>
+                    <li>First attempt (all Rust) failed after 2 weeks</li>
+                </ul>
+                <p style="margin-top: 40px; font-size: 1.1em;"><strong>The Wins:</strong></p>
+                <ul style="margin-top: 20px; font-size: 0.95em;">
+                    <li>6 MB app, 50 MB RAM, instant startup</li>
+                    <li>Once I learned Rust basics, development was fast</li>
+                    <li>Type safety caught bugs before testing</li>
                 </ul>
             </section>
 
-            <!-- SHOULD YOU USE TAURI -->
+            <!-- WHEN TO USE WHAT -->
             <section>
                 <h2>Should You Use Tauri?</h2>
-                <p style="font-size: 1.2em; margin-bottom: 30px;">It depends on your project</p>
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.05em;"><strong>Use Tauri if:</strong></p>
+                    <ul style="font-size: 0.95em; margin-top: 15px;">
+                        <li>Background apps, utility tools</li>
+                        <li>Performance matters</li>
+                        <li>Want to learn Rust</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 1.05em;"><strong>Use Electron if:</strong></p>
+                    <ul style="font-size: 0.95em; margin-top: 15px;">
+                        <li>Need to ship fast</li>
+                        <li>JavaScript-only team</li>
+                        <li>Complex apps with lots of Node.js libraries</li>
+                    </ul>
+                </div>
             </section>
 
+            <!-- SUMMARY -->
             <section>
-                <h2>Tauri Is Great For:</h2>
-                <ul>
-                    <li><strong>Background apps:</strong> Tools that run all day</li>
-                    <li><strong>Utility apps:</strong> Small, focused tools</li>
-                    <li><strong>Performance-critical apps:</strong> When speed matters</li>
-                    <li><strong>New projects:</strong> Starting fresh is easier</li>
-                    <li><strong>Learning opportunity:</strong> Want to learn Rust</li>
+                <h2>Summary</h2>
+                <ul style="margin-top: 40px; font-size: 1.05em;">
+                    <li><strong>Problem:</strong> Sitting too long, needed reminders</li>
+                    <li><strong>Solution:</strong> Built StandClock with Tauri</li>
+                    <li><strong>Result:</strong> 6 MB app that runs all day</li>
+                    <li><strong>Learning:</strong> Rust was hard but worth it</li>
                 </ul>
-                <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
-                    <em>Examples: timers, system monitors, small productivity tools</em>
+                <p style="margin-top: 50px; font-size: 1.1em;">
+                    <strong>Choose the right tool for your problem</strong>
                 </p>
-            </section>
-
-            <section>
-                <h2>Stick with Electron If:</h2>
-                <ul>
-                    <li><strong>Team velocity matters:</strong> Need to ship fast</li>
-                    <li><strong>JavaScript-only team:</strong> No time to learn Rust</li>
-                    <li><strong>Complex apps:</strong> Need lots of Node.js libraries</li>
-                    <li><strong>Existing project:</strong> Already built with Electron</li>
-                    <li><strong>Identical everywhere:</strong> Exact same look on all platforms</li>
-                </ul>
-                <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
-                    <em>Examples: IDEs, design tools, large enterprise apps</em>
-                </p>
-            </section>
-
-            <!-- MY VERDICT -->
-            <section>
-                <h2>My Verdict</h2>
-                <p style="font-size: 1.2em; margin: 30px 0;">Tauri was the right choice for StandClock</p>
-                <ul>
-                    <li>App runs silently in background all day</li>
-                    <li>Users don't even notice it's there (performance-wise)</li>
-                    <li>6MB download means fast updates</li>
-                    <li>Learning Rust opened new opportunities</li>
-                </ul>
-                <p style="margin-top: 30px; font-size: 1.1em;">
-                    <strong>Was it harder? Yes. Was it worth it? Absolutely.</strong>
-                </p>
-            </section>
-
-            <!-- CLOSING SECTION -->
-            <section>
-                <h2>Key Takeaways</h2>
-                <ul>
-                    <li><strong>Match the tool to the problem:</strong> Tauri for lightweight, Electron for complex</li>
-                    <li><strong>Rust has a learning curve:</strong> But it pays off for performance apps</li>
-                    <li><strong>Don't reinvent the wheel:</strong> Use mature JS frameworks for UI</li>
-                    <li><strong>Start simple, iterate:</strong> Get it working before making it perfect</li>
-                    <li><strong>Community matters:</strong> Join Discord, ask questions, share learnings</li>
-                </ul>
             </section>
 
             <!-- FINAL SLIDE -->
@@ -434,9 +295,6 @@
                         <li><a href="https://www.solidjs.com" target="_blank">solidjs.com</a> - Solid.js framework</li>
                     </ul>
                 </div>
-                <p style="margin-top: 40px; font-size: 0.85em; color: #666;">
-                    <strong>Next Talks:</strong> Functor in Haskell is Fun • Linux Distributions
-                </p>
             </section>
         </div>
     </div>
