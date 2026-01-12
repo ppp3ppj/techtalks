@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Tauri in Action</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/simple.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<style>
+    .fragment.blur {
+        filter: blur(5px);
+    }
+
+    .fragment.blur.visible {
+        filter: none;
+    }
+</style>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title -->
+            <section>
+                <h1>Tauri in Action</h1>
+                <h3>Building StandClock</h3>
+            </section>
+
+            <!-- WHAT IS TAURI -->
+            <section>
+                <h2>What is Tauri? 🦀</h2>
+                <p>A modern toolkit for building desktop apps</p>
+                <ul style="margin-top: 30px;">
+                    <li><strong>Frontend:</strong> Use any web framework (React, Vue, Solid.js, etc.)</li>
+                    <li><strong>Backend:</strong> Powered by Rust (fast, safe, efficient)</li>
+                    <li><strong>Uses your OS:</strong> Leverages system's built-in browser engine</li>
+                    <li><strong>Tiny bundles:</strong> Much smaller than bundling a whole browser</li>
+                    <li><strong>Cross-platform:</strong> Write once, run on Windows, Mac, Linux</li>
+                </ul>
+                <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
+                    <em>Think of it as: Web UI + Rust power + System browser = Small, fast desktop app</em>
+                </p>
+            </section>
+
+            <!-- THE PROBLEM SECTION -->
+            <section>
+                <h2>The Problem: Sitting Too Much</h2>
+                <ul>
+                    <li>Back pain, poor posture, health issues from sitting all day</li>
+                    <li>When you're focused on work, it's easy to forget to take breaks</li>
+                    <li>Sitting 8+ hours daily increases health risks by 30%</li>
+                    <li>We need gentle reminders to stand up and move</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Why a Desktop App?</h2>
+                <ul>
+                    <li><strong>Always there:</strong> Runs in the background, you don't need to remember to open it</li>
+                    <li><strong>Smart notifications:</strong> Pops up when it's time to take a break</li>
+                    <li><strong>No phone needed:</strong> Your phone might be in another room</li>
+                    <li><strong>Where you work:</strong> Most office work happens at a desk</li>
+                    <li><strong>Your data stays private:</strong> Everything saved on your computer, not the cloud</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>What's Wrong with Existing Apps?</h2>
+                <ul>
+                    <li><strong>Website timers:</strong> Easy to accidentally close the browser tab</li>
+                    <li><strong>Phone apps:</strong> Your phone might be far away, drains battery</li>
+                    <li><strong>Heavy apps:</strong> Slow to start, eat up computer memory</li>
+                    <li><strong>Browser extensions:</strong> Only work when browser is open</li>
+                </ul>
+                <p style="margin-top: 30px;"><strong>What we need:</strong> A small, fast app that just works</p>
+            </section>
+
+            <!-- THE TECH DECISION SECTION -->
+            <section>
+                <h2>The Big Decision: Electron vs Tauri</h2>
+                <p>Two ways to build desktop apps using web technology (HTML, CSS, JavaScript).</p>
+                <p>But they work very differently under the hood.</p>
+            </section>
+
+            <section>
+                <h2>Electron vs Tauri: The Numbers</h2>
+                <table style="font-size: 0.8em;">
+                    <thead>
+                        <tr>
+                            <th>What</th>
+                            <th>Electron</th>
+                            <th>Tauri</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Download Size</strong></td>
+                            <td>120-150 MB 🐘</td>
+                            <td>3-10 MB 🐁</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memory Usage</strong></td>
+                            <td>150-300 MB</td>
+                            <td>50-100 MB</td>
+                        </tr>
+                        <tr>
+                            <td><strong>How Fast It Starts</strong></td>
+                            <td>2-3 seconds</td>
+                            <td>0.5-1 second ⚡</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technology</strong></td>
+                            <td>JavaScript (Node.js)</td>
+                            <td>Rust</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.8em; margin-top: 20px;">
+                    <em>Think: Tauri is like a compact car, Electron is like an SUV</em>
+                </p>
+            </section>
+
+            <section>
+                <h2>Why Electron is Popular</h2>
+                <ul>
+                    <li><strong>Lots of help available:</strong> Many tutorials and examples online</li>
+                    <li><strong>Easy to learn:</strong> Just use JavaScript, no new language</li>
+                    <li><strong>Big apps use it:</strong> VS Code, Slack, Discord, Figma</li>
+                    <li><strong>Tons of ready-made tools:</strong> Easy to add features</li>
+                    <li><strong>Works the same everywhere:</strong> Looks identical on Windows, Mac, Linux</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Why I Chose Tauri for StandClock</h2>
+                <ul>
+                    <li><strong>Super lightweight:</strong> Won't slow down your computer</li>
+                    <li><strong>Runs all day:</strong> Uses less memory, perfect for background apps</li>
+                    <li><strong>Fast to start:</strong> Opens instantly when you boot your computer</li>
+                    <li><strong>Safer:</strong> Rust prevents many common security bugs</li>
+                    <li><strong>Small updates:</strong> Download only what changed, not the whole app</li>
+                    <li><strong>Future ready:</strong> Will work on phones too (coming soon!)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>The Downsides of Tauri</h2>
+                <ul>
+                    <li><strong>Rust is harder to learn</strong> than JavaScript</li>
+                    <li><strong>Smaller community</strong> - fewer examples online</li>
+                    <li><strong>Newer technology</strong> - less mature tools</li>
+                    <li><strong>Some quirks</strong> on different operating systems</li>
+                </ul>
+                <p style="margin-top: 30px;"><strong>My decision:</strong> For an app that runs all day, being small and fast is worth the extra learning!</p>
+            </section>
+
+            <!-- BUILDING STANDCLOCK SECTION -->
+            <section>
+                <h2>What StandClock Does</h2>
+                <ul>
+                    <li><strong>Pomodoro Timer:</strong> 25-minute work, then a break reminder</li>
+                    <li><strong>Pick Your Break Activity:</strong> Stretch, walk, drink water, or just rest</li>
+                    <li><strong>Track Your Progress:</strong> See how many sessions you completed</li>
+                    <li><strong>Customize Everything:</strong> Change timer length to fit your style</li>
+                    <li><strong>Make it Yours:</strong> 32 different color themes</li>
+                    <li><strong>Gentle Sounds:</strong> Friendly audio cues (you can turn them off)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Inspiration: Pomofocus 🍅</h2>
+                <p>I love <a href="https://pomofocus.io" target="_blank">pomofocus.io</a> - it's a beautiful web-based Pomodoro timer!</p>
+                <p style="margin-top: 30px;"><strong>But I wanted more:</strong></p>
+                <ul>
+                    <li>A <strong>desktop app</strong> that's always there, not in a browser tab</li>
+                    <li><strong>Activity tracking</strong> - what did I do during breaks?</li>
+                    <li><strong>History view</strong> - how many sessions did I complete this week?</li>
+                    <li><strong>Health focus</strong> - encourage movement, not just productivity</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
+                    StandClock = Pomofocus + Desktop + Health tracking
+                </p>
+            </section>
+
+            <section data-background-color="#2a9d8f">
+                <h2 style="color: white;">Demo Time!</h2>
+                <p style="color: white; font-size: 1.2em; margin-top: 30px;">Let's see StandClock in action</p>
+                <div style="margin-top: 40px; padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 10px;">
+                    <p style="color: white; font-size: 0.9em; margin-bottom: 10px;">Want to try it yourself?</p>
+                    <p style="color: white; font-size: 1.1em;">
+                        <strong>Download (Windows):</strong> <a href="https://bananacoding-my.sharepoint.com/:u:/p/athiwat/IQCMFN4INhcFR6mfq0ag0KA4AYSc-U5COOglQ_aHlnRorXY?e=KTFQZu" target="_blank" style="color: #ffd166; text-decoration: underline;">Here!</a>
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>How It's Built</h2>
+                <ul>
+                    <li><strong>User Interface:</strong> Solid.js (like React, but faster and smaller)</li>
+                    <li><strong>Core Engine:</strong> Rust + Tauri 2.0</li>
+                    <li><strong>Data Storage:</strong> SQLite (keeps your history on your computer)</li>
+                    <li><strong>Looks:</strong> Tailwind CSS + DaisyUI (for those 32 themes!)</li>
+                    <li><strong>Build Tool:</strong> Bun (super fast JavaScript toolkit)</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 0.9em;">
+                    <strong>Simple version:</strong> Web technology on the outside, Rust power on the inside
+                </p>
+            </section>
+
+            <section>
+                <h2>Works on All Computers</h2>
+                <ul>
+                    <li><strong>Windows:</strong> Uses Edge's browser engine</li>
+                    <li><strong>Mac:</strong> Uses Safari's browser engine</li>
+                    <li><strong>Linux:</strong> Uses WebKit</li>
+                </ul>
+                <p style="margin-top: 30px; font-size: 0.9em;">
+                    Each one uses your computer's built-in browser tech - that's why it's so small!
+                </p>
+            </section>
+
+            <!-- LESSONS & FUTURE SECTION -->
+            <section>
+                <h2>What Went Great! ✅</h2>
+                <ul>
+                    <li><strong>Super light:</strong> People say it doesn't slow down their computer at all</li>
+                    <li><strong>Fast to build:</strong> Solid.js made development quick</li>
+                    <li><strong>Easy to organize:</strong> Clean code structure makes changes easy</li>
+                    <li><strong>Ready-made tools:</strong> Tauri's database plugin just worked</li>
+                    <li><strong>Caught bugs early:</strong> TypeScript + Rust found errors before users did</li>
+                    <li><strong>32 beautiful themes:</strong> Got them almost for free with DaisyUI!</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>My First Attempt Failed 💥</h2>
+                <p><strong>Original plan: Go full Rust!</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li><strong>Idea:</strong> Use Rust + WASM for frontend with Sycamore framework</li>
+                    <li><strong>Goal:</strong> Pure Rust everywhere - no JavaScript at all</li>
+                </ul>
+                <p style="margin-top: 30px;"><strong>What went wrong:</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li><strong>Very few docs:</strong> Sycamore was new, hard to find examples</li>
+                    <li><strong>Had to write everything:</strong> No ready-made components</li>
+                    <li><strong>Took forever:</strong> Simple things became complicated</li>
+                    <li><strong>Hard to maintain:</strong> Would be nightmare to update later</li>
+                </ul>
+                <p style="margin-top: 30px; font-size: 0.95em;">
+                    <strong>Smart move:</strong> Switched to Solid.js - better docs, easier development, still fast!
+                </p>
+            </section>
+
+            <section>
+                <h2>What Was Hard 😅</h2>
+                <ul>
+                    <li><strong>Learning Rust:</strong> Took me way longer than expected</li>
+                    <li><strong>Finding solutions:</strong> Not as many tutorials as Electron</li>
+                    <li><strong>Debugging:</strong> Rust errors can be confusing</li>
+                    <li><strong>Platform differences:</strong> Had to tweak things for Windows/Mac/Linux</li>
+                    <li><strong>New technology:</strong> Some Tauri features weren't well documented yet</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>What's Next? 🚀</h2>
+                <ul>
+                    <li><strong>Phone app:</strong> Android and iPhone versions (Tauri 2.0 makes this possible!)</li>
+                    <li><strong>System tray icon:</strong> Quick access without opening the full app</li>
+                    <li><strong>Better notifications:</strong> Use your computer's native notification style</li>
+                    <li><strong>Start automatically:</strong> Launch when you turn on your computer</li>
+                    <li><strong>Smart suggestions:</strong> App learns and suggests activities you like</li>
+                    <li><strong>Team mode:</strong> Compete with coworkers (optional, for fun!)</li>
+                    <li><strong>Cloud backup:</strong> Sync your data if you want</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Should YOU Use Tauri?</h2>
+                <p><strong>Use Tauri if:</strong></p>
+                <ul>
+                    <li>Your app needs to run in the background without slowing things down</li>
+                    <li>You want a small download size</li>
+                    <li>You're starting a new project (easier than converting old one)</li>
+                    <li>You're willing to learn Rust (or already know it!)</li>
+                    <li>Speed and efficiency matter more than quick development</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Stick with Electron if:</h2>
+                <ul>
+                    <li>Your team only knows JavaScript and needs to move fast</li>
+                    <li>You need lots of ready-made plugins and tools</li>
+                    <li>You don't have time to learn Rust</li>
+                    <li>Your app doesn't need to run 24/7</li>
+                    <li>You need the app to look exactly the same everywhere</li>
+                </ul>
+                <p style="margin-top: 30px; font-size: 0.9em;">
+                    <strong>Bottom line:</strong> Both are great! Pick based on your needs.
+                </p>
+            </section>
+
+            <!-- CLOSING SECTION -->
+            <section>
+                <h2>Key Takeaways 💡</h2>
+                <ul>
+                    <li><strong>Tauri makes tiny, fast desktop apps</strong> - perfect for tools that run all day</li>
+                    <li><strong>The speed difference is real</strong> - but you have to learn Rust</li>
+                    <li><strong>Modern web tools work great</strong> - Solid.js, TypeScript, Tailwind</li>
+                    <li><strong>Good code structure matters</strong> - makes everything easier later</li>
+                    <li><strong>Choose wisely:</strong> Match the tool to your project's needs</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Q&A</h2>
+                <p><strong>StandClock Repository:</strong></p>
+                <p><a href="https://github.com/ppp3ppj/stand-clock">github.com/ppp3ppj/stand-clock</a></p>
+                <br>
+                <p><strong>Next Sections:</strong></p>
+                <ul>
+                    <li>Functor in Haskell is Fun</li>
+                    <li>Linux Distributions</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</body>
+
+</html>
