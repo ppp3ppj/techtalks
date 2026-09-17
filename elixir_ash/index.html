@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Pastel, and the Magic of Ash framework</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/white.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-color="white">
+                <img width="150"
+                    src="https://www.datocms-assets.com/55475/1730698620-ashlogo_sqr.svg" />
+                <h2>Pastel, and the Magic of Ash framework</h2>
+                <blockquote style="color: rgb(94, 94, 94); font-weight: 800;">
+                    "Welcome to functional programming with Elixir and Ash framework!"
+                </blockquote>
+            </section>
+
+            <section>
+                <h2>Why Rewrite Pastel?</h2>
+                <p>The original Pastel system had limitations in terms of performance, scalability, and maintainability. Rewriting it using the Ash framework allows us to leverage Elixir's strengths and build a more robust and efficient system.</p>
+            </section>
+
+            <section>
+                <h2>Use DDD to Structure Pastel</h2>
+                <p>Domain-Driven Design (DDD) helps us organize the Pastel system into well-defined contexts and boundaries, making it easier to manage complexity and maintain a clear separation of concerns.</p>
+            </section>
+
+            <section data-background-color="black">
+                <img width="1000"
+                    src="image/pastel_context.excalidraw.png" />
+            </section>
+
+            <section>
+                <h2>TechStack</h2>
+                <ul>
+                    <li>Ash Framework (Elixir-based and Phoenix)</li>
+                    <li>PostgreSQL</li>
+                    <li>Rust for <strong>SandClock GUI</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Why Ash Framework?</h2>
+                <ul>
+                    <li>Declarative approach to building APIs and resources</li>
+                    <li>Built-in support for data validation and transformations</li>
+                    <li>Enhanced scalability and maintainability for Elixir applications</li>
+                    <li>Seamless integration with Phoenix and other Elixir libraries</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Technical Highlights Pastel</h2>
+                <ul>
+                    <li>SASS APP (Software as a Service Application)</li>
+                    <li>Rewritten in Elixir for better performance</li>
+                    <li>Improved scalability with Ash framework</li>
+                    <li>Enhanced testing and debugging capabilities</li>
+                    <li>Support real-time features like live updates and notifications</li>
+                    <li>Functional programming style for better code maintainability</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>What news in SandClock?</h2>
+                <ul>
+                    <li>Real-time updates project and category and standup</li>
+                    <li>Heartbeat mechanism for check status connectivity</li>
+                    <li>Improved handling edge cases when create tasks</li>
+                    <li>Rewrite it in Rust (ICED)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>How to migrate Old Pastel to New Pastel</h2>
+                <ul>
+                    <li>ETL (Extract, Transform, Load) process for migrating data from the old Pastel system to the new Pastel system in runtime</li>
+                    <li>Zero downtime migration to ensure continuous availability</li>
+                    <li>User still use the old Pastel system during the migration process</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Magic of Ash Framework</h2>
+                <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
+defmodule Pastel.TimeTracking.Task do
+  use Ash.Resource,
+    otp_app: :pastel,
+    domain: Pastel.TimeTracking,
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshJsonApi.Resource],
+    authorizers: [Ash.Policy.Authorizer]
+
+  postgres do
+    table "tasks"
+    repo Pastel.Repo
+  end
+
+  multitenancy do
+    strategy :attribute
+    attribute :organization_id
+  end
+
+  json_api do
+    type "task"
+  end
+
+  policies do
+    policy action_type(:read) do
+      authorize_if {Pastel.Organizations.Checks.ActorHasRole, roles: [:owner, :admin]}
+      authorize_if expr(exists(category.project.team_members, user_id == ^actor(:id)))
+      authorize_if expr(user_id == ^actor(:id))
+    end
+
+    policy action_type([:create, :update]) do
+      authorize_if {Pastel.Organizations.Checks.ActorHasRole, roles: [:owner, :admin]}
+      authorize_if expr(user_id == ^actor(:id))
+    end
+
+    policy action_type(:destroy) do
+      authorize_if {Pastel.Organizations.Checks.ActorHasRole, roles: [:owner, :admin]}
+      authorize_if expr(user_id == ^actor(:id))
+    end
+  end
+
+  @task_fields [
+    :name,
+    :duration_seconds,
+    :is_overtime,
+    :approval_status,
+    :approve_at,
+    :work_date,
+    :user_id,
+    :category_id,
+    :approved_by_id
+  ]
+
+  actions do
+    defaults [:read]
+
+    create :create do
+      accept @task_fields
+      change {Pastel.Organizations.Changes.EnsureUserInTenant, field: :user_id}
+      change {Pastel.TimeTracking.Changes.BroadcastChange,
+              topic: "tasks", event: "task_changed", action: :created}
+
+      validate {Pastel.TimeTracking.Validations.NotFutureDate, []}
+    end
+
+    update :update do
+      require_atomic? false
+      accept @task_fields
+      argument :expected_version, :integer, allow_nil?: false
+
+      change {Pastel.Organizations.Changes.EnsureUserInTenant, field: :user_id}
+      change {Pastel.TimeTracking.Changes.BroadcastChange,
+              topic: "tasks", event: "task_changed", action: :updated}
+      change optimistic_lock(:version)
+
+      validate {Pastel.TimeTracking.Validations.NotFutureDate, []}
+      validate {Pastel.TimeTracking.Validations.ExpectedVersion, []}
+    end
+
+    destroy :destroy do
+      primary? true
+      change {Pastel.TimeTracking.Changes.BroadcastChange,
+              topic: "tasks", event: "task_changed", action: :destroyed}
+    end
+  end
+
+  attributes do
+    uuid_primary_key :id
+
+    attribute :name, :string do
+      public? true
+    end
+
+    attribute :duration_seconds, :integer do
+      allow_nil? false
+      public? true
+    end
+
+    attribute :is_overtime, :boolean do
+      public? true
+    end
+
+    attribute :approval_status, :string do
+      public? true
+    end
+
+    attribute :approve_at, :utc_datetime do
+      public? true
+    end
+
+    attribute :work_date, :date do
+      allow_nil? false
+      public? true
+      default &Date.utc_today/0
+    end
+
+    attribute :version, :integer do
+      allow_nil? false
+      public? true
+      default 1
+    end
+
+    timestamps()
+  end
+
+  relationships do
+    belongs_to :organization, Pastel.Organizations.Organization do
+      allow_nil? false
+      public? true
+    end
+
+    belongs_to :user, Pastel.Accounts.User do
+      allow_nil? false
+      public? true
+    end
+
+    belongs_to :category, Pastel.TimeTracking.Category do
+      allow_nil? false
+      public? true
+    end
+
+    belongs_to :approved_by, Pastel.Accounts.User do
+      public? true
+    end
+  end
+end
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>API Side</h3>
+                <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
+defmodule Pastel.TimeTracking do
+  use Ash.Domain,
+    otp_app: :pastel,
+    extensions: [AshJsonApi.Domain]
+
+  json_api do
+    routes do
+      base_route "/categories", Pastel.TimeTracking.Category do
+        get :read
+        index :read
+      end
+
+      base_route "/projects", Pastel.TimeTracking.Project do
+        get :read
+        index :read
+      end
+
+      base_route "/tasks", Pastel.TimeTracking.Task do
+        get :read
+        index :read
+        post :create
+        patch :update
+        delete :destroy
+      end
+    end
+  end
+
+  resources do
+    resource Pastel.TimeTracking.Department
+    resource Pastel.TimeTracking.Project
+    resource Pastel.TimeTracking.ProjectRole
+    resource Pastel.TimeTracking.TeamMember
+    resource Pastel.TimeTracking.Category
+    resource Pastel.TimeTracking.Task
+  end
+end
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Resources</h3>
+                <ul>
+                    <li>3 day for all contexts and conditions</li>
+                    <li>Claude AI for code assistance 30% weekly (Pastel)</li>
+                    <li>Codex for code assistance 20% weekly (SandClock)</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Demo</h2>
+                <img width="200" src="https://media1.tenor.com/m/R1TTUaq_hMcAAAAC/haerin-newjeans.gif" />
+            </section>
+
+            <section>
+                <h2>Summary</h2>
+                <blockquote>
+                    “In Elixir, Ash framework makes building scalable and maintainable applications easier.”
+                </blockquote>
+            </section>
+
+            <section>
+                <h2>💧 What is Elixir?</h2>
+                <ul>
+                    <li>💥 Not Ruby — but looks a bit like it!</li>
+                    <li>⚡ Built for real-time, always-on apps</li>
+                    <li>🧠 Runs on the super-reliable BEAM (Erlang VM)</li>
+                    <li>🎧 Powers big apps like Discord & WhatsApp</li>
+                </ul>
+            </section>
+
+            <section data-background-color="white">
+                <div style="text-align: center;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Erlang_logo.svg"
+                        style="height: 420px;" />
+                </div>
+            </section>
+
+            <section>
+                <h3>[Elixir] Designed by</h3>
+                <div style="text-align: center;">
+                    <img src="https://2023.elixirconf.com/images/presenters/jose-valim.jpg"
+                        style="height: 320px; border-radius: 50%;" />
+                    <p><strong>José Valim</strong></p>
+                </div>
+            </section>
+
+            <section>
+              <h2>Benefits of Elixir</h2>
+              <ul>
+                <li><strong>Fault-Tolerant and Resilient Architecture</strong></li>
+                <li>Scalability Through the BEAM VM</li>
+                <li>Concurrent Programming Made Easy</li>
+                <li>Clean and Readable Syntax</li>
+                <li>Immutable Data for Safer Code</li>
+                <li>Powerful Pattern Matching</li>
+                <li>Excellent Tooling and Mix Build System</li>
+                <li>First-Class Support for Distributed Systems</li>
+                <li>Hot Code Swapping in Production</li>
+              </ul>
+            </section>
+
+            <section>
+                <img width="200" src="https://media1.tenor.com/m/QFOG8gacB-UAAAAd/newjeans-kpop.gif"
+                    style="background-color: white;" />
+                <h4>🧱 What is Fault Tolerance?</h4>
+                <blockquote>
+                    🩰 Fault tolerance is like the secret choreography of the K-pop world:<br>
+                    Even if one dancer slips, the show must go on — <strong>flawlessly</strong>.
+                </blockquote>
+            </section>
+
+            <section>
+                <h2>🎤 What If a NewJeans Member Slips?</h2>
+
+                <p><strong>OOP style:</strong></p>
+                <ul>
+                    <li>🧠 Stop the show, run checks, fix hair, fix shoes</li>
+                    <li>😓 Hope nothing else breaks while doing that</li>
+                    <li>📉 The audience might get bored or leave</li>
+                </ul>
+            </section>
+
+            <section>
+                <p><strong>OOP style:</strong></p>
+                <pre><code class="language-ruby" data-trim data-noescape data-trim data-noescape>
+                        begin
+                            raise "error"
+                        rescue => e
+                            puts "Caught error: #{e}" # Handles error manually
+                        end
+                    </code></pre>
+            </section>
+
+
+            <section>
+                <p><strong>Elixir style:</strong></p>
+                <ul>
+                    <li>💥 Let her fall (aka crash)</li>
+                    <li>🧑‍💼 Supervisor quietly sends in backup (or restarts her!)</li>
+                    <li>🎶 The music keeps playing — the crowd never notices!</li>
+                </ul>
+
+                <p><em>Elixir’s fault tolerance isn’t panic — it’s performance-ready resilience.</em></p>
+            </section>
+
+            <section>
+                <p><strong>Elixir style:</strong></p>
+                <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
+                        raise "error it easy?"
+                    </code></pre>
+            </section>
+
+            <section>
+                <h2>🎶 Meet NewJeans = Elixir Processes</h2>
+                <ul>
+                    <li>Each member: <strong>Hanni</strong>, <strong>Minji</strong>, <strong>Danielle</strong>,
+                        <strong>Haerin</strong>, <strong>Hyein</strong>
+                    </li>
+                    <li>Each process performs independently</li>
+                    <li>If <strong>Hanni</strong> forgets a move — do we cancel the concert?</li>
+                </ul>
+                <blockquote>
+                    <strong>No!</strong> The performance continues.
+                    Just like Elixir processes.
+                </blockquote>
+            </section>
+
+
+            <section>
+                <h2>🧑 Meet the Stage Manager = Supervisor</h2>
+                <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
+                        children = [
+                            Supervisor.child_spec({Member, "Haerin"}, id: :haerin),
+                            Supervisor.child_spec({Member, "Minji"}, id: :minji),
+                            # ...
+                        ]
+                    </code></pre>
+            </section>
+
+            <section>
+                <h3>Newjeans on <strong>STAGE</strong></h3>
+                <img width="900" src="image/newjeans_process_stage.png" />
+            </section>
+
+            <section>
+                <h2>💥 Oops! Hanni Crashes 😱</h2>
+
+                <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
+                        NewJeans.Member.crash("Hanni")
+                    </code></pre>
+
+                <p>💃 <em>"She forgot the dance move…"</em></p>
+
+                <ul>
+                    <li>But the <strong>Supervisor</strong> doesn't panic.</li>
+                    <li>She calmly restarts <strong>Hanni</strong> backstage.</li>
+                    <li>In <strong>0.2s</strong> she’s back on stage like nothing happened.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Newjeans on <strong>STAGE</strong></h3>
+                <img width="900" src="image/newjeans_process_stage_fail.png" />
+            </section>
+
+            <section>
+                <h2>🔁 Code That Recovers Like an Idol</h2>
+
+                <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
+                        test "crashed member is restarted automatically" do
+                        ...
+                            Member.crash("Hanni")
+                            Process.sleep(200)
+                        ...
+                        end
+                    </code></pre>
+
+                <p>
+                    🛡️ Elixir processes are <strong>isolated</strong> and <strong>supervised</strong>,<br>
+                    just like a high-budget concert performance.
+                </p>
+            </section>
+
+            <section>
+                <h3>Newjeans on <strong>STAGE</strong></h3>
+                <img width="900" src="image/newjeans_process_stage_restart.png" />
+            </section>
+
+            <section>
+                <h2>Demo</h2>
+                <img width="200" src="https://media1.tenor.com/m/R1TTUaq_hMcAAAAC/haerin-newjeans.gif" />
+            </section>
+
+            <section>
+                <h2>Real world application</h2>
+                <ul>
+                    <li><strong>Discord</strong></li>
+                    <li><strong>WhatsApp(Meta)</strong></li>
+                    <li><strong>Heroku</strong></li>
+                    <li><strong>PepsiCo</strong></li>
+                    <li><strong>RabbitMQ(Erlang OTP)</strong></li>
+                </ul>
+            </section>
+
+            <section>
+                <img width="200" src="https://media1.tenor.com/m/OT9Am8Bg9-cAAAAd/haerin-newjeans.gif" />
+                <h2>Summary</h2>
+                <blockquote>
+                    “In Elixir, crashing is not a bug — it’s a strategy.” 🦸‍♂️💥
+                </blockquote>
+            </section>
+
+
+            <section>
+                <img width="200" src="https://media1.tenor.com/m/SWnJcKoRB6EAAAAd/haerin-newjeans-haerin.gif"
+                    style="background-color: white;" />
+                    <h3>QA |> exit(0)</h3>
+            </section>
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        });
+    </script>
+</body>
+
+</html>
