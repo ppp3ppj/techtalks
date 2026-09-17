@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Pastel, and the Magic of Ash framework</title>
+    <title>Pastel & Ash: A Rewrite Story</title>
 
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
@@ -21,15 +21,34 @@
             <section data-background-color="white">
                 <img width="150"
                     src="https://www.datocms-assets.com/55475/1730698620-ashlogo_sqr.svg" />
-                <h2>Pastel, and the Magic of Ash framework</h2>
+                <h2>Pastel & Ash: A Rewrite Story</h2>
                 <blockquote style="color: rgb(94, 94, 94); font-weight: 800;">
-                    "Welcome to functional programming with Elixir and Ash framework!"
+                    "Life is better with Elixir and Ash framework!"
                 </blockquote>
             </section>
 
             <section>
                 <h2>Why Rewrite Pastel?</h2>
-                <p>The original Pastel system had limitations in terms of performance, scalability, and maintainability. Rewriting it using the Ash framework allows us to leverage Elixir's strengths and build a more robust and efficient system.</p>
+                <p>The original Pastel system was built with <strong>Ruby on Rails</strong>. As the project grew, it became:</p>
+                <ul>
+                    <li>Hard to debug and reproduce bugs</li>
+                    <li>Spaghetti code - logic scattered across callbacks and concerns</li>
+                    <li>Slower performance under load</li>
+                    <li>Harder to maintain as the codebase grew</li>
+                </ul>
+                <p>Rewriting it in <strong>Elixir with Ash framework</strong> lets us build a more robust, debuggable, and maintainable system.</p>
+            </section>
+
+            <section data-background-color="white">
+                <h3>Simple Made Easy - Rich Hickey</h3>
+                <a href="https://www.youtube.com/watch?v=LKtk3HCgTa8" target="_blank">
+                    <img src="https://img.youtube.com/vi/LKtk3HCgTa8/maxresdefault.jpg" width="700" />
+                </a>
+                <p style="font-size: 0.6em;">
+                    Simple ≠ Easy. "Easy" means familiar; "Simple" means not interleaved -
+                    each piece does one thing and isn't tangled with the rest.
+                    Spaghetti code is easy to write and hard to reason about because it's <em>complected</em>.
+                </p>
             </section>
 
             <section>
@@ -52,6 +71,18 @@
             </section>
 
             <section>
+                <h2>What is Ash?</h2>
+                <p>A <strong>declarative, resource-oriented application framework</strong> for Elixir.
+                    Instead of writing controllers, models, and services by hand, you describe a
+                    <strong>resource</strong> - its data, actions, relationships, and rules - and Ash
+                    generates the API, persistence, and authorization plumbing for you.</p>
+                <ul>
+                    <li>A resource = attributes + actions + relationships + policies, all in one file</li>
+                    <li>Extensions add JSON:API, GraphQL, Postgres, etc. with no extra boilerplate</li>
+                </ul>
+            </section>
+
+            <section>
                 <h2>Why Ash Framework?</h2>
                 <ul>
                     <li>Declarative approach to building APIs and resources</li>
@@ -64,22 +95,20 @@
             <section>
                 <h2>Technical Highlights Pastel</h2>
                 <ul>
-                    <li>SASS APP (Software as a Service Application)</li>
-                    <li>Rewritten in Elixir for better performance</li>
-                    <li>Improved scalability with Ash framework</li>
-                    <li>Enhanced testing and debugging capabilities</li>
-                    <li>Support real-time features like live updates and notifications</li>
-                    <li>Functional programming style for better code maintainability</li>
+                    <li>SaaS app for time tracking, rebuilt as a set of Ash resources</li>
+                    <li>Real-time features — live updates and notifications</li>
+                    <li>Full test coverage across every context</li>
                 </ul>
             </section>
 
             <section>
-                <h2>What news in SandClock?</h2>
+                <h2>SandClock: The Desktop Companion, Rewritten Too</h2>
+                <p>SandClock is the desktop GUI users track time from — it had the same Rails-era rot, so it got rebuilt in Rust alongside Pastel.</p>
                 <ul>
-                    <li>Real-time updates project and category and standup</li>
-                    <li>Heartbeat mechanism for check status connectivity</li>
-                    <li>Improved handling edge cases when create tasks</li>
-                    <li>Rewrite it in Rust (ICED)</li>
+                    <li>Real-time updates for project, category, and standup</li>
+                    <li>Heartbeat mechanism to check connectivity status</li>
+                    <li>Fixed edge cases when creating tasks</li>
+                    <li>Rewritten in Rust (ICED)</li>
                 </ul>
             </section>
 
@@ -244,6 +273,34 @@ end
             </section>
 
             <section>
+                <h3>New Requirement from Product</h3>
+                <blockquote>
+                    "A single task entry shouldn't log more than 12 hours -
+                    anything longer is almost certainly a data-entry mistake."
+                </blockquote>
+                <p>In a Rails app, that rule could live in a model validation, a form object, a
+                    frontend check, or all three - and drift out of sync over time.</p>
+            </section>
+
+            <section>
+                <h3>The Fix - One Validation, One Place</h3>
+                <pre><code class="language-diff" data-trim data-noescape>
+  create :create do
+    accept @task_fields
+    change {Pastel.Organizations.Changes.EnsureUserInTenant, field: :user_id}
+    change {Pastel.TimeTracking.Changes.BroadcastChange,
+            topic: "tasks", event: "task_changed", action: :created}
+
+    validate {Pastel.TimeTracking.Validations.NotFutureDate, []}
++   validate numericality(:duration_seconds, less_than_or_equal_to: 43_200),
++     message: "can't log more than 12 hours in a single entry"
+  end
+                </code></pre>
+                <p>The rule lives right next to the field it governs, inside the resource that owns
+                    it - not scattered across a model, a form, and a frontend.</p>
+           </section>
+
+            <section>
                 <h3>API Side</h3>
                 <pre><code class="language-elixir" data-trim data-noescape data-trim data-noescape>
 defmodule Pastel.TimeTracking do
@@ -286,11 +343,21 @@ end
             </section>
 
             <section>
-                <h3>Resources</h3>
+                <h2>Did It Solve the Original Pain?</h2>
                 <ul>
-                    <li>3 day for all contexts and conditions</li>
-                    <li>Claude AI for code assistance 30% weekly (Pastel)</li>
-                    <li>Codex for code assistance 20% weekly (SandClock)</li>
+                    <li><strong>Hard to debug</strong> → declarative resources + pattern matching make failures obvious</li>
+                    <li><strong>Spaghetti code</strong> → logic lives in explicit actions, changes, and policies, not scattered callbacks</li>
+                    <li><strong>Slow under load</strong> → BEAM concurrency, no more Rails request-per-thread bottleneck</li>
+                    <li><strong>Hard to maintain as it grows</strong> → DDD contexts keep boundaries clean as Pastel scales</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>How We Shipped It</h3>
+                <p>All contexts and conditions rebuilt in just <strong>3 days</strong>, with heavy AI pairing:</p>
+                <ul>
+                    <li>Claude AI for code assistance - 30% weekly (Pastel)</li>
+                    <li>Codex for code assistance - 20% weekly (SandClock)</li>
                 </ul>
             </section>
 
@@ -302,7 +369,8 @@ end
             <section>
                 <h2>Summary</h2>
                 <blockquote>
-                    “In Elixir, Ash framework makes building scalable and maintainable applications easier.”
+                    “From spaghetti Rails callbacks to declarative Ash resources —
+                    same features, way easier to debug and maintain.”
                 </blockquote>
             </section>
 
