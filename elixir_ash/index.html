@@ -39,18 +39,6 @@
                 <p>Rewriting it in <strong>Elixir with Ash framework</strong> lets us build a more robust, debuggable, and maintainable system.</p>
             </section>
 
-            <section data-background-color="white">
-                <h3>Simple Made Easy - Rich Hickey</h3>
-                <a href="https://www.youtube.com/watch?v=LKtk3HCgTa8" target="_blank">
-                    <img src="https://img.youtube.com/vi/LKtk3HCgTa8/maxresdefault.jpg" width="700" />
-                </a>
-                <p style="font-size: 0.6em;">
-                    Simple ≠ Easy. "Easy" means familiar; "Simple" means not interleaved -
-                    each piece does one thing and isn't tangled with the rest.
-                    Spaghetti code is easy to write and hard to reason about because it's <em>complected</em>.
-                </p>
-            </section>
-
             <section>
                 <h2>Use DDD to Structure Pastel</h2>
                 <p>Domain-Driven Design (DDD) helps us organize the Pastel system into well-defined contexts and boundaries, making it easier to manage complexity and maintain a clear separation of concerns.</p>
@@ -84,13 +72,25 @@
 
             <section>
                 <h2>Why Ash Framework?</h2>
+                <p style="font-size: 0.55em;">Ash's own design principles:</p>
                 <ul>
-                    <li>Declarative approach to building APIs and resources</li>
-                    <li>Built-in support for data validation and transformations</li>
-                    <li>Enhanced scalability and maintainability for Elixir applications</li>
-                    <li>Seamless integration with Phoenix and other Elixir libraries</li>
+                    <li><strong>Anything, not Everything</strong> - unlocks what you need, doesn't lock you into one prescribed pattern</li>
+                    <li><strong>Declarative, Introspectable, Derivable</strong> - a resource is a configuration, not code that runs on its own</li>
+                    <li><strong>Configuration over Convention</strong> - explicit, not magic based on file name or folder location</li>
+                    <li><strong>Pragmatism First</strong> - built around what real users need, with clean upgrade paths</li>
                 </ul>
             </section>
+
+            <section>
+                <h3>Configuration over Convention</h3>
+                <p>Rails' whole pitch is <strong>"Convention over Configuration"</strong> - name a file right,
+                    put it in the right folder, and magic happens.</p>
+                <p>That magic is exactly what made the old Pastel <em>hard to debug</em> - behavior comes
+                    from a convention you have to already know, not from something you can read.</p>
+                <p>Ash flips it: nothing happens unless it's <strong>explicitly declared</strong> on the resource.
+                    Read the resource, know the behavior.</p>
+            </section>
+
 
             <section>
                 <h2>Technical Highlights Pastel</h2>
@@ -355,6 +355,15 @@ end
                     <li><strong>Spaghetti code</strong> → logic lives in explicit actions, changes, and policies, not scattered callbacks</li>
                     <li><strong>Slow under load</strong> → BEAM concurrency, no more Rails request-per-thread bottleneck</li>
                     <li><strong>Hard to maintain as it grows</strong> → DDD contexts keep boundaries clean as Pastel scales</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Where Ash Isn't a Silver Bullet</h3>
+                <ul>
+                    <li>Steeper learning curve - resources, changes, policies are a different mental model than plain Ecto/Phoenix</li>
+                    <li>Smaller ecosystem than Rails - fewer tutorials, less hire-able experience</li>
+                    <li>Heavier compile times as resources and extensions grow</li>
                 </ul>
             </section>
 
