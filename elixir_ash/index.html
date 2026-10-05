@@ -71,17 +71,6 @@
             </section>
 
             <section>
-                <h2>Why Ash Framework?</h2>
-                <p style="font-size: 0.55em;">Ash's own design principles:</p>
-                <ul>
-                    <li><strong>Anything, not Everything</strong> - unlocks what you need, doesn't lock you into one prescribed pattern</li>
-                    <li><strong>Declarative, Introspectable, Derivable</strong> - a resource is a configuration, not code that runs on its own</li>
-                    <li><strong>Configuration over Convention</strong> - explicit, not magic based on file name or folder location</li>
-                    <li><strong>Pragmatism First</strong> - built around what real users need, with clean upgrade paths</li>
-                </ul>
-            </section>
-
-            <section>
                 <h3>Configuration over Convention</h3>
                 <p>Rails' whole pitch is <strong>"Convention over Configuration"</strong> - name a file right,
                     put it in the right folder, and magic happens.</p>
@@ -93,32 +82,24 @@
 
 
             <section>
-                <h2>Technical Highlights Pastel</h2>
+                <h2>What's New - Features &amp; Benefits</h2>
                 <ul>
-                    <li>SaaS app for time tracking, rebuilt as a set of Ash resources</li>
-                    <li>Real-time features - live updates and notifications</li>
-                    <li>Full test coverage across every context</li>
+                    <li><strong>Pastel</strong> (rebuilt as Ash resources)
+                        <ul>
+                            <li>Real-time live updates and notifications</li>
+                            <li>Full test coverage across every context</li>
+                        </ul>
+                    </li>
+                    <li><strong>SandClock</strong> (rewritten in Rust/ICED - same Rails-era rot, same fix)
+                        <ul>
+                            <li>Real-time updates for project, category, and standup</li>
+                            <li>Heartbeat mechanism for connectivity status</li>
+                            <li>Fixed edge cases when creating tasks</li>
+                        </ul>
+                    </li>
                 </ul>
-            </section>
-
-            <section>
-                <h2>SandClock: The Desktop Companion, Rewritten Too</h2>
-                <p>SandClock is the desktop GUI users track time from - it had the same Rails-era rot, so it got rebuilt in Rust alongside Pastel.</p>
-                <ul>
-                    <li>Real-time updates for project, category, and standup</li>
-                    <li>Heartbeat mechanism to check connectivity status</li>
-                    <li>Fixed edge cases when creating tasks</li>
-                    <li>Rewritten in Rust (ICED)</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>How to migrate Old Pastel to New Pastel</h2>
-                <ul>
-                    <li>ETL (Extract, Transform, Load) process for migrating data from the old Pastel system to the new Pastel system in runtime</li>
-                    <li>Zero downtime migration to ensure continuous availability</li>
-                    <li>User still use the old Pastel system during the migration process</li>
-                </ul>
+                <p style="font-size: 0.55em;">Benefit: both apps share the same payoff - faster,
+                    more reliable, and easier to extend than their predecessors.</p>
             </section>
 
             <section>
@@ -349,12 +330,11 @@ end
             </section>
 
             <section>
-                <h2>Did It Solve the Original Pain?</h2>
+                <h3>How We Shipped It</h3>
+                <p>All contexts and conditions rebuilt in just <strong>3 days</strong>, with heavy AI pairing:</p>
                 <ul>
-                    <li><strong>Hard to debug</strong> → declarative resources + pattern matching make failures obvious</li>
-                    <li><strong>Spaghetti code</strong> → logic lives in explicit actions, changes, and policies, not scattered callbacks</li>
-                    <li><strong>Slow under load</strong> → BEAM concurrency, no more Rails request-per-thread bottleneck</li>
-                    <li><strong>Hard to maintain as it grows</strong> → DDD contexts keep boundaries clean as Pastel scales</li>
+                    <li>Claude AI for code assistance - 30% weekly (Pastel)</li>
+                    <li>Codex for code assistance - 20% weekly (SandClock)</li>
                 </ul>
             </section>
 
@@ -368,12 +348,15 @@ end
             </section>
 
             <section>
-                <h3>How We Shipped It</h3>
-                <p>All contexts and conditions rebuilt in just <strong>3 days</strong>, with heavy AI pairing:</p>
+                <h3>Where Elixir + Phoenix + Ash Fit Best</h3>
                 <ul>
-                    <li>Claude AI for code assistance - 30% weekly (Pastel)</li>
-                    <li>Codex for code assistance - 20% weekly (SandClock)</li>
+                    <li>Multi-tenant SaaS backends with complex authorization - exactly Pastel's shape</li>
+                    <li>Real-time features - live updates, notifications, dashboards (Phoenix Channels/PubSub)</li>
+                    <li>APIs with lots of business rules and relationships - Ash keeps them declarative instead of scattered</li>
+                    <li>Systems that need to stay up - BEAM's fault tolerance suits long-running, always-on services</li>
                 </ul>
+                <p style="font-size: 0.55em;">Less of a fit: quick throwaway scripts, heavy ML/data-science
+                    workloads, or a team with zero Elixir runway and a tight deadline.</p>
             </section>
 
             <section>
