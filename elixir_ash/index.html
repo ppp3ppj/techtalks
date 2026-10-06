@@ -31,16 +31,21 @@
                 <h2>Why Rewrite Pastel?</h2>
                 <p>The original Pastel system was built with <strong>Ruby on Rails</strong>. As the project grew, it became:</p>
                 <ul>
-                    <li>Hard to debug and reproduce bugs</li>
-                    <li>Spaghetti code - logic scattered across callbacks and concerns</li>
-                    <li>Slower performance under load</li>
-                    <li>Harder to maintain as the codebase grew</li>
+                    <li class="fragment">Hard to debug and reproduce bugs</li>
+                    <li class="fragment">Spaghetti code - logic scattered across callbacks and concerns</li>
+                    <li class="fragment">Slower performance under load</li>
+                    <li class="fragment">Harder to maintain as the codebase grew</li>
                 </ul>
             </section>
 
             <section>
                 <h2>Use DDD to Structure Pastel</h2>
-                <p>Domain-Driven Design (DDD) helps us organize the Pastel system into well-defined contexts and boundaries, making it easier to manage complexity and maintain a clear separation of concerns.</p>
+                <ul>
+                    <li class="fragment">Domain-Driven Design (DDD): organize the system into well-defined contexts and boundaries</li>
+                    <li class="fragment">Makes complexity easier to manage</li>
+                    <li class="fragment">Keeps a clear separation of concerns</li>
+                </ul>
+                <p class="fragment" style="font-size: 0.55em; color: rgb(180, 120, 0);">Note: we applied DDD partially, not a full/strict implementation</p>
             </section>
 
             <section data-background-color="black">
@@ -59,46 +64,32 @@
 
             <section>
                 <h2>What is Ash?</h2>
-                <p>A <strong>declarative, resource-oriented application framework</strong> for Elixir.
-                    Instead of writing controllers, models, and services by hand, you describe a
-                    <strong>resource</strong> - its data, actions, relationships, and rules - and Ash
-                    generates the API, persistence, and authorization plumbing for you.</p>
+                <p>A <strong>declarative, resource-oriented framework</strong> for Elixir - describe a resource, Ash builds the rest.</p>
                 <ul>
-                    <li>A resource = attributes + actions + relationships + policies, all in one file</li>
-                    <li>Extensions add JSON:API, GraphQL, Postgres, etc. with no extra boilerplate</li>
+                    <li class="fragment">A resource = attributes + actions + relationships + policies, all in one file</li>
+                    <li class="fragment">No hand-written controllers, models, or services</li>
+                    <li class="fragment">Extensions add JSON:API, GraphQL, Postgres, etc. with no extra boilerplate</li>
                 </ul>
             </section>
 
             <section>
                 <h3>Configuration over Convention</h3>
-                <p>Rails' whole pitch is <strong>"Convention over Configuration"</strong> - name a file right,
-                    put it in the right folder, and magic happens.</p>
-                <p>That magic is exactly what made the old Pastel <em>hard to debug</em> - behavior comes
-                    from a convention you have to already know, not from something you can read.</p>
-                <p>Ash flips it: nothing happens unless it's <strong>explicitly declared</strong> on the resource.
-                    Read the resource, know the behavior.</p>
+                <ul>
+                    <li class="fragment">Rails: <strong>"Convention over Configuration"</strong> - name a file right, put it in the right folder, and magic happens</li>
+                    <li class="fragment">That magic is what made old Pastel <em>hard to debug</em> - behavior comes from a convention you have to already know</li>
+                    <li class="fragment">Ash flips it: nothing happens unless it's <strong>explicitly declared</strong> on the resource</li>
+                    <li class="fragment">Read the resource, know the behavior</li>
+                </ul>
             </section>
 
 
             <section>
-                <h2>What's New - Features &amp; Benefits</h2>
+                <h2>What's New</h2>
                 <ul>
-                    <li><strong>Pastel</strong> (rebuilt as Ash resources)
-                        <ul>
-                            <li>Real-time live updates and notifications</li>
-                            <li>Full test coverage across every context</li>
-                        </ul>
-                    </li>
-                    <li><strong>SandClock</strong> (rewritten in Rust/ICED - same Rails-era rot, same fix)
-                        <ul>
-                            <li>Real-time updates for project, category, and standup</li>
-                            <li>Heartbeat mechanism for connectivity status</li>
-                            <li>Fixed edge cases when creating tasks</li>
-                        </ul>
-                    </li>
+                    <li><strong>Pastel</strong> (Ash resources): real-time updates, full test coverage</li>
+                    <li><strong>SandClock</strong> (Rust/ICED): real-time updates, heartbeat, fixed task edge cases</li>
                 </ul>
-                <p style="font-size: 0.55em;">Benefit: both apps share the same payoff - faster,
-                    more reliable, and easier to extend than their predecessors.</p>
+                <p style="font-size: 0.55em;">Both apps: faster, more reliable, easier to extend.</p>
             </section>
 
             <section>
@@ -338,24 +329,23 @@ end
             </section>
 
             <section>
-                <h3>Where Ash Isn't a Silver Bullet</h3>
+                <h3>Not a Silver Bullet</h3>
                 <ul>
-                    <li>Steeper learning curve - resources, changes, policies are a different mental model than plain Ecto/Phoenix</li>
-                    <li>Smaller ecosystem than Rails - fewer tutorials, less hire-able experience</li>
-                    <li>Heavier compile times as resources and extensions grow</li>
+                    <li>Steeper learning curve - new mental model vs plain Ecto/Phoenix</li>
+                    <li>Smaller ecosystem than Rails - fewer tutorials, hires</li>
+                    <li>Heavier compile times as resources grow</li>
                 </ul>
             </section>
 
             <section>
-                <h3>Where Elixir + Phoenix + Ash Fit Best</h3>
+                <h3>Where It Fits Best</h3>
                 <ul>
-                    <li>Multi-tenant SaaS backends with complex authorization - exactly Pastel's shape</li>
-                    <li>Real-time features - live updates, notifications, dashboards (Phoenix Channels/PubSub)</li>
-                    <li>APIs with lots of business rules and relationships - Ash keeps them declarative instead of scattered</li>
-                    <li>Systems that need to stay up - BEAM's fault tolerance suits long-running, always-on services</li>
+                    <li>Multi-tenant SaaS with complex authorization</li>
+                    <li>Real-time features - live updates, dashboards</li>
+                    <li>APIs with heavy business rules and relationships</li>
+                    <li>Always-on systems needing fault tolerance</li>
                 </ul>
-                <p style="font-size: 0.55em;">Less of a fit: quick throwaway scripts, heavy ML/data-science
-                    workloads, or a team with zero Elixir runway and a tight deadline.</p>
+                <p style="font-size: 0.55em;">Less of a fit: throwaway scripts, heavy ML/data-science, or a team with no Elixir runway.</p>
             </section>
 
             <section>
